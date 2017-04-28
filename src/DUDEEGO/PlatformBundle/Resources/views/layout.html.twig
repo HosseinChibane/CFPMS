@@ -1,0 +1,24 @@
+{# src/DUDEEGO/PlatformBundle/Resources/views/layout.html.twig #}
+
+{% extends "::base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+{% endblock %}
+
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}	
+	{% block bodyabonne %}	
+		{# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+		{% block dudeegoplatform_bodyAbonne %} 
+
+		{% endblock %}
+	{% endblock %}
+{% else %}
+	{% block body %}	
+		{# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+		{% block dudeegoplatform_body %} 
+
+		{% endblock %}
+	{% endblock %}
+{% endif %}
+

@@ -1,0 +1,163 @@
+{# app/Resources/views/layoutdudeego.html.twig #}
+
+<!DOCTYPE html>
+<head>
+  <title>{% block title %}DUDEE GO{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% block stylesheets %}      
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/css/bootstrap-theme.css') }}">
+    <!-- Google -->
+    <link href="{{ asset('bundles/dudeegoplatform/css/fontsgoogleapis.css') }}" rel='stylesheet' type='text/css'>
+    <!-- Content Filter -->
+    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/content-filter/css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/content-filter/css/style.css') }}"> 
+    <!-- Dudee'Go -->
+    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/css/styleNavBar.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/css/styleSideBar.css') }}">
+    <!-- GridView -->
+    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/css/styleGridView.css') }}">
+    <!-- multirange -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.min.css"> 
+    <!-- Espace Abonnés -->
+    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/espaceabonnes/css/espaceabonne.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/espaceabonnes/css/font-awesome-4.7.0/css/font-awesome.min.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/espaceabonnes/css/bootstrap.css') }}"> 
+    <!-- DataTable -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  {% endblock %}
+
+  {% block script %}
+    <!-- Bootstrap -->
+    <script src="{{ asset('bundles/dudeegoplatform/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('bundles/dudeegoplatform/js/bootstrap.min.js') }}"></script>
+  {% endblock %}
+
+  {% block javascripts %}
+    <!-- Bootstrap -->
+    <script src="{{ asset('bundles/dudeegoplatform/js/isTouchDevice.js') }}"></script>
+    <!-- Content Filter -->
+    <script src="{{ asset('bundles/dudeegoplatform/content-filter/js/modernizr.js') }}"></script> 
+    <script src="{{ asset('bundles/dudeegoplatform/content-filter/js/jquery-2.1.1.js') }}"></script>
+    <script src="{{ asset('bundles/dudeegoplatform/content-filter/js/jquery.mixitup.min.js') }}"></script>
+    <script src="{{ asset('bundles/dudeegoplatform/content-filter/js/main.js') }}"></script> 
+    <!-- GridView -->
+    <script src="{{ asset('bundles/dudeegoplatform/js/JsGridView.js') }}"></script> 
+    <!-- multirange -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js"></script>
+    <!-- Espace Abonnés -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{{ asset('bundles/dudeegoplatform/espaceabonnes/js/bootstrap.js') }}"></script>
+    <!-- DataTable -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript"  src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
+    <script type="text/javascript"  src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
+  {% endblock %}
+</head>
+<body>
+  {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+    {# Contenu de l'en-tete #}
+    {% block enteteAbonne %} 
+      <div class="jumbotron">
+        <div class="container text-center">
+          <h1>DUDEE'GO</h1>      
+          <p>Comparateur d'écoles et d'universités</p>
+        </div>
+      </div>
+    {% endblock %}
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="nav-side-menu">
+            <div class="icon-bar">
+              <a title="Mon compte" data-toggle="tooltip" data-placement="left" href="{{ path('dudeego_platform_abonne_monProfil') }}"><i class="fa fa-user-o"></i></a> 
+              <a title="Inscription à l'Université" data-toggle="tooltip" data-placement="left" href="{{ path('dudeego_platform_abonne_universite') }}"><i class="fa fa-university"></i></a> 
+              <a title="Inscription à un cours de langue" data-toggle="tooltip" data-placement="left" href="{{ path('dudeego_platform_abonne_langue') }}"><i class="fa fa-language"></i></a> 
+              <a title="Inscription à un logement" data-toggle="tooltip" data-placement="left" href="{{ path('dudeego_platform_abonne_logement') }}"><i class="fa fa-bed"></i></a>
+              <a title="Inscription à un cours de préparation" data-toggle="tooltip" data-placement="left" href="{{ path('dudeego_platform_abonne_preparation') }}"><i class="fa fa-lightbulb-o"></i></a> 
+              <a title="Inscription à la mutuelle" data-toggle="tooltip" data-placement="left" href="{{ path('dudeego_platform_abonne_mutuelle') }}"><i class="fa fa-user-md"></i></a>
+              <a title="Deconnexion" data-toggle="tooltip" data-placement="left" href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i></a> 
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10">
+          <div class="row">
+            <div class="col-md-12 sidebar">
+              <ul class="nav nav-pills" id="onglets">
+                <li class="mypills"><a href="{{ path('dudeego_platform_abonne_monProfil') }}"><i class="fa fa-address-card-o"></i> Mon profil</a></li>
+                <li class="mypills"><a href="{{ path('dudeego_platform_abonne_mesParametres') }}"><i class="fa fa-wrench"></i> Mes parametres</a></li>
+                <li class="mypills"><a href="{{ path('dudeego_platform_abonne_mesDemandes') }}"><i class="fa fa-list-ol"></i> Mes demandes</a></li>
+                <li class="mypills"><a href="{{ path('dudeego_platform_abonne_mesDocuments') }}"><i class="fa fa-file-pdf-o"></i> Mes documents</a></li>
+                <li class="mypills"><a href="{{ path('dudeego_platform_abonne_aide') }}"><i class="fa fa-question-circle"></i> Aide</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-10">  
+            {% block bodyabonne %} 
+              {% block contentabonne %} 
+                {# Contenu du corps de page #}
+              {% endblock %}
+            {% endblock %}
+          </div>
+        </div>
+        <div>
+          {# Contenu du pied de page #}
+          <div class="col-md-12">
+            {% block footerabonne %} 
+              {% include ':default:footer.html.twig' %} 
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  {% else %}
+
+    {# Contenu de l'en-tete #}
+    {% block entete %} 
+      <div class="jumbotron">
+        <div class="container text-center">
+          <h1>DUDEE'GO</h1>      
+          <p>Comparateur d'écoles et d'universités</p>
+        </div>
+      </div>
+    {% endblock %}
+
+    {# Contenu de la navigation #}
+    {% include ':default:topnav.html.twig' %}
+
+    {# Contenu du corps de page #}
+    <div>
+      {% block body %} 
+        <div class="container">
+          {% block content %} 
+          {% endblock %}
+        </div>
+      {% endblock %}
+    </div>
+
+    {# Contenu du pied de page #}
+    <div>
+      {% block footer %} 
+        {% include ':default:footer.html.twig' %} 
+      {% endblock %}
+    </div>
+  {% endif %}
+
+</body>  
+</html>

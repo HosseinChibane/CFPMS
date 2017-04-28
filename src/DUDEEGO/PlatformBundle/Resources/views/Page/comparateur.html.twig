@@ -1,0 +1,16 @@
+{# src/DUDEEGO/PlatformBundle/Resources/views/Advert/comparateur.html.twig #}
+{% extends "DUDEEGOPlatformBundle::layout.html.twig" %}
+{% block title %}
+	Comparateur - {{ parent() }}
+{% endblock %}
+{% block dudeegoplatform_body %}
+
+	{% include 'DUDEEGOPlatformBundle:Page:criteretrie.html.twig'  %}
+
+	<div id="resultats_recherche"> 
+		{% include 'DUDEEGOPlatformBundle:Page:critereresultat.html.twig' with {'listUniversite' : listUniversite}  %}		
+	</div>
+
+	{% include 'DUDEEGOPlatformBundle:Page:criterefiltre.html.twig'  %}
+
+{% endblock %}
