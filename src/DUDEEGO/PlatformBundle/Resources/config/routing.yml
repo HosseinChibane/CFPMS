@@ -1,34 +1,31 @@
 dudeego_platform_home:
     path:      /
     defaults: { _controller: DUDEEGOPlatformBundle:Page:index }
-dudeego_platform_testComparateur:
-    path:      /Page/testcomparateur
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:testcomparateur }
-dudeego_platform_testFilterComparateur:
-    path:      /Page/testcomparateur
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:testFilter }
-    requirements:
-        _method: GET
-dudeego_platform_filtreComparateur:
+
+dudeego_platform_showComparateur:
     path:      /Page/comparateur
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:filtrecomparateur }
-    requirements:
-        _method: POST
-dudeego_platform_voirComparateur:
+    defaults: { _controller: DUDEEGOPlatformBundle:Page:showComparateur }
+
+dudeego_platform_filterComparateur:
     path:      /Page/comparateur
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:comparateur }
+    defaults: { _controller: DUDEEGOPlatformBundle:Page:filterComparateur }
+
 dudeego_platform_voirJob:
     path:      /Page/job
     defaults: { _controller: DUDEEGOPlatformBundle:Page:job }
+
 dudeego_platform_voirStage:
     path:      /Page/stage
     defaults: { _controller: DUDEEGOPlatformBundle:Page:stage }
+
 dudeego_platform_voirLogement:
     path:      /Page/Logement
     defaults: { _controller: DUDEEGOPlatformBundle:Page:Logement }
+
 dudeego_platform_voirLangue:
     path:      /Page/langue
     defaults: { _controller: DUDEEGOPlatformBundle:Page:langue }
+
 dudeego_platform_voirBlog:
     path:      /Page/blog
     defaults: { _controller: DUDEEGOPlatformBundle:Page:blog }

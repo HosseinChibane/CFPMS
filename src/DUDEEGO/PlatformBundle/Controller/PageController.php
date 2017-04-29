@@ -28,89 +28,45 @@ class PageController extends Controller
 		return new Response($content);
 	}
 
-	public function testcomparateurAction()
+	public function showComparateurAction()
 	{
 		$listUniversite = $this
 		->getDoctrine()
 		->getManager()
-		->getRepository('DUDEEGOPlatformBundle:T_Image_Universite')
-		->getUniversiteWithImages()
+		->getRepository('DUDEEGOPlatformBundle:T_Universite')
+		->findAll()
 		;
-		//dump($listUniversite);exit();
-		
-		return $this->render('DUDEEGOPlatformBundle:Page:testcomparateur.html.twig', array('listUniversite' => $listUniversite));
-	}
+		dump($listUniversite);exit();
 
-	public function testFilterAction(Request $request)
-    {
-        $form = $this->get('form.factory')->create(ItemFilterType::class);
-
-        if ($request->query->has($form->getNometablissement())) {
-            // manually bind values from the request
-            $form->submit($request->query->get($form->getNometablissement()));
-
-            // initialize a query builder
-            $filterBuilder = $this->get('doctrine.orm.entity_manager')
-                ->getRepository('DUDEEGOPlatformBundle:T_Universite')
-                ->createQueryBuilder('e');
-
-            // build the query from the given form object
-            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
-
-            // now look at the DQL =)
-            var_dump($filterBuilder->getDql());
-        }
-
-        return $this->render('DUDEEGOPlatformBundle:Page:testcomparateur.html.twig', array(
-            'form' => $form->createView(),
-        ));
-    }
-
-	public function comparateurAction()
-	{
-		$listUniversite = $this
-		->getDoctrine()
-		->getManager()
-		->getRepository('DUDEEGOPlatformBundle:T_Image_Universite')
-		->getUniversiteWithImages()
-		;
-		
 		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array('listUniversite' => $listUniversite));
 	}
 
-
-
-	public function filtrecomparateurAction(Request $request)
+	public function filterComparateurAction(Request $request)
 	{
-		//$request = $this->container->get('request');
+		$form = $this->get('form.factory')->create(ItemFilterType::class);
 
-		if($request->isXmlHttpRequest())
-		{
-			//$motcle =  $request->get('search');
-			//$myValue = $request->getParameter('search');
-			//var_dump($motcle);
+		if ($request->query->has($form->getNometablissement())) {
+            // manually bind values from the request
+			$form->submit($request->query->get($form->getNometablissement()));
 
-			$form->bind( $request );
-			$data = $form->getData();
-			var_dump($data);
+            // initialize a query builder
+			$filterBuilder = $this->get('doctrine.orm.entity_manager')
+			->getRepository('DUDEEGOPlatformBundle:T_Universite')
+			->createQueryBuilder('e');
 
-			if(isset($motcle))
-			{
+            // build the query from the given form object
+			$this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
 
-			}
-			else {
-
-			}
-
-			return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array('listUniversite' => $listUniversite));
+            // now look at the DQL =)
+			var_dump($filterBuilder->getDql());
 		}
-		else {
-			//throw $this->createNotFoundException();
-			return $this->comparateurAction();
-		}
+
+		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
+			'form' => $form->createView(),
+			));
 	}
 
-
+	
 	public function jobAction()
 	{    
 		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Page:job.html.twig');

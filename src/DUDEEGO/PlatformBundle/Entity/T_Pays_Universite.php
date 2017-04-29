@@ -13,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class T_Pays_Universite
 {
 
+    /**
+     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Ville_Universite", mappedBy="pays")
+     */
+    private $villes;
+
 
     /**
      * @var int
@@ -28,7 +33,7 @@ class T_Pays_Universite
      *
      * @ORM\Column(name="nom", type="string", length=255)
      */
-    private $nom;
+    private $pays;
 
 
     /**
@@ -65,4 +70,69 @@ class T_Pays_Universite
         return $this->nom;
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->villes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add ville
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Ville_Universite $ville
+     *
+     * @return T_Pays_Universite
+     */
+    public function addVille(\DUDEEGO\PlatformBundle\Entity\T_Ville_Universite $ville)
+    {
+        $this->villes[] = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Remove ville
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Ville_Universite $ville
+     */
+    public function removeVille(\DUDEEGO\PlatformBundle\Entity\T_Ville_Universite $ville)
+    {
+        $this->villes->removeElement($ville);
+    }
+
+    /**
+     * Get villes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVilles()
+    {
+        return $this->villes;
+    }
+
+    /**
+     * Set pays
+     *
+     * @param string $pays
+     *
+     * @return T_Pays_Universite
+     */
+    public function setPays($pays)
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    /**
+     * Get pays
+     *
+     * @return string
+     */
+    public function getPays()
+    {
+        return $this->pays;
+    }
 }

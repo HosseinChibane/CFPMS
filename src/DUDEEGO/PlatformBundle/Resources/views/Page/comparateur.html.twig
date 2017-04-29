@@ -1,16 +1,192 @@
-{# src/DUDEEGO/PlatformBundle/Resources/views/Advert/comparateur.html.twig #}
 {% extends "DUDEEGOPlatformBundle::layout.html.twig" %}
+
 {% block title %}
-	Comparateur - {{ parent() }}
+  Comparateur - {{ parent() }}
 {% endblock %}
+
 {% block dudeegoplatform_body %}
 
-	{% include 'DUDEEGOPlatformBundle:Page:criteretrie.html.twig'  %}
+  <div class="row">
+    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
 
-	<div id="resultats_recherche"> 
-		{% include 'DUDEEGOPlatformBundle:Page:critereresultat.html.twig' with {'listUniversite' : listUniversite}  %}		
-	</div>
+      <form id="form_recherche" action="{{ path('dudeego_platform_filterComparateur') }}" method="Post">
 
-	{% include 'DUDEEGOPlatformBundle:Page:criterefiltre.html.twig'  %}
+       <div class="form-group">
+        <label for="search">Rechercher</label>
+        <input type="text" class="form-control" placeholder="Recherche..." id="search" name="search">
+      </div> 
 
-{% endblock %}
+      <div class="form-group">
+        <label for="pays">Selectionner un pays</label>
+        <select class="form-control" id="pays">
+          <option value=""></option>
+          <option value="Chypre">Chypre</option>
+          <option value="Espagne">Espagne</option>
+          <option value="Hongrie">Hongrie</option>
+          <option value="Luxembourg">Luxembourg</option>
+          <option value="Maroc">Maroc</option>
+          <option value="Roumanie">Roumanie</option>
+          <option value="Pologne">Pologne</option>
+          <option value="Portugal">Portugal</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="langue">Selectionner une langue</label>
+        <select class="form-control" id="langue">
+          <option value=""></option>
+          <option value="Anglais">Anglais</option>
+          <option value="Espagnol">Espagnol</option>
+          <option value="Français">Français</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="langue">Selectionner une formation</label>
+        <select class="form-control" id="langue">
+          <option value=""></option>
+          <option value="Kinésithérapeute">Kinésithérapeute</option>
+          <option value="Dentiste">Dentiste</option>
+          <option value="Psycologue">Psycologue</option>
+          <option value="Audioprothésiste">Audioprothésiste</option>
+          <option value="Biotechnologue">Biotechnologue</option>
+          <option value="Pharmacien">Pharmacien</option>
+          <option value="Médecin">Médecin</option>
+          <option value="Vétérinaire">Vétérinaire</option>
+          <option value="Infirmier">Infirmier</option>
+          <option value="STAPS">Sciences et techniques des activités physiques et sportives</option>
+          <option value="Podologie">Podologie</option>
+          <option value="Orthopédiste">Orthopédiste</option>
+          <option value="SS">Science de la santé</option>
+          <option value="physiothérapie">physiothérapie</option>
+          <option value="Nutrition">Nutrition</option>
+          <option value="PD">Prothésiste dentaire</option>
+        </select>
+      </div>
+
+      <div class="form-group">                                   
+        <button type="submit" name="submit-filter" value="filter" class="btn btn-primary" id="filtrer">Appliquer</button>
+        <button type="button" class="btn btn-secondary" onclick="dudeego_platform_showComparateur">Réinitialiser</button>
+      </div>
+
+    </form>
+
+  </div>
+  <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+
+    <table id="universite" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Etablissement</th>
+          <th>Description</th>
+          <th>Formation</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if listUniversite is defined %}
+          {% for rowUniversite in listUniversite %}
+            <tr>
+              <td><img class="media-object img-rounded img-responsive"  src="{{ rowUniversite.image.url }}" alt="{{ rowUniversite.image.alt }}"></td>
+              <td> <a href="{{ rowUniversite.siteinternet }}">{{ rowUniversite.nometablissement }}</a></td>
+              <td>{{ rowUniversite.description|slice(0, 50) ~ '...'  }}</td>
+              <td>
+                {% for rowUniversite.formations in formation %}
+                {{ formation.formation }}
+              {% endfor %}
+            </td>
+            <td><button type="button" class="btn btn-default btn-lg btn-block"> Inscription </button>
+              <button type="button" class="btn btn-default btn-lg btn-block"> Détails </button></td>
+            </tr>
+          {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+    <table id="favoris" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+      <thead>
+        <tr>
+          <th>Etablissement</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if listUniversite is defined %}
+          {% for rowUniversite in listUniversite %}
+            <tr>
+              <td><img class="media-object img-rounded img-responsive"  src="{{ rowUniversite.image.url }}" alt="{{ rowUniversite.image.alt }}" width="50" height="50"> <a href="{{ rowUniversite.siteinternet }}">{{ rowUniversite.nometablissement }}</a></td>
+            </tr>
+          {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-default btn-lg btn-block"> Comparer </button>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#universite').DataTable( {
+    paging: true,
+    responsive: true,
+  } );
+</script>
+
+<script type="text/javascript">
+  $('#favoris').DataTable( {
+    paging: false,
+    responsive: true
+  } );
+</script>
+
+<script type="text/javascript">
+        // Instantiate a slider
+        var mySlider = $("budget.slider").bootstrapSlider();
+
+        // Call a method on the slider
+        var value = mySlider.bootstrapSlider('getValue');
+
+        // For non-getter methods, you can chain together commands
+        mySlider
+        .bootstrapSlider('setValue', 5)
+        .bootstrapSlider('setValue', 7);
+      </script>
+
+      <script type="text/javascript">
+        // Instantiate a slider
+        var mySlider = $("reussite.slider").bootstrapSlider();
+
+        // Call a method on the slider
+        var value = mySlider.bootstrapSlider('getValue');
+
+        // For non-getter methods, you can chain together commands
+        mySlider
+        .bootstrapSlider('setValue', 5)
+        .bootstrapSlider('setValue', 7);
+      </script>
+      <script type="text/javascript">
+        // Instantiate a slider
+        var mySlider = $("emploi.slider").bootstrapSlider();
+
+        // Call a method on the slider
+        var value = mySlider.bootstrapSlider('getValue');
+
+        // For non-getter methods, you can chain together commands
+        mySlider
+        .bootstrapSlider('setValue', 5)
+        .bootstrapSlider('setValue', 7);
+      </script>
+      <script type="text/javascript">
+        // Instantiate a slider
+        var mySlider = $("salaire.slider").bootstrapSlider();
+
+        // Call a method on the slider
+        var value = mySlider.bootstrapSlider('getValue');
+
+        // For non-getter methods, you can chain together commands
+        mySlider
+        .bootstrapSlider('setValue', 5)
+        .bootstrapSlider('setValue', 7);
+      </script>
+
+    {% endblock %}

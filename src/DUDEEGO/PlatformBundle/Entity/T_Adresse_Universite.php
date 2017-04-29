@@ -14,7 +14,8 @@ class T_Adresse_Universite
 {
 
     /**
-   * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Ville_Universite", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Ville_Universite", cascade={"persist"})
+   * @ORM\JoinColumn(nullable=false)
    */
     private $ville;
 

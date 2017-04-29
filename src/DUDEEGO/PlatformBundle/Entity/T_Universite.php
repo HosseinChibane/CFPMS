@@ -12,6 +12,20 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class T_Universite
 {
+    /**
+     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Formation_Universite", mappedBy="universite")
+     */
+    private $formations;
+
+   /**
+   * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite", cascade={"persist"})
+   */
+    private $adresse;
+
+   /**
+   * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Image_Universite", cascade={"persist"})
+   */
+    private $image;
 
     /**
      * @var int
@@ -123,5 +137,118 @@ class T_Universite
     public function getDescription()
     {
         return $this->description;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->image = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add image
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Image_Universite $image
+     *
+     * @return T_Universite
+     */
+    public function addImage(\DUDEEGO\PlatformBundle\Entity\T_Image_Universite $image)
+    {
+        $this->image[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Image_Universite $image
+     */
+    public function removeImage(\DUDEEGO\PlatformBundle\Entity\T_Image_Universite $image)
+    {
+        $this->image->removeElement($image);
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Add formation
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Formation_Universite $formation
+     *
+     * @return T_Universite
+     */
+    public function addFormation(\DUDEEGO\PlatformBundle\Entity\T_Formation_Universite $formation)
+    {
+        $this->formations[] = $formation;
+
+        return $this;
+    }
+
+    /**
+     * Remove formation
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Formation_Universite $formation
+     */
+    public function removeFormation(\DUDEEGO\PlatformBundle\Entity\T_Formation_Universite $formation)
+    {
+        $this->formations->removeElement($formation);
+    }
+
+    /**
+     * Get formations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFormations()
+    {
+        return $this->formations;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite $adresse
+     *
+     * @return T_Universite
+     */
+    public function setAdresse(\DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite $adresse = null)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return \DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Image_Universite $image
+     *
+     * @return T_Universite
+     */
+    public function setImage(\DUDEEGO\PlatformBundle\Entity\T_Image_Universite $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

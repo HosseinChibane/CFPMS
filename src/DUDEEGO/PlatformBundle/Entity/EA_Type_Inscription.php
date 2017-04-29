@@ -94,4 +94,3 @@ class EA_Type_Inscription
         return $this->description;
     }
 }
-

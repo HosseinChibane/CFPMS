@@ -99,5 +99,28 @@ class EA_Document_Inscription
     {
         return $this->alt;
     }
-}
 
+    /**
+     * Set physique
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\EA_Physique $physique
+     *
+     * @return EA_Document_Inscription
+     */
+    public function setPhysique(\DUDEEGO\PlatformBundle\Entity\EA_Physique $physique)
+    {
+        $this->physique = $physique;
+
+        return $this;
+    }
+
+    /**
+     * Get physique
+     *
+     * @return \DUDEEGO\PlatformBundle\Entity\EA_Physique
+     */
+    public function getPhysique()
+    {
+        return $this->physique;
+    }
+}
