@@ -18,8 +18,7 @@ class T_Adresse_Universite
    * @ORM\JoinColumn(nullable=false)
    */
     private $ville;
-
-
+   
     /**
      * @var int
      *

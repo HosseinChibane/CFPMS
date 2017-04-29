@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class T_Image_Universite
 {
         /**
-     * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Universite", inversedBy="image")
+     * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Universite", inversedBy="images")
      * @ORM\JoinColumn(name="universite_id", referencedColumnName="id")
      */
     private $universite;

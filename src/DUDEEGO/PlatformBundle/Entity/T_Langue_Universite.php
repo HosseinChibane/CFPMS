@@ -14,7 +14,7 @@ class T_Langue_Universite
 {
 
     /**
-   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Formation_Universite", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Formation_Universite", inversedBy="langues")
    * @ORM\JoinColumn(nullable=false)
    */
     private $formation;

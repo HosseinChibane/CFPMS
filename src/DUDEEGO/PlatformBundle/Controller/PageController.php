@@ -17,7 +17,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-use DUDEEGO\PlatformBundle\Form\ItemFilterType;
+use DUDEEGO\PlatformBundle\Entity\T_Universite;
+use DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite;
+
+use DUDEEGO\PlatformBundle\Form\T_UniversiteType;
 
 
 class PageController extends Controller
@@ -28,45 +31,43 @@ class PageController extends Controller
 		return new Response($content);
 	}
 
-	public function showComparateurAction()
+	public function showComparateurAction(Request $request)
 	{
+		$form = $this->createform(T_UniversiteType::class);
+		$form->handleRequest($request);
+
 		$listUniversite = $this
 		->getDoctrine()
 		->getManager()
 		->getRepository('DUDEEGOPlatformBundle:T_Universite')
 		->findAll()
 		;
-		dump($listUniversite);exit();
 
-		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array('listUniversite' => $listUniversite));
+		if ($form->isSubmitted() && $form->isValid()) {
+			
+		}
+
+		//dump($listUniversite);exit();
+
+		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array('form' => $form->createView(), 'listUniversite' => $listUniversite));
 	}
 
 	public function filterComparateurAction(Request $request)
 	{
-		$form = $this->get('form.factory')->create(ItemFilterType::class);
+		$form = $this->createform(T_UniversiteType::class);
+		$form->handleRequest($request);
 
-		if ($request->query->has($form->getNometablissement())) {
-            // manually bind values from the request
-			$form->submit($request->query->get($form->getNometablissement()));
+		if ($form->isSubmitted() && $form->isValid()) {
 
-            // initialize a query builder
-			$filterBuilder = $this->get('doctrine.orm.entity_manager')
-			->getRepository('DUDEEGOPlatformBundle:T_Universite')
-			->createQueryBuilder('e');
-
-            // build the query from the given form object
-			$this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
-
-            // now look at the DQL =)
-			var_dump($filterBuilder->getDql());
 		}
 
 		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
 			'form' => $form->createView(),
-			));
+			));		
+
 	}
 
-	
+
 	public function jobAction()
 	{    
 		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Page:job.html.twig');

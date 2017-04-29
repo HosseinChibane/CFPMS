@@ -17,15 +17,15 @@ class T_Universite
      */
     private $formations;
 
-   /**
-   * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite", cascade={"persist"})
-   */
-    private $adresse;
+    /**
+     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Image_Universite", mappedBy="universite")
+     */
+    private $images;
 
-   /**
-   * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Image_Universite", cascade={"persist"})
-   */
-    private $image;
+    /**
+     * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite")
+     */
+    private $adresse;
 
     /**
      * @var int
@@ -250,5 +250,39 @@ class T_Universite
         $this->image = $image;
 
         return $this;
+    }
+
+    /**
+     * Add adresse
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite $adresse
+     *
+     * @return T_Universite
+     */
+    public function addAdresse(\DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite $adresse)
+    {
+        $this->adresse[] = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Remove adresse
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite $adresse
+     */
+    public function removeAdresse(\DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite $adresse)
+    {
+        $this->adresse->removeElement($adresse);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }
