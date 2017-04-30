@@ -1,0 +1,73 @@
+
+{% extends "DUDEEGOPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Details - {{ parent() }}
+{% endblock %}
+
+{% block dudeegoplatform_body %}
+	<div class="row">
+		<div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+		</div>
+		<div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+			<a href="{{ path('dudeego_platform_showComparateur') }}">
+				<i class="glyphicon glyphicon-th-list"></i>
+				Retour à la liste des universités
+			</a>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+			<div class="list-group table-of-contents">
+				<a class="list-group-item" href="#section1"><i class="glyphicon glyphicon-chevron-right"></i>Aperçu</a>
+				<a class="list-group-item" href="#section2"><i class="glyphicon glyphicon-chevron-right"></i>Formations</a>
+				<a class="list-group-item" href="#section3"><i class="glyphicon glyphicon-chevron-right"></i>Langues</a>
+			</div>
+		</div>
+		<div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+			<div class="row">
+				{% if listUniversite is defined %}
+					<div id="#section1">
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								Aperçu
+							</div>
+							<div class="panel-body">										
+								{{ listUniversite.nometablissement }} 
+								<br>
+								{{ listUniversite.description }}
+							</div>
+						</div>
+					</div>
+					<div id="#section2">
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								Formations
+							</div>
+							<div class="panel-body">
+								{% for itemformation in listUniversite.formations %}
+									{{ itemformation.formation }} 
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+					<div id="#section3">
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								Langues
+							</div>
+							<div class="panel-body">
+								{% for itemformation in listUniversite.formations %}
+									{% for itemlangue in itemformation.langues %}
+										{{ itemlangue.langue }} 
+									{% endfor %}
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}	

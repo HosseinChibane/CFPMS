@@ -21,6 +21,7 @@ use DUDEEGO\PlatformBundle\Entity\T_Universite;
 use DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite;
 
 use DUDEEGO\PlatformBundle\Form\T_UniversiteType;
+use DUDEEGO\PlatformBundle\Form\T_Search_UniversiteType;
 
 
 class PageController extends Controller
@@ -33,7 +34,7 @@ class PageController extends Controller
 
 	public function showComparateurAction(Request $request)
 	{
-		$form = $this->createform(T_UniversiteType::class);
+		$form = $this->createform(T_Search_UniversiteType::class);
 		$form->handleRequest($request);
 
 		$listUniversite = $this
@@ -43,21 +44,55 @@ class PageController extends Controller
 		->findAll()
 		;
 
-		if ($form->isSubmitted() && $form->isValid()) {
-			
-		}
+		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
+			'form' => $form->createView(),
+			'listUniversite' => $listUniversite,
+			));
+	}
 
+	public function detailsComparateurAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+    	// On récupère l'annonce $id
+		$listUniversite = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->find($id);
 		//dump($listUniversite);exit();
 
-		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array('form' => $form->createView(), 'listUniversite' => $listUniversite));
+		if (null === $listUniversite) {
+			throw new NotFoundHttpException("L'universite d'id : ".$id." n'existe pas.");
+		}	
+
+		return $this->render('DUDEEGOPlatformBundle:Page:detailscomparateur.html.twig', array(
+			'listUniversite' => $listUniversite
+			));
+	}
+
+	public function favorisComparateurAction($id)
+	{
+		$favs = $request->get('lisFavoristUniversite');
+		foreach($favs  as $fav) {
+    		//ADD TO SESSION
+			$session->set('lisFavoristUniversite', $fav);
+			$session->getFlashBag()->add('notice', 'Add to favorite');
+		}
+
+		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
+			'lisFavoristUniversite' => $lisFavoristUniversite
+			));
 	}
 
 	public function filterComparateurAction(Request $request)
 	{
-		$form = $this->createform(T_UniversiteType::class);
+		$form = $this->createform(T_Search_UniversiteType::class);
 		$form->handleRequest($request);
-
+		
 		if ($form->isSubmitted() && $form->isValid()) {
+			$listUniversite = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('DUDEEGOPlatformBundle:T_Universite')
+			->getUniversiteWithSearch()
+			;
 
 		}
 

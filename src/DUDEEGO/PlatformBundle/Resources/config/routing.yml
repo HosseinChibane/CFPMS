@@ -5,10 +5,16 @@ dudeego_platform_home:
 dudeego_platform_showComparateur:
     path:      /Page/comparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Page:showComparateur }
-
+dudeego_platform_detailsComparateur:
+    path:      /Page/detailscomparateur/{id}
+    defaults: { _controller: DUDEEGOPlatformBundle:Page:detailsComparateur }
+dudeego_platform_favorisComparateur:
+    path:      /Page/comparateur/{id}
+    defaults: { _controller: DUDEEGOPlatformBundle:Page:favorisComparateur }
 dudeego_platform_filterComparateur:
     path:      /Page/comparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Page:filterComparateur }
+    methods: POST
 
 dudeego_platform_voirJob:
     path:      /Page/job
