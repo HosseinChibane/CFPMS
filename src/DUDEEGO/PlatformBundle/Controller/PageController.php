@@ -35,14 +35,12 @@ class PageController extends Controller
 	public function showComparateurAction(Request $request)
 	{
 		$form = $this->createform(T_Search_UniversiteType::class);
-		$form->handleRequest($request);
 
 		$listUniversite = $this
 		->getDoctrine()
 		->getManager()
 		->getRepository('DUDEEGOPlatformBundle:T_Universite')
-		->findAll()
-		;
+		->findAll();
 
 		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
 			'form' => $form->createView(),
@@ -50,13 +48,36 @@ class PageController extends Controller
 			));
 	}
 
-	public function detailsComparateurAction($id)
+	public function favorisComparateurAction(int $id)
+	{
+		$form = $this->createform(T_Search_UniversiteType::class);
+		 // getting session 
+		$sessionFav = $request->getSession();
+		$fav = $sessionFav->get('favoris');
+		$fav[] = $idFav;
+		//dump($sessionFav);dump($fav);exit();
+
+		foreach ($fav as $rowId) {
+			# code...
+			$listFavUniversite = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('DUDEEGOPlatformBundle:T_Universite')
+			->find($rowId);
+		}
+
+		//$sessionCart->set('fav', $fav);
+
+		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
+			'form' => $form->createView(),
+			'listFavUniversite' => $listFavUniversite,
+			));
+	}
+
+	public function detailsComparateurAction(int $id)
 	{
 		$em = $this->getDoctrine()->getManager();
-
-    	// On récupère l'annonce $id
 		$listUniversite = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->find($id);
-		//dump($listUniversite);exit();
 
 		if (null === $listUniversite) {
 			throw new NotFoundHttpException("L'universite d'id : ".$id." n'existe pas.");
@@ -67,39 +88,34 @@ class PageController extends Controller
 			));
 	}
 
-	public function favorisComparateurAction($id)
-	{
-		$favs = $request->get('lisFavoristUniversite');
-		foreach($favs  as $fav) {
-    		//ADD TO SESSION
-			$session->set('lisFavoristUniversite', $fav);
-			$session->getFlashBag()->add('notice', 'Add to favorite');
-		}
-
-		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
-			'lisFavoristUniversite' => $lisFavoristUniversite
-			));
-	}
-
 	public function filterComparateurAction(Request $request)
 	{
-		$form = $this->createform(T_Search_UniversiteType::class);
-		$form->handleRequest($request);
-		
-		if ($form->isSubmitted() && $form->isValid()) {
+		$form = $this->get('form.factory')->create(T_Search_UniversiteType::class);
+
+		if ($request->query->has($form->getName())) {
+            // manually bind values from the request
+			$form->submit($request->query->get($form->getName()));
+			$data = $form->getData();
+			//dump($data);die();
+
+			$formations = $data->getFormations();
+			$langues = $data->getLangues();
+			$villes = $data->getVilles();
+			$pays =  $data->getPays();
+			$nomuniversite =  $data->getNomuniversite();
+
 			$listUniversite = $this
 			->getDoctrine()
 			->getManager()
 			->getRepository('DUDEEGOPlatformBundle:T_Universite')
-			->getUniversiteWithSearch()
-			;
+			->getUniversiteWithSearch($formations, $langues, $villes, $pays, $nomuniversite);
 
 		}
 
 		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
 			'form' => $form->createView(),
-			));		
-
+			'listUniversite' => $listUniversite,
+			));
 	}
 
 

@@ -8,7 +8,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type as Filters;
 
 class T_Search_UniversiteType extends AbstractType
 {
@@ -18,10 +21,10 @@ class T_Search_UniversiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('nomuniversite', SearchType::class, array(
-            'attr' => array('class' => 'nomuniversite'),
+        ->add('nomuniversite', Filters\TextFilterType::class, array(
+            'attr' => array('class' => 'form-control'),
             ))
-        ->add('formations', ChoiceType::class, array(
+        ->add('formations', Filters\ChoiceFilterType::class, array(
             'choices' => array(
                 'Kinésithérapeute' => 'Kinésithérapeute',
                 'Dentiste' => 'Dentiste',
@@ -43,7 +46,7 @@ class T_Search_UniversiteType extends AbstractType
             'placeholder' => 'Choisir une formation',
             'empty_data'  => null))
 
-        ->add('langues', ChoiceType::class, array(
+        ->add('langues', Filters\ChoiceFilterType::class, array(
             'choices' => array(
                 'Anglais' => 'Anglais',
                 'Espagnol' => 'Espagnol',
@@ -53,7 +56,7 @@ class T_Search_UniversiteType extends AbstractType
             'placeholder' => 'Choisir une langue',
             'empty_data'  => null))
 
-        ->add('villes', ChoiceType::class, array(
+        ->add('villes', Filters\ChoiceFilterType::class, array(
             'choices' => array(
                 'Madrid' => 'Madrid',
                 'Valencia' => 'Valencia',
@@ -93,7 +96,7 @@ class T_Search_UniversiteType extends AbstractType
             'placeholder' => 'Choisir une ville',
             'empty_data'  => null))
 
-        ->add('pays', ChoiceType::class, array(
+        ->add('pays', Filters\ChoiceFilterType::class, array(
             'choices' => array(
                 'Chypre' => 'Chypre',
                 'Espagne' => 'Espagne',
@@ -106,12 +109,13 @@ class T_Search_UniversiteType extends AbstractType
             'required'    => false,
             'placeholder' => 'Choisir un pays',
             'empty_data'  => null))
-        ->add('rechercher', ButtonType::class, array(
-            'attr' => array('class' => 'rechercher'),
+        ->add('rechercher', SubmitType::class, array(
+            'attr' => array('class' => 'btn btn-primary'),
             ))
         ->add('reinitialiser', ResetType::class, array(
-            'attr' => array('class' => 'reinitialiser'),
-            ));
+            'attr' => array('class' => 'btn btn-danger'),
+            ))
+        ;
     }
 
     /**
@@ -121,12 +125,9 @@ class T_Search_UniversiteType extends AbstractType
     {
         $resolver->setDefaults(array(
             'csrf_protection' => false,
-            ));
-
-        /*$resolver->setDefaults(array(
             'data_class' => 'DUDEEGO\PlatformBundle\Entity\T_Search_Universite'
             ));
-            */
+
         }
 
     /**
