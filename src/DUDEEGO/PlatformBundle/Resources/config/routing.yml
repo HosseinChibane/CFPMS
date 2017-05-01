@@ -9,9 +9,13 @@ dudeego_platform_showComparateur:
 dudeego_platform_detailsComparateur:
     path:      /Page/detailscomparateur/{id}
     defaults: { _controller: DUDEEGOPlatformBundle:Page:detailsComparateur }
-dudeego_platform_favorisComparateur:
+dudeego_platform_addfavComparateur:
     path:      /Page/comparateur/{id}
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:favorisComparateur }
+    defaults: { _controller: DUDEEGOPlatformBundle:Page:addfavComparateur }
+dudeego_platform_removefavComparateur:
+    path:      /Page/comparateur/{id}
+    defaults: { _controller: DUDEEGOPlatformBundle:Page:removefavComparateur }
+
 dudeego_platform_filterComparateur:
     path:      /Page/filtercomparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Page:filterComparateur }

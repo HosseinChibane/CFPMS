@@ -48,30 +48,62 @@ class PageController extends Controller
 			));
 	}
 
-	public function favorisComparateurAction(int $id)
+	public function addfavComparateurAction(Request $request, $id)
 	{
 		$form = $this->createform(T_Search_UniversiteType::class);
-		 // getting session 
-		$sessionFav = $request->getSession();
-		$fav = $sessionFav->get('favoris');
-		$fav[] = $idFav;
-		//dump($sessionFav);dump($fav);exit();
 
-		foreach ($fav as $rowId) {
-			# code...
-			$listFavUniversite = $this
-			->getDoctrine()
-			->getManager()
-			->getRepository('DUDEEGOPlatformBundle:T_Universite')
-			->find($rowId);
+		$session = $this->get('session');
+		$cart = $session->get('cart', array());
+
+    	// fetch the cart		
+		$em = $this->getDoctrine()->getEntityManager();  
+		foreach($cart as $id) 
+		{
+			$listFavUniversite[] = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->findById($id);
+		} 
+
+		//dump($cart);exit();
+
+		if (!isset($listFavUniversite))
+		{
+			return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
+				'form' => $form->createView(),
+				'listFavUniversite' => $listFavUniversite,
+				));
+		} 
+		else {
+			return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
+				'form' => $form->createView(),
+				'listFavUniversite' => $listFavUniversite,
+				));
+		}
+	}
+
+	public function removefavComparateurAction($id)
+	{
+    		// check the cart
+		$session = $this->getRequest()->getSession();
+		$cart = $session->get('cart', array());
+
+    		// if it doesn't exist redirect to cart index page. end
+		if(!$cart) { $this->redirect( $this->generateUrl('dudeego_platform_showComparateur') ); }
+
+    		// check if the $id already exists in it.
+		if( isset($cart[$id]) ) {
+        		// if it does ++ the quantity
+			$cart[$id]['quantity'] = '0';
+			unset($cart[$id]);
+        		//echo $cart[$id]['quantity']; die();
+		} else {
+			$this->get('session')->setFlash('notice', 'Go to hell');    
+			return $this->redirect( $this->generateUrl('dudeego_platform_showComparateur') );
 		}
 
-		//$sessionCart->set('fav', $fav);
+		$session->set('cart', $cart);
 
-		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
-			'form' => $form->createView(),
-			'listFavUniversite' => $listFavUniversite,
-			));
+    		// redirect(index page)
+		$this->get('session')->setFlash('notice', 'This product is Remove');
+		return $this->redirect( $this->generateUrl('dudeego_platform_showComparateur') );
 	}
 
 	public function detailsComparateurAction(int $id)
