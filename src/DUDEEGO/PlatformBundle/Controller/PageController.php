@@ -77,35 +77,6 @@ class PageController extends Controller
 		}
 	}
 
-	/*public function addPanierComparateurAction(Request $request, int $id)
-	{
-		# fetch the cart
-		$em = $this->getDoctrine()->getEntityManager();
-		$universite = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->findById($id);
-		$session = $request->getSession();
-		$cart = $session->get('cart', array());
-
-
-    	# check if the $id already exists in it.
-		if (!isset($universite)) {
-			$this->addFlash('notice','Cette universite est indisponible !');  
-			return $this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
-		} else {
-			if(isset($cart[$id])) {
-				$this->addFlash('notice','Cette universite est déja présente !');         
-				return $this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
-			} else {
-            	# if it doesnt make it 1
-				$cart = $session->get('cart', array());
-				$cart[$id] = $id;
-			}
-
-			$session->set('cart', $cart);
-			return $this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
-
-		}
-	}*/
-
 	public function PanierComparateurAction(Request $request, int $id)
 	{
 		# check the cart

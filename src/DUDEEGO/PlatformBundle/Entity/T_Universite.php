@@ -23,7 +23,7 @@ class T_Universite
     private $images;
 
     /**
-     * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite")
+     * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite" , cascade={"persist"})
      */
     private $adresse;
 

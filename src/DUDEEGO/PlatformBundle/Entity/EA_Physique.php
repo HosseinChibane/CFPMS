@@ -18,6 +18,12 @@ class EA_Physique
    */
     private $personne;
 
+     /**
+     * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Image" , cascade={"persist"})
+     */
+    private $image;
+
+
     /**
      * @var int
      *
@@ -338,5 +344,29 @@ class EA_Physique
     public function getPersonne()
     {
         return $this->personne;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\EA_Image $image
+     *
+     * @return EA_Physique
+     */
+    public function setImage(\DUDEEGO\PlatformBundle\Entity\EA_Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \DUDEEGO\PlatformBundle\Entity\EA_Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

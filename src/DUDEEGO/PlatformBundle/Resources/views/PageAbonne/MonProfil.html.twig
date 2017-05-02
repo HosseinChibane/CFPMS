@@ -5,10 +5,14 @@
 {% endblock %}
 
 {% block dudeegoplatform_bodyAbonne %} 
-    
-<!-- Mon profil -->
-    <form action="{{ path('fos_user_registration_register') }}" method="POST">
 
+    <!-- Mon profil -->
+    <form action="{{ path('dudeego_platform_abonne_monProfil') }}" method="POST">
+        {% for flash_message in app.session.flashBag.get('notice') %}
+          <div class="flash-notice">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
     {{ form_errors(form) }}
     <div class="col-md-5">
         <div class="form-group">
@@ -69,18 +73,23 @@
     </div>
 
     <div class="col-md-5">
+        {{ dump(physique.image) }}
+        {#
+        <img   src="{{ asset(form.image.getWebPath) }}" class="img-circle" alt="{{ form.image.alt }}" width="304" height="236"> 
+        #}
         <div class="form-group">
-            <label class="mylabel">Changer de photo</label>
-            <input  type="file" accept="application/pdf" class="form-control-file">
+            {{ form_label(form.image.file, 'Choissisez une photo') }}
+            {{ form_errors(form.image.file) }}
+            {{ form_widget(form.image.file) }}
         </div>
     </div>
     <div class="col-md-5">
         <div class="form-group">
             <div>
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                <button type="" class="btn btn-danger">Annuler</button>
-            </div>
-        </div>
-    </div>
-    {{ form_end(form) }}
+               {{ form_widget(form.reinitialiser) }} 
+               {{ form_widget(form.enregistrer) }}
+           </div>
+       </div>
+   </div>
+   {{ form_end(form) }}
 {% endblock %}

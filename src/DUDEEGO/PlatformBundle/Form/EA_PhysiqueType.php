@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class EA_PhysiqueType extends AbstractType
 {
@@ -15,11 +18,31 @@ class EA_PhysiqueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('nom')
-        ->add('prenom')
+        ->add('nom', TextType::class, array(
+            'attr' => array('class' => 'form-control'),
+            ))
+
+        ->add('prenom', TextType::class, array(
+            'attr' => array('class' => 'form-control'),
+            ))
+
         ->add('datenaissance', DateType::class, array('widget' => 'single_text'))
-        ->add('numerocarteid')
-        ->add('personne', EA_PersonneType::class);
+
+        ->add('numerocarteid', TextType::class, array(
+            'attr' => array('class' => 'form-control'),
+            ))
+
+        ->add('personne', EA_PersonneType::class)
+
+        ->add('image', EA_ImageType::class)
+
+        ->add('enregistrer', SubmitType::class, array(
+            'attr' => array('class' => 'btn btn-primary'),
+            ))
+        ->add('reinitialiser', ResetType::class, array(
+            'attr' => array('class' => 'btn btn-danger'),
+            ))
+        ;
     }
     
     /**
@@ -29,7 +52,7 @@ class EA_PhysiqueType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'DUDEEGO\PlatformBundle\Entity\EA_Physique'
-        ));
+            ));
     }
 
     /**

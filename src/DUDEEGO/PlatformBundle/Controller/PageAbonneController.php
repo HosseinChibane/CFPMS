@@ -42,26 +42,27 @@ class PageAbonneController extends Controller
 	{ 
 
 		$user = $this->getUser();
-
 		$em = $this->getDoctrine()->getManager();
-		$physique = $em->getRepository('DUDEEGOPlatformBundle:EA_Physique')->findOneById(1);		
+		$physique = $em->getRepository('DUDEEGOPlatformBundle:EA_Physique')->findOneById($user->getPhysique()->getId());		
 		$form = $this->createform(EA_PhysiqueType::class, $physique);
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
 
 			$physique = $form->getData();
+			# c'est elle qui déplace l'image là où on veut les stocker
+			# $physique->getImage()->upload();
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($physique);
 			$em->flush();
 
-			$request->getSession()->getFlashBag()->add('notice', 'Modifcation bien enregistrée.');
-
+			$this->addFlash('notice','Modifcation bien enregistrée.');
 			return $this->redirectToRoute('dudeego_platform_abonne_monProfil');
 		}
 
 		return $this->render('DUDEEGOPlatformBundle:PageAbonne:monprofil.html.twig', array(
 			'form' => $form->createView(),
+			'physique' => $physique,
 			));		
 	}
 
