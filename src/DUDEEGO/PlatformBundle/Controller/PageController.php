@@ -42,68 +42,150 @@ class PageController extends Controller
 		->getRepository('DUDEEGOPlatformBundle:T_Universite')
 		->findAll();
 
-		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
-			'form' => $form->createView(),
-			'listUniversite' => $listUniversite,
-			));
-	}
-
-	public function addfavComparateurAction(Request $request, $id)
-	{
-		$form = $this->createform(T_Search_UniversiteType::class);
-
-		$session = $this->get('session');
+	    // get the cart from  the session
+		$session = $request->getSession();
 		$cart = $session->get('cart', array());
 
-    	// fetch the cart		
-		$em = $this->getDoctrine()->getEntityManager();  
-		foreach($cart as $id) 
-		{
-			$listFavUniversite[] = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->findById($id);
-		} 
+		if(isset($cart)) {
+			// charge la liste des favoris
+			foreach( $cart as $id => $quantity ) {
+				$em = $this->getDoctrine()->getEntityManager();
+				$listFavUniversite[] = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->findById($id);
+			}           
+			
+			if(isset($listFavUniversite)) {
+				return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
+					'form' => $form->createView(),
+					'listUniversite' => $listUniversite,
+					'listFavUniversite' => $listFavUniversite,
+					));
+				
+			} else {
+				return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
+					'form' => $form->createView(),
+					'listUniversite' => $listUniversite,
+					'empty' => true,
+					));
+			}
 
-		//dump($cart);exit();
-
-		if (!isset($listFavUniversite))
-		{
+		} else {
 			return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
 				'form' => $form->createView(),
-				'listFavUniversite' => $listFavUniversite,
-				));
-		} 
-		else {
-			return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
-				'form' => $form->createView(),
-				'listFavUniversite' => $listFavUniversite,
+				'listUniversite' => $listUniversite,
+				'empty' => true,
 				));
 		}
 	}
 
-	public function removefavComparateurAction($id)
+	/*public function addPanierComparateurAction(Request $request, int $id)
 	{
-    		// check the cart
-		$session = $this->getRequest()->getSession();
+		# fetch the cart
+		$em = $this->getDoctrine()->getEntityManager();
+		$universite = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->findById($id);
+		$session = $request->getSession();
 		$cart = $session->get('cart', array());
 
-    		// if it doesn't exist redirect to cart index page. end
-		if(!$cart) { $this->redirect( $this->generateUrl('dudeego_platform_showComparateur') ); }
 
-    		// check if the $id already exists in it.
-		if( isset($cart[$id]) ) {
-        		// if it does ++ the quantity
-			$cart[$id]['quantity'] = '0';
-			unset($cart[$id]);
-        		//echo $cart[$id]['quantity']; die();
+    	# check if the $id already exists in it.
+		if (!isset($universite)) {
+			$this->addFlash('notice','Cette universite est indisponible !');  
+			return $this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
 		} else {
-			$this->get('session')->setFlash('notice', 'Go to hell');    
-			return $this->redirect( $this->generateUrl('dudeego_platform_showComparateur') );
+			if(isset($cart[$id])) {
+				$this->addFlash('notice','Cette universite est déja présente !');         
+				return $this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
+			} else {
+            	# if it doesnt make it 1
+				$cart = $session->get('cart', array());
+				$cart[$id] = $id;
+			}
+
+			$session->set('cart', $cart);
+			return $this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
+
+		}
+	}*/
+
+	public function PanierComparateurAction(Request $request, int $id)
+	{
+		# check the cart
+		$session = $request->getSession();
+		$cart = $session->get('cart', array());
+
+    	# if it doesn't exist redirect to cart index page. end
+		if(!isset($cart)) {
+			$this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
+		}
+
+    	# check if the $id already exists in it.
+		if(isset($cart[$id])) {
+			#remove
+			unset($cart[$id]);
+			$session->set('cart',$cart);
+			$this->addFlash('notice','Universite supprimé !');
+		} else {
+			#throw new \Exception('Something went wrong!');
+
+			# fetch the cart
+			$em = $this->getDoctrine()->getEntityManager();
+			$universite = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->findById($id);
+			$session = $request->getSession();
+			$cart = $session->get('cart', array());
+
+
+    		# check if the $id already exists in it.
+			if (!isset($universite)) {
+				$this->addFlash('notice','Cette universite est indisponible !');  
+				return $this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
+			} else {
+				if(isset($cart[$id])) {
+					$this->addFlash('notice','Cette universite est déja présente !');         
+					return $this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
+				} else {
+            	# if it doesnt make it 1
+					$cart = $session->get('cart', array());
+					$cart[$id] = $id;
+				}
+
+				$session->set('cart', $cart);
+				return $this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
+			}
 		}
 
 		$session->set('cart', $cart);
+		return $this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
 
-    		// redirect(index page)
-		$this->get('session')->setFlash('notice', 'This product is Remove');
-		return $this->redirect( $this->generateUrl('dudeego_platform_showComparateur') );
+	}
+
+	public function comparerComparateurAction(Request $request)
+	{
+		// get the cart from  the session
+		$session = $request->getSession();
+		$cart = $session->get('cart', array());
+
+		if(isset($cart)) {
+			// charge la liste des favoris
+			foreach( $cart as $id => $quantity ) {
+				$em = $this->getDoctrine()->getEntityManager();
+				$listFavUniversite[] = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->findById($id);
+			}           
+
+			if(isset($listFavUniversite)) {
+				return $this->render('DUDEEGOPlatformBundle:Page:comparer.html.twig', array(
+					'listFavUniversite' => $listFavUniversite,
+					));
+
+			} else {
+				return $this->render('DUDEEGOPlatformBundle:Page:comparer.html.twig', array(
+					'empty' => true,
+					));
+			}
+
+		} else {
+			return $this->render('DUDEEGOPlatformBundle:Page:comparer.html.twig', array(
+				'empty' => true,
+				));
+		}
 	}
 
 	public function detailsComparateurAction(int $id)
@@ -140,8 +222,7 @@ class PageController extends Controller
 			->getDoctrine()
 			->getManager()
 			->getRepository('DUDEEGOPlatformBundle:T_Universite')
-			->getUniversiteWithSearch($formations, $langues, $villes, $pays, $nomuniversite);
-
+			->getUniversiteWithSearchAND($formations, $langues, $villes, $pays, $nomuniversite);
 		}
 
 		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(

@@ -13,7 +13,11 @@ class T_UniversiteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nometablissement')->add('siteinternet')->add('description')->add('adresse');
+        $builder
+        ->add('nometablissement')
+        ->add('siteinternet')
+        ->add('description');
+        ->add('adresse');
     }
     
     /**

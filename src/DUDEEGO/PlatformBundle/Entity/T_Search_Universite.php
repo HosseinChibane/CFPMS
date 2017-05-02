@@ -54,7 +54,7 @@ class T_Search_Universite
      *
      * @ORM\Column(name="nomuniversite", type="string", length=255)
      */
-    private $nomuniversite;
+     private $nomuniversite;
 
 
     /**

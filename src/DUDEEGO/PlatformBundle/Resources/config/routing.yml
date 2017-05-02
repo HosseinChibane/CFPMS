@@ -5,21 +5,23 @@ dudeego_platform_home:
 dudeego_platform_showComparateur:
     path:      /Page/comparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Page:showComparateur }
-    methods: POST|GET
+
 dudeego_platform_detailsComparateur:
     path:      /Page/detailscomparateur/{id}
     defaults: { _controller: DUDEEGOPlatformBundle:Page:detailsComparateur }
-dudeego_platform_addfavComparateur:
-    path:      /Page/comparateur/{id}
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:addfavComparateur }
-dudeego_platform_removefavComparateur:
-    path:      /Page/comparateur/{id}
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:removefavComparateur }
 
+dudeego_platform_PanierComparateur:
+    path:      /Page/comparateur/{id}
+    defaults: { _controller: DUDEEGOPlatformBundle:Page:PanierComparateur }
+
+dudeego_platform_comparerComparateur:
+    path:      /Page/comparer
+    defaults: { _controller: DUDEEGOPlatformBundle:Page:comparerComparateur }
 dudeego_platform_filterComparateur:
     path:      /Page/filtercomparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Page:filterComparateur }
     methods: POST|GET
+
 
 dudeego_platform_voirJob:
     path:      /Page/job
