@@ -62,7 +62,7 @@ class EA_Image
      *
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
-     * @return Product
+     * @return EA_Image
      */
     public function setImageFile(File $image = null)
     {
@@ -88,7 +88,7 @@ class EA_Image
     /**
      * @param string $imageName
      *
-     * @return Product
+     * @return EA_Image
      */
     public function setImageName($imageName)
     {
@@ -108,7 +108,7 @@ class EA_Image
     /**
      * @param integer $imageSize
      *
-     * @return Product
+     * @return EA_Image
      */
     public function setImageSize($imageSize)
     {

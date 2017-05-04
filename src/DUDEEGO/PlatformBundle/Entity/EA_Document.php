@@ -3,12 +3,16 @@
 namespace DUDEEGO\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * EA_Document
  *
  * @ORM\Table(name="e_a__document")
  * @ORM\Entity(repositoryClass="DUDEEGO\PlatformBundle\Repository\EA_DocumentRepository")
+ * @Vich\Uploadable
  */
 class EA_Document
 {
@@ -27,69 +31,27 @@ class EA_Document
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=255)
-     */
-    private $nom;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @Vich\UploadableField(mapping="users_pdf", fileNameProperty="pdfName")
+     * 
+     * @var File
      */
-    private $prenom;
+    private $pdfFile;
 
     /**
-     * @var string
+     * @ORM\Column(type="string", length=255)
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @var string
      */
-    private $description;
+    private $pdfName;
 
     /**
-     * @var string
+     * @ORM\Column(type="datetime")
      *
-     * @ORM\Column(name="contenu", type="string", length=255)
-     */
-    private $contenu;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="url", type="string", length=255)
-     */
-    private $url;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="alt", type="string", length=255)
-     */
-    private $alt;
-
-    /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="creation", type="datetimetz")
-     */
-    private $creation;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="miseajour", type="datetimetz")
-     */
-    private $miseajour;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="verifier", type="boolean")
-     */
-    private $verifier;
-
+    */
+    private $updatedAt;
 
     /**
      * Get id
@@ -99,222 +61,6 @@ class EA_Document
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return EA_Document
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    /**
-     * Set prenom
-     *
-     * @param string $prenom
-     *
-     * @return EA_Document
-     */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    /**
-     * Get prenom
-     *
-     * @return string
-     */
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return EA_Document
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set contenu
-     *
-     * @param string $contenu
-     *
-     * @return EA_Document
-     */
-    public function setContenu($contenu)
-    {
-        $this->contenu = $contenu;
-
-        return $this;
-    }
-
-    /**
-     * Get contenu
-     *
-     * @return string
-     */
-    public function getContenu()
-    {
-        return $this->contenu;
-    }
-
-    /**
-     * Set url
-     *
-     * @param string $url
-     *
-     * @return EA_Document
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * Set alt
-     *
-     * @param string $alt
-     *
-     * @return EA_Document
-     */
-    public function setAlt($alt)
-    {
-        $this->alt = $alt;
-
-        return $this;
-    }
-
-    /**
-     * Get alt
-     *
-     * @return string
-     */
-    public function getAlt()
-    {
-        return $this->alt;
-    }
-
-    /**
-     * Set creation
-     *
-     * @param \DateTime $creation
-     *
-     * @return EA_Document
-     */
-    public function setCreation($creation)
-    {
-        $this->creation = $creation;
-
-        return $this;
-    }
-
-    /**
-     * Get creation
-     *
-     * @return \DateTime
-     */
-    public function getCreation()
-    {
-        return $this->creation;
-    }
-
-    /**
-     * Set miseajour
-     *
-     * @param \DateTime $miseajour
-     *
-     * @return EA_Document
-     */
-    public function setMiseajour($miseajour)
-    {
-        $this->miseajour = $miseajour;
-
-        return $this;
-    }
-
-    /**
-     * Get miseajour
-     *
-     * @return \DateTime
-     */
-    public function getMiseajour()
-    {
-        return $this->miseajour;
-    }
-
-    /**
-     * Set verifier
-     *
-     * @param boolean $verifier
-     *
-     * @return EA_Document
-     */
-    public function setVerifier($verifier)
-    {
-        $this->verifier = $verifier;
-
-        return $this;
-    }
-
-    /**
-     * Get verifier
-     *
-     * @return bool
-     */
-    public function getVerifier()
-    {
-        return $this->verifier;
     }
 
     /**
@@ -339,5 +85,72 @@ class EA_Document
     public function getPhysique()
     {
         return $this->physique;
+    }
+
+     /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $pdf
+     *
+     * @return EA_Document
+    */
+    public function setPdfFile(File $pdf = null)
+    {
+        $this->pdfFile = $pdf;
+
+        if ($pdf) 
+            $this->updatedAt = new \DateTimeImmutable();
+        
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getPdfFile()
+    {
+        return $this->pdfFile;
+    }
+
+    /**
+     * @param string $pdfName
+     *
+     * @return EA_Document
+     */
+    public function setPdfName($pdfName)
+    {
+        $this->pdfName = $pdfName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPdfName()
+    {
+        return $this->pdfName;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return EA_Document
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

@@ -10,11 +10,14 @@ use DUDEEGO\PlatformBundle\Entity\EA_Morale;
 use DUDEEGO\PlatformBundle\Entity\User;
 use DUDEEGO\PlatformBundle\Entity\EA_Image;
 use DUDEEGO\PlatformBundle\Entity\EA_Demande_Inscription;
+use DUDEEGO\PlatformBundle\Entity\EA_Document;
+
 
 use DUDEEGO\PlatformBundle\Form\EA_PersonneType;
 use DUDEEGO\PlatformBundle\Form\EA_PhysiqueType;
 use DUDEEGO\PlatformBundle\Form\EA_MoraleType;
 use DUDEEGO\PlatformBundle\Form\EA_ImageType;
+use DUDEEGO\PlatformBundle\Form\EA_DocumentType;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -118,64 +121,89 @@ class PageAbonneController extends Controller
 			));		
 	}
 
-	public function mesdocumentsAction()
+	public function mesdocumentsAction(Request $request)
 	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:mesdocuments.html.twig');
-		return new Response($content);
-	}
-
-	public function aideAction(Request $request)
-	{    
+		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
-		$images =  $em->getRepository('DUDEEGOPlatformBundle:EA_Image')->findOneById(9);
+		$physique = $em->getRepository('DUDEEGOPlatformBundle:EA_Physique')->findOneById($user->getPhysique()->getId());
+		$documents = $em->getRepository('DUDEEGOPlatformBundle:EA_Document')->findOneById($physique->getImage());
 
-		$form = $this->createform(EA_ImageType::class, $images);
+		$form = $this->createform(EA_DocumentType::class, $documents);
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
 
-			$images = $form->getData();
+			$documents = $form->getData();
+
+			$documents->setPdfName($form->getData()->getPdfName());
+			dump($documents);exit();
 			$em = $this->get('doctrine')->getEntityManager();
-			$em->persist($images);
+			$em->persist($documents);
 			$em->flush();
 
 			$this->addFlash('notice','Fichier bien enregistrée.');
-			return $this->redirectToRoute('dudeego_platform_abonne_aide');
+			return $this->redirectToRoute('dudeego_platform_abonne_mesdocuments');
 		}
 
-		return $this->render('DUDEEGOPlatformBundle:PageAbonne:aide.html.twig', array(
+		return $this->render('DUDEEGOPlatformBundle:PageAbonne:mesdocuments.html.twig', array(
 			'form' => $form->createView(),
-			'images' => $images,
+			'documents' => $documents,
 			));
-	}
 
-	public function universiteAction()
-	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:Universite.html.twig');
-		return new Response($content);
-	}
+		}
 
-	public function langueAction()
-	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:langue.html.twig');
-		return new Response($content);
-	}
+		public function aideAction(Request $request)
+		{    
+			$em = $this->getDoctrine()->getManager();
+			$images =  $em->getRepository('DUDEEGOPlatformBundle:EA_Image')->findOneById(9);
 
-	public function logementAction()
-	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:logement.html.twig');
-		return new Response($content);
-	}
+			$form = $this->createform(EA_ImageType::class, $images);
+			$form->handleRequest($request);
 
-	public function preparationAction()
-	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:preparation.html.twig');
-		return new Response($content);
-	}
+			if ($form->isSubmitted() && $form->isValid()) {
 
-	public function mutuelleAction()
-	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:mutuelle.html.twig');
-		return new Response($content);
+				$images = $form->getData();
+				$em = $this->get('doctrine')->getEntityManager();
+				$em->persist($images);
+				$em->flush();
+
+				$this->addFlash('notice','Fichier bien enregistrée.');
+				return $this->redirectToRoute('dudeego_platform_abonne_aide');
+			}
+
+			return $this->render('DUDEEGOPlatformBundle:PageAbonne:aide.html.twig', array(
+				'form' => $form->createView(),
+				'images' => $images,
+				));
+		}
+
+		public function universiteAction()
+		{    
+			$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:Universite.html.twig');
+			return new Response($content);
+		}
+
+		public function langueAction()
+		{    
+			$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:langue.html.twig');
+			return new Response($content);
+		}
+
+		public function logementAction()
+		{    
+			$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:logement.html.twig');
+			return new Response($content);
+		}
+
+		public function preparationAction()
+		{    
+			$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:preparation.html.twig');
+			return new Response($content);
+		}
+
+		public function mutuelleAction()
+		{    
+			$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:mutuelle.html.twig');
+			return new Response($content);
+		}
 	}
-}

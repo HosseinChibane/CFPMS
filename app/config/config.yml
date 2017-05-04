@@ -156,9 +156,16 @@ vich_uploader:
 #    storage:   flysystem
     mappings:
         users_images:
-            namer:              vich_uploader.namer_uniqid
-            uri_prefix:         /images/users
-            upload_destination: '%kernel.root_dir%/../web/images/users'            
+            namer:              vich_uploader.namer_origname
+            uri_prefix:         /users/image
+            upload_destination: '%kernel.root_dir%/../web/users/image'            
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+        users_pdf:
+            namer:              vich_uploader.namer_origname
+            uri_prefix:         /users/pdf
+            upload_destination: '%kernel.root_dir%/../web/users/pdf'            
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
