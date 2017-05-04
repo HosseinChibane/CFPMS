@@ -39,8 +39,12 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        admin_skin: skin-blue
+        root_path: %kernel.root_dir%
     form_themes:
         - 'bootstrap_3_layout.html.twig'
+        - 'VichUploaderBundle:Form:fields.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -134,3 +138,28 @@ fos_user:
         username_canonicalizer: fos_user.util.canonicalizer.default
         token_generator:        fos_user.util.token_generator.default
         user_manager:           fos_user.user_manager.default
+
+# OneupFlysystemBundle Configuration
+oneup_flysystem:
+    adapters:
+        users_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/images/users
+    filesystems:
+        users_image_fs:
+           adapter:    users_adapter
+           mount:      users_image_fs
+
+# VichUploaderBundle Configuration
+vich_uploader:
+    db_driver: orm # or mongodb or propel or phpcr
+#    storage:   flysystem
+    mappings:
+        users_images:
+            namer:              vich_uploader.namer_uniqid
+            uri_prefix:         /images/users
+            upload_destination: '%kernel.root_dir%/../web/images/users'            
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+

@@ -8,10 +8,13 @@ use DUDEEGO\PlatformBundle\Entity\EA_Personne;
 use DUDEEGO\PlatformBundle\Entity\EA_Physique;
 use DUDEEGO\PlatformBundle\Entity\EA_Morale;
 use DUDEEGO\PlatformBundle\Entity\User;
+use DUDEEGO\PlatformBundle\Entity\EA_Image;
+use DUDEEGO\PlatformBundle\Entity\EA_Demande_Inscription;
 
 use DUDEEGO\PlatformBundle\Form\EA_PersonneType;
 use DUDEEGO\PlatformBundle\Form\EA_PhysiqueType;
 use DUDEEGO\PlatformBundle\Form\EA_MoraleType;
+use DUDEEGO\PlatformBundle\Form\EA_ImageType;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -40,18 +43,18 @@ class PageAbonneController extends Controller
 {
 	public function monprofilAction(Request $request)
 	{ 
-
 		$user = $this->getUser();
+
 		$em = $this->getDoctrine()->getManager();
-		$physique = $em->getRepository('DUDEEGOPlatformBundle:EA_Physique')->findOneById($user->getPhysique()->getId());		
+		$physique = $em->getRepository('DUDEEGOPlatformBundle:EA_Physique')->findOneById($user->getPhysique()->getId());
+		$image = $em->getRepository('DUDEEGOPlatformBundle:EA_Image')->findOneById($physique->getImage());
+		
 		$form = $this->createform(EA_PhysiqueType::class, $physique);
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
 
 			$physique = $form->getData();
-			# c'est elle qui déplace l'image là où on veut les stocker
-			# $physique->getImage()->upload();
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($physique);
 			$em->flush();
@@ -63,6 +66,7 @@ class PageAbonneController extends Controller
 		return $this->render('DUDEEGOPlatformBundle:PageAbonne:monprofil.html.twig', array(
 			'form' => $form->createView(),
 			'physique' => $physique,
+			'image' => $image,
 			));		
 	}
 
@@ -104,8 +108,14 @@ class PageAbonneController extends Controller
 
 	public function mesdemandesAction()
 	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:mesdemandes.html.twig');
-		return new Response($content);
+		$user = $this->getUser();
+		$em = $this->getDoctrine()->getManager();
+		$physique = $em->getRepository('DUDEEGOPlatformBundle:EA_Physique')->findOneById($user->getPhysique()->getId());
+		$listDemandeInscription = $em->getRepository('DUDEEGOPlatformBundle:EA_Demande_Inscription')->find($physique->getId());
+
+		return $this->render('DUDEEGOPlatformBundle:PageAbonne:mesdemandes.html.twig', array(
+			'listDemandeInscription' => $listDemandeInscription,
+			));		
 	}
 
 	public function mesdocumentsAction()
@@ -114,10 +124,29 @@ class PageAbonneController extends Controller
 		return new Response($content);
 	}
 
-	public function aideAction()
+	public function aideAction(Request $request)
 	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:PageAbonne:aide.html.twig');
-		return new Response($content);
+		$em = $this->getDoctrine()->getManager();
+		$images =  $em->getRepository('DUDEEGOPlatformBundle:EA_Image')->findOneById(9);
+
+		$form = $this->createform(EA_ImageType::class, $images);
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted() && $form->isValid()) {
+
+			$images = $form->getData();
+			$em = $this->get('doctrine')->getEntityManager();
+			$em->persist($images);
+			$em->flush();
+
+			$this->addFlash('notice','Fichier bien enregistrée.');
+			return $this->redirectToRoute('dudeego_platform_abonne_aide');
+		}
+
+		return $this->render('DUDEEGOPlatformBundle:PageAbonne:aide.html.twig', array(
+			'form' => $form->createView(),
+			'images' => $images,
+			));
 	}
 
 	public function universiteAction()

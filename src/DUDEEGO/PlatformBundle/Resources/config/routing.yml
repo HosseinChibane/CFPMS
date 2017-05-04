@@ -1,19 +1,15 @@
 dudeego_platform_home:
     path:      /
     defaults: { _controller: DUDEEGOPlatformBundle:Page:index }
-
 dudeego_platform_showComparateur:
     path:      /Page/comparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Page:showComparateur }
-
 dudeego_platform_detailsComparateur:
     path:      /Page/detailscomparateur/{id}
     defaults: { _controller: DUDEEGOPlatformBundle:Page:detailsComparateur }
-
 dudeego_platform_PanierComparateur:
     path:      /Page/comparateur/{id}
     defaults: { _controller: DUDEEGOPlatformBundle:Page:PanierComparateur }
-
 dudeego_platform_comparerComparateur:
     path:      /Page/comparer
     defaults: { _controller: DUDEEGOPlatformBundle:Page:comparerComparateur }
@@ -21,31 +17,26 @@ dudeego_platform_filterComparateur:
     path:      /Page/filtercomparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Page:filterComparateur }
     methods: POST|GET
-
-
 dudeego_platform_voirJob:
     path:      /Page/job
     defaults: { _controller: DUDEEGOPlatformBundle:Page:job }
-
 dudeego_platform_voirStage:
     path:      /Page/stage
     defaults: { _controller: DUDEEGOPlatformBundle:Page:stage }
-
 dudeego_platform_voirLogement:
     path:      /Page/Logement
     defaults: { _controller: DUDEEGOPlatformBundle:Page:Logement }
-
 dudeego_platform_voirLangue:
     path:      /Page/langue
     defaults: { _controller: DUDEEGOPlatformBundle:Page:langue }
-
 dudeego_platform_voirBlog:
     path:      /Page/blog
     defaults: { _controller: DUDEEGOPlatformBundle:Page:blog }
-
-
+dudeego_platform_voirTest:
+    path:      /Page/test
+    defaults: { _controller: DUDEEGOPlatformBundle:Page:test }
 dudeego_platform_abonne_monProfil:
-    path:      /PageAbonne/monprofil
+    path:      /PageAbonne/monprofil/
     defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:monprofil }
 dudeego_platform_abonne_mesParametres:
     path:      /PageAbonne/mesparametres
@@ -59,7 +50,6 @@ dudeego_platform_abonne_mesDocuments:
 dudeego_platform_abonne_aide:
     path:      /PageAbonne/aide
     defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:aide } 
- 
 dudeego_platform_abonne_universite:
     path:      /PageAbonne/universite
     defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:universite } 

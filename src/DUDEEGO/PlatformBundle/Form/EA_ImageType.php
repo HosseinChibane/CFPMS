@@ -5,7 +5,10 @@ namespace DUDEEGO\PlatformBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EA_ImageType extends AbstractType
 {
@@ -15,7 +18,15 @@ class EA_ImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('file', FileType::class);
+        //->add('imageName', TextType::class)
+        ->add('imageFile', VichImageType::class, [
+            'label' => 'Choissisez une image...',
+            'required' => false,
+            ])
+        ->add('upload', SubmitType::class, array(
+            'attr' => array('class' => 'btn btn-primary'),
+            ))
+        ;
     }
     
     /**
@@ -25,7 +36,7 @@ class EA_ImageType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'DUDEEGO\PlatformBundle\Entity\EA_Image'
-        ));
+            ));
     }
 
     /**

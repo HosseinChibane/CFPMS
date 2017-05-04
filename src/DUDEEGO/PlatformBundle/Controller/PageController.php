@@ -232,4 +232,10 @@ class PageController extends Controller
 		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Page:blog.html.twig');
 		return new Response($content);
 	}
+
+	public function testAction()
+	{    
+		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Page:test.html.twig');
+		return new Response($content);
+	}
 }
