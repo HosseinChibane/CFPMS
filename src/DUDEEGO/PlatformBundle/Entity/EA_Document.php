@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class EA_Document
 {
     /**
-   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Physique")
+   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Physique", inversedBy = "documents")
    * @ORM\JoinColumn(nullable=false)
    */
     private $physique;
@@ -34,6 +34,7 @@ class EA_Document
 
     /**
      * @Vich\UploadableField(mapping="users_pdf", fileNameProperty="pdfName")
+     * @Assert\File(maxSize = "10M")
      * 
      * @var File
      */

@@ -23,6 +23,10 @@ class EA_Physique
      */
     private $image;
 
+    /**
+     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Document", mappedBy="physique")
+     */
+    private $documents;
 
     /**
      * @var int
@@ -368,5 +372,15 @@ class EA_Physique
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Get documents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
     }
 }

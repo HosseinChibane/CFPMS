@@ -20,10 +20,10 @@ class EA_DocumentType extends AbstractType
         $builder
         //->add('pdfName', TextType::class);
         ->add('pdfFile', VichFileType::class, [
-            'label' => 'Choissisez une image...',
+            'label' => 'Choissisez un document...',
             'required' => false,
             ])
-        ->add('upload', SubmitType::class, array(
+        ->add('transferer', SubmitType::class, array(
             'attr' => array('class' => 'btn btn-primary'),
             ))
         ;

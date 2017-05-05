@@ -17,6 +17,14 @@ dudeego_platform_filterComparateur:
     path:      /Page/filtercomparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Page:filterComparateur }
     methods: POST|GET
+dudeego_platform_filterAjaxComparateur:
+    path:      /Page/comparateurajax
+    defaults: { _controller: DUDEEGOPlatformBundle:Page:filterAjaxComparateur }
+    methods: POST
+dudeego_platform_itemsComparateur:
+    path:      /Page/itemsComparateur
+    defaults: { _controller: DUDEEGOPlatformBundle:Page:itemsComparateur }
+
 dudeego_platform_voirJob:
     path:      /Page/job
     defaults: { _controller: DUDEEGOPlatformBundle:Page:job }

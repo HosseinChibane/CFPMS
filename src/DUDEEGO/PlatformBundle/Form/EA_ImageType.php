@@ -23,7 +23,7 @@ class EA_ImageType extends AbstractType
             'label' => 'Choissisez une image...',
             'required' => false,
             ])
-        ->add('upload', SubmitType::class, array(
+        ->add('transferer', SubmitType::class, array(
             'attr' => array('class' => 'btn btn-primary'),
             ))
         ;

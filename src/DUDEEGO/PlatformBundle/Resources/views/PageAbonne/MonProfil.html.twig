@@ -84,7 +84,7 @@
             {% endif %}#}
 
             {{ form_widget(form.image.imageFile) }}
-            {{ form_widget(form.image.upload) }}
+            {{ form_widget(form.image.transferer) }}
 
 
         </div>
@@ -99,5 +99,5 @@
          </div>
      </div>
  </div>
- {{ form_end(form) }}
+{{ form_end(form, {'render_rest': false}) }}
 {% endblock %}

@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class EA_PhysiqueType extends AbstractType
 {
@@ -37,6 +38,13 @@ class EA_PhysiqueType extends AbstractType
 
         ->add('image', EA_ImageType::class)
 
+        ->add('documents', CollectionType::class, array(
+            'entry_type' => EA_DocumentType::class,
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+            ))
+        
         ->add('enregistrer', SubmitType::class, array(
             'attr' => array('class' => 'btn btn-primary'),
             ))

@@ -202,6 +202,64 @@ class PageController extends Controller
 			));
 	}
 
+	public function filterAjaxComparateurAction(Request $request)
+	{
+		//die("ddd");
+		if($request->isXMLHttpRequest()){
+			$formations = $request->get('formations');
+			$langues = $request->get('langues');
+			$villes = $request->get('villes');
+			$pays =  $request->get('pays');
+			$nomuniversite =  $request->get('nomuniversite');
+
+
+			$listUniversite = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('DUDEEGOPlatformBundle:T_Universite')
+			->getUniversiteWithSearchAND($formations, $langues, $villes, $pays, $nomuniversite);
+
+			$data = array(
+				'listUniversite' => $listUniversite,
+				);
+
+			return $this->render('DUDEEGOPlatformBundle:Page:comparateurAjax.html.twig', $data);
+		}
+
+		$form = $this->get('form.factory')->create(T_Search_UniversiteType::class);
+
+		if ($request->query->has($form->getName())) {
+            // manually bind values from the request
+			$form->submit($request->query->get($form->getName()));
+			$data = $form->getData();
+			//dump($data);die();
+
+			$formations = $data->getFormations();
+			$langues = $data->getLangues();
+			$villes = $data->getVilles();
+			$pays =  $data->getPays();
+			$nomuniversite =  $data->getNomuniversite();
+
+			$listUniversite = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('DUDEEGOPlatformBundle:T_Universite')
+			->getUniversiteWithSearchAND($formations, $langues, $villes, $pays, $nomuniversite);
+		}
+
+		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
+			'form' => $form->createView(),
+			'listUniversite' => $listUniversite,
+			));
+	}
+
+	public function itemsComparateurAction(Request $request){
+		$id0= $request->get('id0');
+		$id1= $request->get('id1'); 
+		$id2= $request->get('id2'); 
+		var_dump($id0);var_dump($id1);var_dump($id2);
+		die("Diiiie");
+	}
 
 	public function jobAction()
 	{    
