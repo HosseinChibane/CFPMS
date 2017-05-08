@@ -1,6 +1,9 @@
 dudeego_platform_home:
     path:      /
     defaults: { _controller: DUDEEGOPlatformBundle:Page:index }
+dudeego_platform_accueil:
+    path:      /Page/accueil
+    defaults: { _controller: DUDEEGOPlatformBundle:Page:accueil }    
 dudeego_platform_showComparateur:
     path:      /Page/comparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Page:showComparateur }
@@ -16,15 +19,11 @@ dudeego_platform_comparerComparateur:
 dudeego_platform_filterComparateur:
     path:      /Page/filtercomparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Page:filterComparateur }
-    methods: POST|GET
-dudeego_platform_filterAjaxComparateur:
-    path:      /Page/comparateurajax
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:filterAjaxComparateur }
     methods: POST
 dudeego_platform_itemsComparateur:
     path:      /Page/itemsComparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Page:itemsComparateur }
-
+    methods: POST|GET
 dudeego_platform_voirJob:
     path:      /Page/job
     defaults: { _controller: DUDEEGOPlatformBundle:Page:job }

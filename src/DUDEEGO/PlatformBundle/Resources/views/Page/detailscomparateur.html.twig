@@ -6,46 +6,52 @@
 {% endblock %}
 
 {% block dudeegoplatform_body %}
+	<!-- Page Heading/Breadcrumbs -->
 	<div class="row">
-		<div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
-			<a href="{{ path('dudeego_platform_showComparateur') }}">
-				<i class="glyphicon glyphicon-th-list"></i>
-				Retour à la liste des universités
-			</a>
-		</div>
-		<div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
-		</div>	
-		<div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+		<div class="col-lg-12">
+			<h1 class="page-header">
+				Détails 
+				<small>{% if listUniversite is defined %} {{ listUniversite.nometablissement }} {% endif %}</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="{{ path('dudeego_platform_home') }}">Accueil</a></li>
+				<li><a href="{{ path('dudeego_platform_showComparateur') }}">Comparateur</a></li>
+				<li class="active">Détails</li>
+			</ol>
 		</div>
 	</div>
+	<!-- /.row -->
 
+	<!-- Content Row -->
 	<div class="row">
-		<div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
-			<div class="list-group table-of-contents">
-				<a class="list-group-item" href="#section1"><i class="glyphicon glyphicon-chevron-right"></i>Aperçu</a>
-				<a class="list-group-item" href="#section2"><i class="glyphicon glyphicon-chevron-right"></i>Formations</a>
-				<a class="list-group-item" href="#section3"><i class="glyphicon glyphicon-chevron-right"></i>Langues</a>
+		<!-- Sidebar Column -->
+		<div class="col-md-3">
+			<div class="list-group">
+				<a href="#section1" class="list-group-item"><i class="glyphicon glyphicon-chevron-right"></i> Informations</a>
+				<a href="#section2" class="list-group-item"><i class="glyphicon glyphicon-chevron-right"></i> Formations</a>
+				<a href="#section3" class="list-group-item"><i class="glyphicon glyphicon-chevron-right"></i> Langues</a>
+				<a href="#sectionInscription" class="list-group-item"><i class="glyphicon glyphicon-chevron-right"></i> Inscription</a>
 			</div>
 		</div>
-		<div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+		<!-- Content Column -->
+
+		<div class="col-md-6">
 			<div class="row">
 				{% if listUniversite is defined %}
 					<div id="#section1">
-						<div class="panel panel-info">
+						<div class="panel panel-default">
 							<div class="panel-heading">
-								Aperçu
+								<h4>Informations</h4>
 							</div>
 							<div class="panel-body">										
-								{{ listUniversite.nometablissement }} 
-								<br>
 								{{ listUniversite.description }}
 							</div>
 						</div>
 					</div>
 					<div id="#section2">
-						<div class="panel panel-info">
+						<div class="panel panel-default">
 							<div class="panel-heading">
-								Formations
+								<h4>Formations</h4>
 							</div>
 							<div class="panel-body">
 								{% for itemformation in listUniversite.formations %}
@@ -55,9 +61,9 @@
 						</div>
 					</div>
 					<div id="#section3">
-						<div class="panel panel-info">
+						<div class="panel panel-default">
 							<div class="panel-heading">
-								Langues
+								<h4>Langues</h4>
 							</div>
 							<div class="panel-body">
 								{% for itemformation in listUniversite.formations %}
@@ -68,35 +74,25 @@
 							</div>
 						</div>
 					</div>
+					<div id="#sectionInscription">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4>Inscription</h4>
+							</div>
+							<div class="panel-body">
+								<p>
+									Si vous souhaitez vous inscrire à une universite, vous devez avoir un compte utilisateur sur notre plateforme. Pour la création d'un compte, suivez le guide <a href="{{ path('fos_user_registration_register') }}">ici</a>.
+								</p>
+							</div>
+						</div>
+					</div>
 				</div>
 			{% endif %}
 
-			<!-- Button trigger modal -->
-			<div style="float:right;">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Inscription</button>
-			</div>
+
 		</div>
 		<div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
 		</div>	
 	</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Inscription à une université</h4>
-				</div>
-				<div class="modal-body" >
-					<p>
-						Si vous souhaitez vous inscrire à une universite, vous devez avoir un compte utilisateur sur notre plateforme. Pour la création d'un compte, suivez le guide <a href="{{ path('fos_user_registration_register') }}">ici</a>.
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
-				</div>
-			</div>
-		</div>
-	</div>
 {% endblock %}	

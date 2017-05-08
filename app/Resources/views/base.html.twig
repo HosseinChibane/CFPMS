@@ -2,73 +2,13 @@
 
 <!DOCTYPE html>
 <head>
-  <title>{% block title %}DUDEE GO{% endblock %}</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  {% block stylesheets %}      
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/css/bootstrap-theme.css') }}">
-    <!-- Google -->
-    <link href="{{ asset('bundles/dudeegoplatform/css/fontsgoogleapis.css') }}" rel='stylesheet' type='text/css'>
-    <!-- Content Filter -->
-    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/content-filter/css/reset.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/content-filter/css/style.css') }}"> 
-    <!-- Dudee'Go -->
-    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/css/styleNavBar.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/css/styleSideBar.css') }}">
-    <!-- GridView -->
-    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/css/styleGridView.css') }}">
-    <!-- multirange -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.css"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.min.css"> 
-    <!-- Espace Abonnés -->
-    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/espaceabonnes/css/espaceabonne.css') }}"> 
-    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/espaceabonnes/css/font-awesome-4.7.0/css/font-awesome.min.css') }}"> 
-    <link rel="stylesheet" href="{{ asset('bundles/dudeegoplatform/espaceabonnes/css/bootstrap.css') }}"> 
-    <!-- DataTable -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  {% endblock %}
-
-  {% block script %}
-    <!-- Bootstrap -->
-    <script src="{{ asset('bundles/dudeegoplatform/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('bundles/dudeegoplatform/js/bootstrap.min.js') }}"></script>
-  {% endblock %}
-
-  {% block javascripts %}
-    <!-- Bootstrap -->
-    <script src="{{ asset('bundles/dudeegoplatform/js/isTouchDevice.js') }}"></script>
-    <!-- Content Filter -->
-    <script src="{{ asset('bundles/dudeegoplatform/content-filter/js/modernizr.js') }}"></script> 
-    <script src="{{ asset('bundles/dudeegoplatform/content-filter/js/jquery-2.1.1.js') }}"></script>
-    <script src="{{ asset('bundles/dudeegoplatform/content-filter/js/jquery.mixitup.min.js') }}"></script>
-    <script src="{{ asset('bundles/dudeegoplatform/content-filter/js/main.js') }}"></script> 
-    <!-- GridView -->
-    <script src="{{ asset('bundles/dudeegoplatform/js/JsGridView.js') }}"></script> 
-    <!-- multirange -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js"></script>
-    <!-- Espace Abonnés -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="{{ asset('bundles/dudeegoplatform/espaceabonnes/js/bootstrap.js') }}"></script>
-    <!-- DataTable -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript"  src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
-    <script type="text/javascript"  src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
-  {% endblock %}
+ {# Contenu de la balise head #}
+ {% include ':default:head.html.twig' %}
 </head>
 <body>
-  {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
-    {# Contenu de l'en-tete #}
+  {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    {# Contenu de l'en-tete ABONNE #}
     {% block enteteAbonne %} 
       <div class="jumbotron">
         <div class="container text-center">
@@ -124,40 +64,20 @@
       </div>
     </div>
 
-
-
   {% else %}
 
-    {# Contenu de l'en-tete #}
-    {% block entete %} 
-      <div class="jumbotron">
-        <div class="container text-center">
-          <h1>DUDEE'GO</h1>      
-          <p>Comparateur d'écoles et d'universités</p>
-        </div>
-      </div>
+    {# Contenu de la balise nav #}
+    {% include ':default:navigation.html.twig' %}   
+    {# Contenu du corps de page #}    
+    {% block body %} 
+        {% block content %}           
+        {% endblock %}
     {% endblock %}
-
-    {# Contenu de la navigation #}
-    {% include ':default:topnav.html.twig' %}
-
-    {# Contenu du corps de page #}
-    <div>
-      {% block body %} 
-        <div class="container">
-          {% block content %} 
-          {% endblock %}
-        </div>
-      {% endblock %}
-    </div>
-
     {# Contenu du pied de page #}
-    <div>
-      {% block footer %} 
-        {% include ':default:footer.html.twig' %} 
-      {% endblock %}
-    </div>
+    {% block footer %} 
+      {% include ':default:footer.html.twig' %} 
+    {% endblock %}
   {% endif %}
-
+</div>
 </body>  
 </html>

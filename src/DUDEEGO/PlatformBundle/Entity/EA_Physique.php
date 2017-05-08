@@ -19,12 +19,12 @@ class EA_Physique
     private $personne;
 
      /**
-     * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Image" , cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Image", cascade={"persist"})
      */
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Document", mappedBy="physique")
+     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Document", mappedBy="physique", cascade={"persist"})
      */
     private $documents;
 

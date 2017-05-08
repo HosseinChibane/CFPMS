@@ -1,20 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block content %} 
-
-    {#
-    <div>
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-            <a href="{{ path('fos_user_security_logout') }}">
-                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-            </a>
-        {% else %}
-            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-        {% endif %}
-    </div>
-    #}
-
+{% block body %}   
     {% if app.request.hasPreviousSession %}
         {% for type, messages in app.session.flashbag.all() %}
             {% for message in messages %}
@@ -25,9 +11,25 @@
         {% endfor %}
     {% endif %}
 
-    <div>
+    {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+    {% block dudeegoplatform_body %} 
         {% block fos_user_content %}
 
         {% endblock fos_user_content %}
-    </div>
+    {% endblock %}
 {% endblock %}
+
+
+
+{#
+<div>
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+<a href="{{ path('fos_user_security_logout') }}">
+{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+</a>
+{% else %}
+<a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+{% endif %}
+</div>
+#}

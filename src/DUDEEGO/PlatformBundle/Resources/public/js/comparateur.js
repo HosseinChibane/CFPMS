@@ -10,8 +10,8 @@
             beforeSend: function(){
              $("#content_result").html('<tr><td> Chargement en cours...</td><td></td><td></td></tr>');
             },
-            url : "comparateurajax",
-            method: "post",
+            url : "filtercomparateur",
+            method: "POST",
             data : {
                 'formations': formations,
                 'langues': langues,
@@ -33,7 +33,7 @@
                 addInComparateur();
 
             }).fail(function() {
-                $("#content_result").html('<span class="label label-danger">!</span> Erreur de chargement des resultats');
+                $("#content_result").html('<tr><td><span class="label label-danger">!</span> Erreur de chargement des resultats...</td><td></td><td></td></tr>');
             }); 
 
         }
@@ -51,14 +51,14 @@
 
         //==================== COMPARATEUR ==========================
 
-        //Permet l'ajout d'université dans le comparateur
+        //Permet l'ajout d'université dans la partie comparer
         var addInComparateur = function() {
             $(".add_comparateur").on('click',function(e) {
                 e.preventDefault();
 
                 var nbr = $("#comparateur-universites tr").length;
                 if (nbr>=3) {
-                    alert("Vous ne pouvez comparer que 3 universités");
+                    alert("Vous pouvez comparer uniquement que 3 universités !");
                     return;
                 }
 
@@ -69,19 +69,6 @@
 
                 $('#comparateur-universites').append(item);
 
-                //var id = $(this).find('input').val();
-                //var nbForfait = $('#nbForfait').val();
-
-                /*var table2 = $('#favoris').DataTable();
-                table2.destroy();
-                
-
-
-                table2 = $('#favoris').DataTable( {
-                    paging: false,
-                    responsive: true,
-                    searching: false
-                } );*/
                 removeItem();
                 compareBtnActive();
 

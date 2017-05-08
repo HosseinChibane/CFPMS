@@ -32,6 +32,12 @@ class PageController extends Controller
 		return new Response($content);
 	}
 
+	public function accueilAction()
+	{    
+		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Page:accueil.html.twig');
+		return new Response($content);
+	}
+
 	public function showComparateurAction(Request $request)
 	{
 		$form = $this->createform(T_Search_UniversiteType::class);
@@ -177,41 +183,13 @@ class PageController extends Controller
 	{
 		$form = $this->get('form.factory')->create(T_Search_UniversiteType::class);
 
-		if ($request->query->has($form->getName())) {
-            // manually bind values from the request
-			$form->submit($request->query->get($form->getName()));
-			$data = $form->getData();
-			//dump($data);die();
+		if($request->isXMLHttpRequest()) {
 
-			$formations = $data->getFormations();
-			$langues = $data->getLangues();
-			$villes = $data->getVilles();
-			$pays =  $data->getPays();
-			$nomuniversite =  $data->getNomuniversite();
-
-			$listUniversite = $this
-			->getDoctrine()
-			->getManager()
-			->getRepository('DUDEEGOPlatformBundle:T_Universite')
-			->getUniversiteWithSearchAND($formations, $langues, $villes, $pays, $nomuniversite);
-		}
-
-		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
-			'form' => $form->createView(),
-			'listUniversite' => $listUniversite,
-			));
-	}
-
-	public function filterAjaxComparateurAction(Request $request)
-	{
-		//die("ddd");
-		if($request->isXMLHttpRequest()){
 			$formations = $request->get('formations');
 			$langues = $request->get('langues');
 			$villes = $request->get('villes');
 			$pays =  $request->get('pays');
 			$nomuniversite =  $request->get('nomuniversite');
-
 
 			$listUniversite = $this
 			->getDoctrine()
@@ -223,16 +201,20 @@ class PageController extends Controller
 				'listUniversite' => $listUniversite,
 				);
 
-			return $this->render('DUDEEGOPlatformBundle:Page:comparateurAjax.html.twig', $data);
+			return $this->render('DUDEEGOPlatformBundle:Page:filtercomparateur.html.twig', array(
+				'form' => $form->createView(),
+				'listUniversite' => $listUniversite,
+				'data' => $data,
+				));
 		}
+		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
+			'form' => $form->createView(),
+			));
 
-		$form = $this->get('form.factory')->create(T_Search_UniversiteType::class);
-
-		if ($request->query->has($form->getName())) {
+		/*if ($request->query->has($form->getName())) {
             // manually bind values from the request
 			$form->submit($request->query->get($form->getName()));
 			$data = $form->getData();
-			//dump($data);die();
 
 			$formations = $data->getFormations();
 			$langues = $data->getLangues();
@@ -241,24 +223,25 @@ class PageController extends Controller
 			$nomuniversite =  $data->getNomuniversite();
 
 			$listUniversite = $this
-			->getDoctrine()
-			->getManager()
-			->getRepository('DUDEEGOPlatformBundle:T_Universite')
+			->getDoctrine()->getManager()->getRepository('DUDEEGOPlatformBundle:T_Universite')
 			->getUniversiteWithSearchAND($formations, $langues, $villes, $pays, $nomuniversite);
-		}
-
-		return $this->render('DUDEEGOPlatformBundle:Page:comparateur.html.twig', array(
-			'form' => $form->createView(),
-			'listUniversite' => $listUniversite,
-			));
+		}*/
 	}
 
-	public function itemsComparateurAction(Request $request){
-		$id0= $request->get('id0');
-		$id1= $request->get('id1'); 
-		$id2= $request->get('id2'); 
-		var_dump($id0);var_dump($id1);var_dump($id2);
-		die("Diiiie");
+	public function itemsComparateurAction(Request $request)
+	{
+		$elementComparer = array('1' => $request->get('id0') , '2' => $request->get('id1'), '3' => $request->get('id2') );
+		if(isset($elementComparer)) {
+			foreach ($elementComparer as $key => $value) {
+				$em = $this->getDoctrine()->getEntityManager();
+				$listFavUniversite[] = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->findById($value);
+			}
+		}
+		if(isset($listFavUniversite)) {
+			return $this->render('DUDEEGOPlatformBundle:Page:comparer.html.twig', array(
+				'listFavUniversite' => $listFavUniversite,
+				));
+		}
 	}
 
 	public function jobAction()

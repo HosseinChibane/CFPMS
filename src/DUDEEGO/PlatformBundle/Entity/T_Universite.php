@@ -13,17 +13,17 @@ use Doctrine\ORM\Mapping as ORM;
 class T_Universite
 {
     /**
-     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Formation_Universite", mappedBy="universite")
+     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Formation_Universite", mappedBy="universite", cascade={"persist"})
      */
     private $formations;
 
     /**
-     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Image_Universite", mappedBy="universite")
+     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Image_Universite", mappedBy="universite", cascade={"persist"})
      */
     private $images;
 
     /**
-     * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite" , cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite", cascade={"persist"})
      */
     private $adresse;
 

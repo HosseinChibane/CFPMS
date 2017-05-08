@@ -14,7 +14,7 @@ class T_Ville_Universite
 {
 
     /**
-   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Pays_Universite", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Pays_Universite", inversedBy="villes", cascade={"persist"})
    * @ORM\JoinColumn(nullable=false)
    */
     private $pays;

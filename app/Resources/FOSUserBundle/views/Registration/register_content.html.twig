@@ -1,87 +1,84 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
-
-{#
-<h1>Formulaire d'inscription</h1>
-
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-{{ form_widget(form) }}
-<div>
-<input type="submit" value="{{ 'registration.submit'|trans }}" />
-</div>
-{{ form_end(form) }}
-#}
-
-<!-- BEGIN REGISTRATION FORM -->
-<h5> S'enregistrer </h5>
-<div class="well">
-	<form action="{{ path('fos_user_registration_register') }}" method="POST">
-
-		{# Les erreurs générales du formulaire. #}
-		{% if form_errors(form) %}
-			<div class="alert alert-danger" role="alert">
-				{{ form_errors(form) }}
+	<!-- Page Content -->
+	<div class="container">
+		<!-- Page Heading/Breadcrumbs -->
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Création d'un compte
+					<small></small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="">Accueil</a>
+					</li>
+					<li class="active">Inscription</li>
+				</ol>
 			</div>
-		{% endif %}
-
-		<div class="form-group" id="fos_user_registration_form">
-
-			{{ form_label(form.physique.nom, 'Nom') }}
-			{{ form_widget(form.physique.nom) }}
-
-			{{ form_label(form.physique.prenom, 'Prénom') }}
-			{{ form_widget(form.physique.prenom) }}
-
-			{{ form_label(form.physique.datenaissance, 'Date de naissance') }}
-			{{ form_widget(form.physique.datenaissance) }}
-
-			{{ form_label(form.physique.numerocarteid, 'Numéro de carte d\'identité') }}
-			{{ form_widget(form.physique.numerocarteid) }}
-
-			{{ form_label(form.physique.personne.numero, 'Numero de rue') }}
-			{{ form_widget(form.physique.personne.numero) }}
-
-			{{ form_label(form.physique.personne.numero, 'Numero de rue') }}
-			{{ form_widget(form.physique.personne.numero) }}
-
-			{{ form_label(form.physique.personne.rue, 'Nom de la rue') }}
-			{{ form_widget(form.physique.personne.rue) }}
-
-			{{ form_label(form.physique.personne.codepostal, 'Code postal') }}
-			{{ form_widget(form.physique.personne.codepostal) }}
-
-			{{ form_label(form.physique.personne.ville, 'Ville') }}
-			{{ form_widget(form.physique.personne.ville) }}
-
-			{{ form_label(form.physique.personne.pays, 'Pays') }}
-			{{ form_widget(form.physique.personne.pays) }}
-
-			{{ form_label(form.physique.personne.gsm, 'Téléphone portable') }}
-			{{ form_widget(form.physique.personne.gsm) }}
-
-			{{ form_label(form.physique.personne.telephone, 'Téléphone fixe') }}
-			{{ form_widget(form.physique.personne.telephone) }}
-
-			{{ form_label(form.physique.personne.courriel, 'Email') }}
-			{{ form_widget(form.physique.personne.courriel) }}
-
-			{{ form_label(form.email, 'Confirmer votre email') }}
-			{{ form_widget(form.email) }}
-
-			{{ form_label(form.username, 'Nom d\'utilisateur') }}
-			{{ form_widget(form.username) }}
-
-			{{ form_label(form.plainPassword.first, 'Mot de passe') }}
-			{{ form_widget(form.plainPassword.first) }}
-
-			{{ form_label(form.plainPassword.second, 'Répéter le mot de  passe') }}
-			{{ form_widget(form.plainPassword.second) }}
-
-			{{ form_rest(form) }}
 		</div>
-		<div>
-			<input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}">
+
+		<!-- /.row -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="jumbotron">
+
+					<!-- BEGIN REGISTRATION FORM -->
+					<form action="{{ path('fos_user_registration_register') }}" method="POST">
+
+						{# Les erreurs générales du formulaire. #}
+						{% if form_errors(form) %}
+							<div class="alert alert-danger" role="alert">
+								{{ form_errors(form) }}
+							</div>
+						{% endif %}
+
+						<h2 class="form-signin-heading">Création d'un compte</h2>
+
+						<div id="fos_user_registration_form">	
+							<div class="form-group">
+								{{ form_label(form.physique.nom, 'Nom') }}
+								{{ form_widget(form.physique.nom) }}
+
+								{{ form_label(form.physique.prenom, 'Prénom') }}
+								{{ form_widget(form.physique.prenom) }}
+
+								{{ form_label(form.username, 'Nom d\'utilisateur') }}
+								{{ form_widget(form.username) }}
+
+								{{ form_label(form.physique.personne.courriel, 'Email') }}
+								{{ form_widget(form.physique.personne.courriel) }}
+
+								{{ form_label(form.email, 'Confirmer votre email') }}
+								{{ form_widget(form.email) }}
+
+								{{ form_label(form.plainPassword.first, 'Mot de passe') }}
+								{{ form_widget(form.plainPassword.first) }}
+
+								{{ form_label(form.plainPassword.second, 'Répéter le mot de  passe') }}
+								{{ form_widget(form.plainPassword.second) }}
+
+								{# Token CSRF #}
+								{{ form_widget(form._token) }}
+								<br>
+								<div class="form-group">
+									<input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}">
+								</div>
+							</div>								
+						</div>
+						{{ form_end(form, {'render_rest': false}) }}
+						<!-- END REGISTRATION FORM -->
+
+					</div>
+				</div>
+			</div>
 		</div>
-	</form>
-</div>	
-<!-- END REGISTRATION FORM -->
+		<!-- /.container -->
+
+	{#
+	<h1>Formulaire d'inscription</h1>
+
+	{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+	{{ form_widget(form) }}
+	<div>
+		<input type="submit" value="{{ 'registration.submit'|trans }}" />
+	</div>
+	{{ form_end(form) }}
+	#}
