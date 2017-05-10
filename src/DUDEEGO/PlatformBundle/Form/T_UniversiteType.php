@@ -5,6 +5,10 @@ namespace DUDEEGO\PlatformBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
+use Doctrine\ORM\EntityRepository;
 
 class T_UniversiteType extends AbstractType
 {
@@ -14,10 +18,30 @@ class T_UniversiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('nometablissement')
-        ->add('siteinternet')
-        ->add('description');
-        ->add('adresse');
+        ->add('nometablissement', EntityType::class, array(
+            'class' => 'DUDEEGOPlatformBundle:T_Universite',
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                ->orderBy('u.nometablissement', 'ASC');
+            },
+            'choice_label' => 'nometablissement',
+            'required'    => true,
+            'placeholder' => 'Choisir un établissement',
+            'empty_data'  => null,
+            ))
+        //->add('siteinternet')
+        //->add('description')
+        //->add('adresse', T_Adresse_UniversiteType::class)
+        ->add('formations', T_Formation_UniversiteType::class)
+        
+        ->add('rechercher', SubmitType::class, array(
+            'attr' => array('class' => 'btn btn-primary'),
+            ))
+
+        ->add('reinitialiser', ResetType::class, array(
+            'attr' => array('class' => 'btn btn-danger'),
+            ))
+        ;
     }
     
     /**
@@ -26,8 +50,8 @@ class T_UniversiteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'DUDEEGO\PlatformBundle\Entity\T_Universite'
-        ));
+            'data_class' => null //'DUDEEGO\PlatformBundle\Entity\T_Universite'
+            ));
     }
 
     /**

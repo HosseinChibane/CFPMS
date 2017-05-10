@@ -48,9 +48,9 @@ class EA_PhysiqueType extends AbstractType
         ->add('enregistrer', SubmitType::class, array(
             'attr' => array('class' => 'btn btn-primary'),
             ))
-        ->add('reinitialiser', ResetType::class, array(
+        /*->add('reinitialiser', ResetType::class, array(
             'attr' => array('class' => 'btn btn-danger'),
-            ))
+            ))*/
         ;
     }
     

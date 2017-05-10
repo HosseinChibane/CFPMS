@@ -12,11 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EA_Document_Inscription
 {
-    /**
-   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Physique")
-   * @ORM\JoinColumn(nullable=false)
-   */
-    private $physique;
 
     /**
      * @var int

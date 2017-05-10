@@ -1,0 +1,93 @@
+
+{% extends "DUDEEGOPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Comparer - {{ parent() }}
+{% endblock %}
+
+{% block FrontContent %}
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+           <a href="{{ path('dudeego_platform_showComparateur') }}">
+            <i class="glyphicon glyphicon-th-list"></i>Retour à la liste des universités</a>
+        </div>
+        <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+        </div>  
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            <div class="list-group table-of-contents">
+                {% if listFavUniversite is defined %}
+                    {% for key, item in listFavUniversite %}
+                        {% for subItem in item %}
+                            <a class="list-group-item" href="#{{ subItem.id }}"><i class="glyphicon glyphicon-chevron-right"></i>{{ subItem.nometablissement }} </a>
+                        {% endfor %}     
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+            <div class="row">
+                {% if listFavUniversite is defined %}
+                    {% for key, item in listFavUniversite %}
+                        {% for subItem in item %}
+                            <div id="#{{ subItem.id }}">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        {{ subItem.nometablissement }} 
+                                    </div>
+                                    <div class="panel-body">                                        
+                                        <br>
+                                        {{ subItem.description }}
+                                        <br>
+                                        <p>
+                                            Formations :
+                                            {% for itemformation in subItem.formations %}
+                                                {{ itemformation.formation }} 
+                                            {% endfor %}
+                                        </p>
+                                        <br>
+                                        <p>
+                                            Langues :
+                                            {% for itemformation in subItem.formations %}
+                                                {% for itemlangue in itemformation.langues %}
+                                                    {{ itemlangue.langue }} 
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        {% endfor %}     
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <!-- Button trigger modal -->
+            <div style="float:right;">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Inscription</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Inscription à une université</h4>
+                </div>
+                <div class="modal-body" >
+                    <p>
+                        Si vous souhaitez vous inscrire à une universite, vous devez avoir un compte utilisateur sur notre plateforme. Pour la création d'un compte, suivez le guide <a href="{{ path('fos_user_registration_register') }}">ici</a>.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}  

@@ -1,0 +1,12 @@
+{# src/DUDEEGO/PlatformBundle/Resources/views/Advert/index.html.twig #}
+
+{% extends "DUDEEGOPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+	Accueil - {{ parent() }}
+{% endblock %}
+
+{% block FrontContent %} 
+  {# Contenu de la page Accueil #}
+  {% include ':frontend:content.html.twig' %}
+{% endblock %}

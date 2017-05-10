@@ -25,56 +25,56 @@ class EA_Personne
     /**
      * @var int
      *
-     * @ORM\Column(name="numero", type="integer")
+     * @ORM\Column(name="numero", type="integer", nullable=true)
      */
     private $numero;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="rue", type="string", length=255)
+     * @ORM\Column(name="rue", type="string", length=255, nullable=true)
      */
     private $rue;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="codepostal", type="string", length=255)
+     * @ORM\Column(name="codepostal", type="string", length=255, nullable=true)
      */
     private $codepostal;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=255)
+     * @ORM\Column(name="ville", type="string", length=255, nullable=true)
      */
     private $ville;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pays", type="string", length=255)
+     * @ORM\Column(name="pays", type="string", length=255, nullable=true)
      */
     private $pays;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="gsm", type="string", length=255)
+     * @ORM\Column(name="gsm", type="string", length=255, nullable=true)
      */
     private $gsm;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=255)
+     * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
      */
     private $telephone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="courriel", type="string", length=255)
+     * @ORM\Column(name="courriel", type="string", length=255, nullable=true)
      */
     private $courriel;
 

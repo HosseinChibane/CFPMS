@@ -1,0 +1,42 @@
+{% extends ":backend:sidebar.html.twig" %}
+
+{% block title %}
+	Inscription Université - {{ parent() }}
+{% endblock %}
+
+{% block BackContent %} 
+	<div class="col-md-10">
+		<h5 class="text-center" style="padding-bottom:2%;">S'INSCRIRE A UN COURS DE PREPARATION</h5>
+		<div class="row">
+			<div class="col-md-7">
+				<h4  style="text-decoration:underline;">MON CHOIX</h4>
+				<div class="alert alert-info" role="alert">Remplissez le formulaire ci-dessous afin de vous inscrire a l'apprentissage d'une langue. N'oubliez pas de remplir le doucment a droite et de l'ajouter dans vos demandes par la suite.</div>
+				<form>
+					<label class="col-sm-6 control-label">Ma Preparation :</label>
+					<select class="form-control">
+						<option>Preparation 1 - Universite 1</option>
+						<option>Preparation 1 - Universite 1</option>
+						<option>Preparation 1 - Universite 1</option>
+					</select><br />
+					<div class="form-group">
+						<div class="col-md-6">
+							<button type="submit" class="btn btn-default">Envoyé ma demande</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-5">
+				<h4  style="text-decoration:underline;">DOCUMENTS A REMPLIR</h4>
+				<div class="alert alert-warning" role="alert">Merci de telecharger et de remplir le document suivant. Il vous faudra ensuite l'ajouter dans <a href="./index.html">vos demandes</a> une fois celle-ci validé sur cette page.</div>
+				<object data="./uploads/resume.pdf" type="application/pdf" width="100%" height="30%"> 
+					<p>Il semblerai que vous n'avais pas l'extention pour lire les PDF.<a href="./uploads/resume.pdf">Cliquez-ici pour téléchager le fichier.</a></p>  
+				</object>
+				<br/><br/><button class="btn btn-default">Télécharger le fichier</button>
+				<br /><label class=" control-label">Mon fichier rempli :</label>
+				<div class="form-group">
+					<input type="file" accept="application/pdf" class="form-control-file">
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

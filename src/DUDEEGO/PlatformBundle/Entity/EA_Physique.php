@@ -54,14 +54,14 @@ class EA_Physique
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datenaissance", type="datetimetz")
+     * @ORM\Column(name="datenaissance", type="datetimetz", nullable=true)
      */
     private $datenaissance;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="numerocarteid", type="string", length=255)
+     * @ORM\Column(name="numerocarteid", type="string", length=255, nullable=true)
      */
     private $numerocarteid;
 

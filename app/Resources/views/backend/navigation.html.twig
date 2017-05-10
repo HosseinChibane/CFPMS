@@ -1,0 +1,167 @@
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ path('dudeego_platform_home') }}">Dudee'Go</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="{{ path('dudeego_platform_accueil') }}">Accueil</a></li>
+       <li><a href="{{ path('dudeego_platform_showComparateur') }}">Comparateur</a></li>       
+       <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+         <li><a href="{{ path('dudeego_platform_voirJob') }}">Trouver un job</a></li>
+         <li><a href="{{ path('dudeego_platform_voirStage') }}">Trouver un stage</a></li>
+         <li><a href="{{ path('dudeego_platform_voirLogement') }}">Trouver un logement</a></li>
+         <li><a href="{{ path('dudeego_platform_voirLangue') }}">Trouver un cours de langue</a></li>
+       </ul>
+     </li>
+     <li><a href="{{ path('dudeego_platform_voirBlog') }}">Blog</a></li>
+     
+     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+       <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+         <li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Mon Compte</a></li>
+         <li><a href="{{ path('dudeego_platform_abonne_mesDemandes') }}">Suivi de mes candidatures</a></li>
+         <li class="divider"></li>
+         <li class="dropdown-header">Inscription</li>
+         <li><a href="{{ path('dudeego_platform_abonne_universite') }}">Universitaires</a></li>
+         <li><a href="{{ path('dudeego_platform_abonne_langue') }}">Cours de langues</a></li>
+         <li><a href="{{ path('dudeego_platform_abonne_logement') }}">Logements étudiants</a></li>
+         <li><a href="{{ path('dudeego_platform_abonne_preparation') }}">Cours préparatoires</a></li>
+         <li><a href="{{ path('dudeego_platform_abonne_mutuelle') }}">Mutuelle étudiante</a></li>
+         <li class="divider"></li>
+         <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+       </ul>
+     </li>     
+     <li><a href="{{ path('dudeego_platform_admin_panel') }}">Admin Panel</a></li>
+     {% if is_granted("ROLE_ADMIN") %}
+       <li><a href="{{ path('dudeego_platform_admin_panel') }}">Admin Panel</a></li>
+     {% endif %} 
+   {% else %}
+    <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+  {% endif %}  
+
+</ul>
+</div>
+<!-- /.navbar-collapse -->
+</div>
+<!-- /.container -->
+</nav>
+{# Exemple de menu
+<style>
+  .dropdown-submenu{position:relative;}
+  .dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+  .dropdown-submenu:hover>.dropdown-menu{display:block;}
+  .dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+  .dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+  .blue{color:#1D38FC}
+  .green{color:#0EC929}
+  .red{color:#FF0000}
+  .orange{color:#ffe100}
+</style>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-menu">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand hidden-md hidden-lg" href="#">Menu</a>
+  </div>
+
+  <div class="collapse navbar-collapse" id="main-menu" style="margin-bottom: 0px;">
+    <ul class="nav navbar-nav">
+      <li class="dropdown"> 
+        <a data-toggle="dropdown" href="#">Accueil<b class="caret"></b></a>
+        <ul class="dropdown-menu jqueryFadeIn">
+          <li><a href="#"><span class="fa fa-bar-chart-o"></span> Tableau de bord</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Pr&eacute;sentation</a></li>
+          <li class="dropdown-submenu">
+            <a data-toggle="dropdown"tabindex="-1" href="#"><span class="fa fa-cogs"></span> Param&eacute;trage</a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><span class="fa fa-bar-chart-o"></span> Liste des soci&eacute;t&eacute;s</a></li>  
+              <li><a href="#"><span class="glyphicon glyphicon-user"></span> Creer une soci&eacute;t&eacute;</a></li>
+              <li><a href="#"><span class="fa fa-cogs"></span> Modifier une soci&eacute;t&eacute;</a></li>
+              <li><a href="#"><span class="fa fa-cogs"></span> Supprimer une soci&eacute;t&eacute;</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li class="dropdown"> 
+        <a data-toggle="dropdown" href="#">Tiers<b class="caret"></b></a>
+        <ul class="dropdown-menu jqueryFadeIn">
+          <li class="dropdown-header">Société</li>
+          <li><a href="#"><span class="fa fa-bank blue"></span> Liste des Soci&eacute;t&eacute;s</a></li>
+          <li><a href="#"><span class="fa fa-plus-square red"></span> Cr&eacute;er une Soci&eacute;t&eacute;</a></li>        
+          <li class="divider"></li>
+          <li class="dropdown-header">Contact</li>
+          <li><a href="#"><span class="glyphicon glyphicon-user blue"></span> Liste des Contacts</a></li>
+          <li><a href="#"><span class="fa fa-plus-square red"></span> Cr&eacute;er un contact</a></li>
+          <li class="dropdown-submenu">
+            <a data-toggle="dropdown"tabindex="-1" href="#"><span class="fa fa-cogs"></span> Sous menu niveau 1</a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><span class="fa fa-bar-chart-o"></span> Acion niveau 2</a></li>  
+              <li><a href="#"><span class="fa fa-bar-chart-o"></span> Autre acion niveau 2</a></li>  
+              <li class="dropdown-submenu">
+                <a data-toggle="dropdown"tabindex="-1" href="#"><span class="fa fa-cogs"></span> Sous menu niveau 3</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><span class="fa fa-bar-chart-o"></span> Acion niveau 3</a></li>  
+                  <li><a href="#"><span class="fa fa-bar-chart-o"></span> Autre acion niveau 3</a></li>  
+
+                </ul>
+              </li>                     
+            </ul>
+          </li>
+        </ul>
+      </li>      
+
+      <li class="dropdown"> 
+        <a data-toggle="dropdown" href="#">Articles<b class="caret"></b></a>
+        <ul class="dropdown-menu jqueryFadeIn">
+          <li class="dropdown-header">Produits</li>
+          <li><a href="#"><span class="fa fa-bank blue"></span> Liste des produits</a></li>
+          <li><a href="#"><span class="fa fa-plus-square red"></span> Cr&eacute;er un produit</a></li>
+          <li class="dropdown-header">Nomenclature</li>
+          <li><a href="#"><span class="fa fa-bank blue"></span> Liste des nomenclatures</a></li>
+          <li><a href="#"><span class="fa fa-plus-square red"></span> Cr&eacute;er une nomenclatures</a></li>
+        </ul>
+      </li>
+
+    </ul>
+
+    <form class="navbar-form pull-right">
+      <input type="text" style="width:150px" class="input-sm form-control" placeholder="Recherche">
+      <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span> </button>
+    </form>
+  </div>
+</nav>
+
+
+<script>
+  $(function() {
+      // Affichage du sous menu en douceur
+      jQuery('ul.nav li.dropdown').hover(function() {
+        jQuery(this).find('.jqueryFadeIn').stop(true, true).delay(200).fadeIn();
+      }, function() {
+        jQuery(this).find('.jqueryFadeIn').stop(true, true).delay(200).fadeOut();
+      });
+
+    });   
+</script>
+
+#}

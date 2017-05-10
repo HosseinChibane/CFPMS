@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="e_a__image")
  * @ORM\Entity(repositoryClass="DUDEEGO\PlatformBundle\Repository\EA_ImageRepository")
  * @Vich\Uploadable
+ * @ORM\HasLifecycleCallbacks
  */
 class EA_Image
 {
@@ -25,11 +26,14 @@ class EA_Image
      */
     private $id;
 
+     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $imageName;
+
     /**
-    * @Assert\File(
-    * maxSize="1M",
-    * mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
-    * )
      * @Vich\UploadableField(mapping="users_images", fileNameProperty="imageName", size="imageSize")
      * 
      * @var File
@@ -37,21 +41,14 @@ class EA_Image
     private $imageFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @var string
-     */
-    private $imageName;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      *
      * @var integer
      */
     private $imageSize;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      *
      * @var \DateTime
      */

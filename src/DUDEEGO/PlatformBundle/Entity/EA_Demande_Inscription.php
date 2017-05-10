@@ -18,15 +18,9 @@ class EA_Demande_Inscription
    */
     private $physique;
 
-    /**
-   * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Type_Inscription", cascade={"persist"})
-   */
-    private $typeinscription;
-
-    /**
-   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Document_Inscription")
-   * @ORM\JoinColumn(nullable=false)
-   */
+  /**
+     * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Document_Inscription", cascade={"persist"})
+     */
     private $documentinscription;
 
     /**
@@ -41,31 +35,16 @@ class EA_Demande_Inscription
     /**
      * @var string
      *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="etat", type="string", length=255)
      */
     private $etat;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="creation", type="datetimetz")
-     */
-    private $creation;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="miseajour", type="datetimetz")
-     */
-    private $miseajour;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="verifier", type="boolean")
-     */
-    private $verifier;
-
 
     /**
      * Get id
@@ -99,102 +78,6 @@ class EA_Demande_Inscription
     public function getEtat()
     {
         return $this->etat;
-    }
-
-    /**
-     * Set creation
-     *
-     * @param \DateTime $creation
-     *
-     * @return EA_Demande_Inscription
-     */
-    public function setCreation($creation)
-    {
-        $this->creation = $creation;
-
-        return $this;
-    }
-
-    /**
-     * Get creation
-     *
-     * @return \DateTime
-     */
-    public function getCreation()
-    {
-        return $this->creation;
-    }
-
-    /**
-     * Set miseajour
-     *
-     * @param \DateTime $miseajour
-     *
-     * @return EA_Demande_Inscription
-     */
-    public function setMiseajour($miseajour)
-    {
-        $this->miseajour = $miseajour;
-
-        return $this;
-    }
-
-    /**
-     * Get miseajour
-     *
-     * @return \DateTime
-     */
-    public function getMiseajour()
-    {
-        return $this->miseajour;
-    }
-
-    /**
-     * Set verifier
-     *
-     * @param boolean $verifier
-     *
-     * @return EA_Demande_Inscription
-     */
-    public function setVerifier($verifier)
-    {
-        $this->verifier = $verifier;
-
-        return $this;
-    }
-
-    /**
-     * Get verifier
-     *
-     * @return bool
-     */
-    public function getVerifier()
-    {
-        return $this->verifier;
-    }
-
-    /**
-     * Set typeinscription
-     *
-     * @param \DUDEEGO\PlatformBundle\Entity\EA_Type_Inscription $typeinscription
-     *
-     * @return EA_Demande_Inscription
-     */
-    public function setTypeinscription(\DUDEEGO\PlatformBundle\Entity\EA_Type_Inscription $typeinscription = null)
-    {
-        $this->typeinscription = $typeinscription;
-
-        return $this;
-    }
-
-    /**
-     * Get typeinscription
-     *
-     * @return \DUDEEGO\PlatformBundle\Entity\EA_Type_Inscription
-     */
-    public function getTypeinscription()
-    {
-        return $this->typeinscription;
     }
 
     /**
@@ -243,5 +126,29 @@ class EA_Demande_Inscription
     public function getPhysique()
     {
         return $this->physique;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return EA_Demande_Inscription
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

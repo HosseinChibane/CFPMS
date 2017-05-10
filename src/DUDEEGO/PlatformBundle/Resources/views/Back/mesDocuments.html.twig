@@ -1,0 +1,71 @@
+{% extends ":backend:sidebar.html.twig" %}
+
+{% block title %}
+    Mes Documents - {{ parent() }}
+{% endblock %}
+
+{% block BackContent %} 
+    <!-- Mes Documents -->
+    {{ form_start(form) }}
+
+    {% if not form.vars.valid %}
+        <div class="alert alert-error">
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-12">          
+            <div class="form-group">
+                {{ form_label(form.PasseportName, 'Passeport') }}
+                {{ form_widget(form.PasseportName) }}
+                {{ form_widget(form.PasseportFile) }}
+
+                {{ form_label(form.BacName, 'Baccalaureat') }}
+                {{ form_widget(form.BacName) }}
+                {{ form_widget(form.BacFile) }}
+
+                {{ form_label(form.CarteIdentiteName, 'Carte Identite') }}
+                {{ form_widget(form.CarteIdentiteName) }}
+                {{ form_widget(form.CarteIdentiteFile) }}
+
+                {{ form_label(form.CredentialName, 'Crédential') }}
+                {{ form_widget(form.CredentialName) }}
+                {{ form_widget(form.CredentialFile) }}
+
+                {{ form_label(form.BulletinNoteName, 'Dernier Bulletin de Note') }}
+                {{ form_widget(form.BulletinNoteName) }}                
+                {{ form_widget(form.BulletinNoteFile) }}
+
+                {{ form_label(form.LettreRecommendationName, 'Lettre de Recommendation') }}
+                {{ form_widget(form.LettreRecommendationName) }}
+                {{ form_widget(form.LettreRecommendationFile) }} 
+                
+                {{ form_label(form.LettreMotivationName, 'Lettre de Motivation') }}
+                {{ form_widget(form.LettreMotivationName) }}
+                {{ form_widget(form.LettreMotivationFile) }}  
+
+            </div>
+        </div>
+        {# Token CSRF #}
+        {{ form_widget(form._token) }}
+        <div class="row">
+            <div class="col-md-7">
+                <div class="form-group">
+                    {% for flash_message in app.session.flashBag.get('notice') %}
+                        <div class="flash-notice">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+                    {{ form_widget(form.upload) }}
+                </div>
+            </div>
+        </div>
+
+
+        {{ form_end(form, {'render_rest': false}) }}
+
+    </div>
+</div>
+
+{% endblock %}

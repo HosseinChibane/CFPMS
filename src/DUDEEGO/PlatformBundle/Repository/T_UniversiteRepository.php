@@ -33,4 +33,22 @@ class T_UniversiteRepository extends \Doctrine\ORM\EntityRepository
 
 		return $qb->getQuery()->getResult();
 	}
+
+	public function getDocumentIncription( $formation,  $langue, $nomuniversite)
+	{
+		$qb = $this
+		->createQueryBuilder('u')
+		->leftJoin('u.documents', 'doc')
+		->where('u.nometablissement = :nomuniversite')
+		->setParameter('nomuniversite', '%'.$nomuniversite.'%')		
+		;
+
+		return $qb->getQuery()->getResult();
+
+		/*->andwhere('for.formation LIKE :formations')
+		->setParameter('formations', '%'.$formation.'%')
+		->andwhere('lan.langue LIKE :langues')
+		->setParameter('langues', '%'.$langue.'%')
+*/
+	}
 }

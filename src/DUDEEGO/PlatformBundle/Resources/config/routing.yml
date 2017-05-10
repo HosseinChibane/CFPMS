@@ -1,74 +1,86 @@
 dudeego_platform_home:
     path:      /
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:index }
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:index }
 dudeego_platform_accueil:
-    path:      /Page/accueil
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:accueil }    
+    path:      /Front/accueil
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:accueil }    
 dudeego_platform_showComparateur:
-    path:      /Page/comparateur
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:showComparateur }
+    path:      /Front/comparateur
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:showComparateur }
 dudeego_platform_detailsComparateur:
-    path:      /Page/detailscomparateur/{id}
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:detailsComparateur }
+    path:      /Front/detailscomparateur/{id}
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:detailsComparateur }
 dudeego_platform_PanierComparateur:
-    path:      /Page/comparateur/{id}
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:PanierComparateur }
+    path:      /Front/comparateur/{id}
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:PanierComparateur }
 dudeego_platform_comparerComparateur:
-    path:      /Page/comparer
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:comparerComparateur }
+    path:      /Front/comparer
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:comparerComparateur }
 dudeego_platform_filterComparateur:
-    path:      /Page/filtercomparateur
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:filterComparateur }
+    path:      /Front/filtercomparateur
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:filterComparateur }
     methods: POST
 dudeego_platform_itemsComparateur:
-    path:      /Page/itemsComparateur
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:itemsComparateur }
+    path:      /Front/itemsComparateur
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:itemsComparateur }
     methods: POST|GET
 dudeego_platform_voirJob:
-    path:      /Page/job
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:job }
+    path:      /Front/job
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:job }
 dudeego_platform_voirStage:
-    path:      /Page/stage
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:stage }
+    path:      /Front/stage
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:stage }
 dudeego_platform_voirLogement:
-    path:      /Page/Logement
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:Logement }
+    path:      /Front/Logement
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:Logement }
 dudeego_platform_voirLangue:
-    path:      /Page/langue
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:langue }
+    path:      /Front/langue
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:langue }
 dudeego_platform_voirBlog:
-    path:      /Page/blog
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:blog }
+    path:      /Front/blog
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:blog }
 dudeego_platform_voirTest:
-    path:      /Page/test
-    defaults: { _controller: DUDEEGOPlatformBundle:Page:test }
+    path:      /Front/test
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:test }
+
 dudeego_platform_abonne_monProfil:
-    path:      /PageAbonne/monprofil/
-    defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:monprofil }
+    path:      /Back/monprofil/
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:monprofil }
 dudeego_platform_abonne_mesParametres:
-    path:      /PageAbonne/mesparametres
-    defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:mesparametres }
+    path:      /Back/mesparametres
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:mesparametres }
 dudeego_platform_abonne_mesDemandes:
-    path:      /PageAbonne/mesdemandes
-    defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:mesdemandes }
+    path:      /Back/mesdemandes
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:mesdemandes }
+dudeego_platform_abonne_addDemandes:
+    path:      /Back/mesdemandes
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:addDemandes }
 dudeego_platform_abonne_mesDocuments:
-    path:      /PageAbonne/mesdocuments
-    defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:mesdocuments }
+    path:      /Back/mesdocuments
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:mesdocuments }
 dudeego_platform_abonne_aide:
-    path:      /PageAbonne/aide
-    defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:aide } 
+    path:      /Back/aide
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:aide } 
+dudeego_platform_abonne_contact:
+    path:      /Back/contact
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:contact }
+    methods: POST|GET 
 dudeego_platform_abonne_universite:
-    path:      /PageAbonne/universite
-    defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:universite } 
+    path:      /Back/universite
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:universite } 
 dudeego_platform_abonne_langue:
-    path:      /PageAbonne/langue
-    defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:langue } 
+    path:      /Back/langue
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:langue } 
 dudeego_platform_abonne_logement:
-    path:      /PageAbonne/logement
-    defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:logement }    
+    path:      /Back/logement
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:logement }    
 dudeego_platform_abonne_preparation:
-    path:      /PageAbonne/preparation
-    defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:preparation }    
+    path:      /Back/preparation
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:preparation }    
 dudeego_platform_abonne_mutuelle:
-    path:      /PageAbonne/mutuelle
-    defaults: { _controller: DUDEEGOPlatformBundle:PageAbonne:mutuelle }       
+    path:      /Back/mutuelle
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:mutuelle }       
+
+dudeego_platform_admin_panel:
+    path:      /Admin/adminPanel
+    defaults: { _controller: DUDEEGOPlatformBundle:Admin:adminPanel }  

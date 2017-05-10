@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class T_Universite
 {
+
+    /**
+     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Document_Universite", mappedBy="universite", cascade={"persist"})
+     */
+    private $documents;
+
     /**
      * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Formation_Universite", mappedBy="universite", cascade={"persist"})
      */
@@ -284,5 +290,39 @@ class T_Universite
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Add document
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Document_Universite $document
+     *
+     * @return T_Universite
+     */
+    public function addDocument(\DUDEEGO\PlatformBundle\Entity\T_Document_Universite $document)
+    {
+        $this->documents[] = $document;
+
+        return $this;
+    }
+
+    /**
+     * Remove document
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Document_Universite $document
+     */
+    public function removeDocument(\DUDEEGO\PlatformBundle\Entity\T_Document_Universite $document)
+    {
+        $this->documents->removeElement($document);
+    }
+
+    /**
+     * Get documents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
     }
 }
