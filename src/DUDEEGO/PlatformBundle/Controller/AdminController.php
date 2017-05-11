@@ -13,6 +13,4 @@ class AdminController extends Controller
 	{ 
 		return $this->render('DUDEEGOPlatformBundle:Admin:adminPanel.html.twig');		
 	}
-
-
 }

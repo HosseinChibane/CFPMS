@@ -1,0 +1,25 @@
+{% extends ":backend:sidebar.html.twig" %}
+
+{% block title %}
+    Modifier Demandes - {{ parent() }}
+{% endblock %}
+
+{% block BackContent %} 
+    <!-- Modifier Demandes -->
+    <div class="col-md-12">
+        <h1>Détail de la demande n°{{ eA_Demande_Inscription.id }} :</h1>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Inscription à {{ eA_Demande_Inscription.type }}</h4>
+            </div>
+            <div class="panel-body">                                        
+                Votre demande est : {{ eA_Demande_Inscription.etat }}
+            </div>
+            <div class="panel-footer">
+                <a class="btn btn-info" href="{{ path('dudeego_platform_abonne_mesDemandes') }}" role="button">Retour à la liste des demandes</a>
+                <a class="btn btn-primary" href="{{ path('dudeego_platform_abonne_modifierDemandes', { 'id': eA_Demande_Inscription.id }) }}">Modifier</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

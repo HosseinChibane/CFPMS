@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class EA_Demande_Inscription
 {
     /**
-   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Physique")
+   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Physique", inversedBy="demandes")
    * @ORM\JoinColumn(nullable=false)
    */
     private $physique;
@@ -45,6 +45,11 @@ class EA_Demande_Inscription
      * @ORM\Column(name="etat", type="string", length=255)
      */
     private $etat;
+
+    public function __toString()
+    {
+        return $this->getType();
+    }
 
     /**
      * Get id

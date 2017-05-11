@@ -63,6 +63,11 @@ class T_Universite
      */
     private $description;
 
+    public function __toString()
+    {
+        return $this->getNometablissement();
+    }
+
     /**
      * Get id
      *
@@ -325,4 +330,5 @@ class T_Universite
     {
         return $this->documents;
     }
+
 }

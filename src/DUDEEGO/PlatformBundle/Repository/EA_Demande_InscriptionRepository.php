@@ -10,4 +10,15 @@ namespace DUDEEGO\PlatformBundle\Repository;
  */
 class EA_Demande_InscriptionRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function getDemandesIncriptions($idphysique)
+	{
+		$qb = $this
+		->createQueryBuilder('u')
+		->leftJoin('u.documentinscription', 'doc')
+		->where('u.physique = :id')
+		->setParameter('id', $idphysique)		
+		;
+
+		return $qb->getQuery()->getResult();
+	}
 }

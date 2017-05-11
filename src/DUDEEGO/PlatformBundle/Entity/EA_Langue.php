@@ -5,19 +5,18 @@ namespace DUDEEGO\PlatformBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * T_Langue_Universite
+ * EA_Langue
  *
- * @ORM\Table(name="t__langue__universite")
- * @ORM\Entity(repositoryClass="DUDEEGO\PlatformBundle\Repository\T_Langue_UniversiteRepository")
+ * @ORM\Table(name="e_a__langue")
+ * @ORM\Entity(repositoryClass="DUDEEGO\PlatformBundle\Repository\EA_LangueRepository")
  */
-class T_Langue_Universite
+class EA_Langue
 {
-
     /**
-   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Formation_Universite", inversedBy="langues")
+   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Morale", inversedBy = "langues")
    * @ORM\JoinColumn(nullable=false)
    */
-    private $formation;
+    private $morale;
 
     /**
      * @var int
@@ -55,7 +54,7 @@ class T_Langue_Universite
      *
      * @param string $langue
      *
-     * @return T_Langue_Universite
+     * @return EA_Langue
      */
     public function setLangue($langue)
     {
@@ -75,26 +74,26 @@ class T_Langue_Universite
     }
 
     /**
-     * Set formation
+     * Set morale
      *
-     * @param \DUDEEGO\PlatformBundle\Entity\T_Formation_Universite $formation
+     * @param \DUDEEGO\PlatformBundle\Entity\EA_Morale $morale
      *
-     * @return T_Langue_Universite
+     * @return EA_Langue
      */
-    public function setFormation(\DUDEEGO\PlatformBundle\Entity\T_Formation_Universite $formation)
+    public function setMorale(\DUDEEGO\PlatformBundle\Entity\EA_Morale $morale)
     {
-        $this->formation = $formation;
+        $this->morale = $morale;
 
         return $this;
     }
 
     /**
-     * Get formation
+     * Get morale
      *
-     * @return \DUDEEGO\PlatformBundle\Entity\T_Formation_Universite
+     * @return \DUDEEGO\PlatformBundle\Entity\EA_Morale
      */
-    public function getFormation()
+    public function getMorale()
     {
-        return $this->formation;
+        return $this->morale;
     }
 }

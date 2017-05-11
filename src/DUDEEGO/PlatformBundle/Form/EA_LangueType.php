@@ -10,10 +10,9 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class EA_MoraleType extends AbstractType
+class EA_LangueType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -21,36 +20,19 @@ class EA_MoraleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('raisonsocial', EntityType::class, array(
-            'class' => 'DUDEEGOPlatformBundle:EA_Morale',
+        ->add('langue', EntityType::class, array(
+            'class' => 'DUDEEGOPlatformBundle:EA_Langue',
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('u')
-                ->orderBy('u.raisonsocial', 'ASC');
+                ->orderBy('u.langue', 'ASC');
             },
-            'choice_label' => 'raisonsocial',
+            'choice_label' => 'langue',
             'required'    => true,
-            'placeholder' => 'Choisir un partenaire',
+            'placeholder' => 'Choisir une langue',
             'empty_data'  => null,
             ))
-        ->add('siret')
-        ->add('fax')
-        ->add('naf')
-        ->add('url')
-        ->add('alt')
 
-        ->add('personne', EA_PersonneType::class)
-
-        ->add('langues', CollectionType::class, array(
-            'entry_type' => EA_LangueType::class
-            ))
-
-        ->add('rechercher', SubmitType::class, array(
-            'attr' => array('class' => 'btn btn-primary'),
-            ))
-
-        ->add('reinitialiser', ResetType::class, array(
-            'attr' => array('class' => 'btn btn-danger'),
-            ))
+        ->add('morale', EA_MoraleType::class)
         ;
     }
     
@@ -60,7 +42,7 @@ class EA_MoraleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'DUDEEGO\PlatformBundle\Entity\EA_Morale'
+            'data_class' => 'DUDEEGO\PlatformBundle\Entity\EA_Langue'
             ));
     }
 
@@ -69,7 +51,7 @@ class EA_MoraleType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'dudeego_platformbundle_ea_morale';
+        return 'dudeego_platformbundle_ea_langue';
     }
 
 

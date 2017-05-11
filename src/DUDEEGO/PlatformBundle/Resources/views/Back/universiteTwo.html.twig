@@ -1,0 +1,52 @@
+{% extends ":backend:sidebar.html.twig" %}
+
+{% block title %}
+    Inscription Université - {{ parent() }}
+{% endblock %}
+
+{% block BackContent %} 
+    <div class="row">
+        <div class="col-md-12">
+            {% if document is defined %}        
+                <h2>Etape 2</h2>
+                <p>veuillez télécharger le(s) PDF ci-dessous et imprimer le PDF afin de nous le renvoyer remplit.</p>      
+                <table id="documentInsciption" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Nom du document</th>
+                            <th>Lien de téléchargement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in document %}
+                            <tr>
+                                <td>{{ item.pdfName }}</td>
+                                <td>
+                                    <a class="btn btn-primary view-pdf" href="{{ asset('universites/pdf/' ~ item.pdfName ~ ".pdf") }}" target="_blank">Télécharger</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>    
+                <a class="btn btn-danger" href="{{ path('dudeego_platform_abonne_universiteStepsOne') }}">Precedent</a>
+                <a class="btn btn-primary" href="{{ path('dudeego_platform_abonne_universiteStepsTwo') }}">Suivant</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <script type="text/javascript" class="init">
+        $(document).ready(function() {
+            var table = $('#documentInsciption').DataTable( {
+                paging: true,
+                responsive: true,
+                searching: false,
+                "lengthChange": false
+            } );
+            new $.fn.dataTable.FixedHeader( table );
+        } );
+    </script>
+{% endblock %}
+
+{#                OK mais moche                
+<img src="{{ vich_uploader_asset(item, 'pdfFile') }}" alt="{{ item.pdfName }}" />
+#}

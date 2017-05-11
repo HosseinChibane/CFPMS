@@ -16,7 +16,7 @@ class T_Image_Universite
      * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Universite", inversedBy="images")
      * @ORM\JoinColumn(name="universite_id", referencedColumnName="id")
      */
-    private $universite;
+        private $universite;
 
     /**
      * @var int
@@ -48,6 +48,10 @@ class T_Image_Universite
      */
     private $alt;
 
+    public function __toString()
+    {
+        return $this->getLibelle();
+    }
 
     /**
      * Get id

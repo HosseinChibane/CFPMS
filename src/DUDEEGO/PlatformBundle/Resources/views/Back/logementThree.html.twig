@@ -1,0 +1,50 @@
+{% extends ":backend:sidebar.html.twig" %}
+
+{% block title %}
+	Inscription logement - {{ parent() }}
+{% endblock %}
+
+{% block BackContent %} 
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Etape 3</h2>
+			<p>Veuillez joindre le(s) PDF precedent afin de valider votre demande pour que nous puissions la prendre en compte.</p>         
+
+			{{ form_start(form) }}
+
+			{% if not form.vars.valid %}
+				<div class="alert alert-error">
+					{{ form_errors(form) }}
+				</div>
+			{% endif %}
+
+			<div class="form-group">
+				{{ form_label(form.documentinscription.nom, 'Document d\'Inscription') }}
+				{{ form_widget(form.documentinscription.nom) }}
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						{{ form_widget(form.documentinscription.pdfFile) }}
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<a class="btn btn-danger" href="{{ path('dudeego_platform_abonne_logementStepsOne') }}">Retour à l'étape 1</a>
+						{{ form_widget(form.documentinscription.Enregistrer) }}
+					</div>
+				</div>
+			</div>
+
+			{# Token CSRF #}
+			{{ form_widget(form._token) }}
+
+			{{ form_end(form, {'render_rest': false }) }}
+		</div>
+	</div>
+
+{% endblock %}

@@ -27,7 +27,7 @@ class EA_Image
     private $id;
 
      /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
@@ -53,6 +53,11 @@ class EA_Image
      * @var \DateTime
      */
     private $updatedAt;
+
+    public function __toString()
+    {
+        return $this->getImageName();
+    }
     
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance

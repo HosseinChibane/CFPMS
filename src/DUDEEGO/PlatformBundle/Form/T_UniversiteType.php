@@ -5,6 +5,8 @@ namespace DUDEEGO\PlatformBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
@@ -18,6 +20,15 @@ class T_UniversiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+        ->add('type', ChoiceType::class, array(
+            'choices' => array(
+                'Campus' => 'Campus',
+                'Partenaire' => 'Partenaire'
+                ),
+            'required'    => true,
+            'placeholder' => 'Choisir un type de logement',
+            'empty_data'  => null))
+
         ->add('nometablissement', EntityType::class, array(
             'class' => 'DUDEEGOPlatformBundle:T_Universite',
             'query_builder' => function (EntityRepository $er) {

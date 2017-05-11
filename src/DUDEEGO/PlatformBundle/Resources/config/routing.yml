@@ -49,12 +49,18 @@ dudeego_platform_abonne_monProfil:
 dudeego_platform_abonne_mesParametres:
     path:      /Back/mesparametres
     defaults: { _controller: DUDEEGOPlatformBundle:Back:mesparametres }
+
 dudeego_platform_abonne_mesDemandes:
     path:      /Back/mesdemandes
     defaults: { _controller: DUDEEGOPlatformBundle:Back:mesdemandes }
-dudeego_platform_abonne_addDemandes:
-    path:      /Back/mesdemandes
-    defaults: { _controller: DUDEEGOPlatformBundle:Back:addDemandes }
+dudeego_platform_abonne_detailsDemandes:
+    path:      /Back/detailsdemandes/{id}
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:detailsdemandes }
+dudeego_platform_abonne_modifierDemandes:
+    path:      /Back/modifierdemandes/{id}
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:modifierdemandes }
+    methods: GET|POST
+
 dudeego_platform_abonne_mesDocuments:
     path:      /Back/mesdocuments
     defaults: { _controller: DUDEEGOPlatformBundle:Back:mesdocuments }
@@ -65,15 +71,37 @@ dudeego_platform_abonne_contact:
     path:      /Back/contact
     defaults: { _controller: DUDEEGOPlatformBundle:Back:contact }
     methods: POST|GET 
-dudeego_platform_abonne_universite:
-    path:      /Back/universite
-    defaults: { _controller: DUDEEGOPlatformBundle:Back:universite } 
-dudeego_platform_abonne_langue:
-    path:      /Back/langue
-    defaults: { _controller: DUDEEGOPlatformBundle:Back:langue } 
-dudeego_platform_abonne_logement:
-    path:      /Back/logement
-    defaults: { _controller: DUDEEGOPlatformBundle:Back:logement }    
+
+dudeego_platform_abonne_universiteStepsOne:
+    path:      /Back/universiteOne
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:universiteOne } 
+dudeego_platform_abonne_universiteStepsTwo:
+    path:      /Back/universiteTwo
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:universiteTwo } 
+dudeego_platform_abonne_universiteStepsThree:
+    path:      /Back/universiteThree
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:universiteTwo } 
+
+dudeego_platform_abonne_langueStepsOne:
+    path:      /Back/langueOne
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:langueOne } 
+dudeego_platform_abonne_langueStepsTwo:
+    path:      /Back/langueTwo
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:langueTwo } 
+dudeego_platform_abonne_langueStepsThree:
+    path:      /Back/langueThree
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:langueTwo } 
+
+dudeego_platform_abonne_logementStepsOne:
+    path:      /Back/logementOne
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:logementOne }    
+dudeego_platform_abonne_logementStepsTwo:
+    path:      /Back/logementTwo
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:logementTwo } 
+dudeego_platform_abonne_logementStepsThree:
+    path:      /Back/logementThree
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:logementTwo } 
+
 dudeego_platform_abonne_preparation:
     path:      /Back/preparation
     defaults: { _controller: DUDEEGOPlatformBundle:Back:preparation }    

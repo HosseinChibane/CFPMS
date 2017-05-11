@@ -38,7 +38,11 @@ class T_Formation_Universite
      * @ORM\Column(name="formation", type="string", length=255)
      */
     private $formation;
-
+    
+    public function __toString()
+    {
+        return $this->getFormation();
+    }
 
     /**
      * Get id

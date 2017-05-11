@@ -44,6 +44,13 @@ class EA_PhysiqueType extends AbstractType
             'allow_delete' => true,
             'by_reference' => false,
             ))
+
+        ->add('demandes', CollectionType::class, array(
+            'entry_type' => EA_Demande_InscriptionType::class,
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+            ))
         
         ->add('enregistrer', SubmitType::class, array(
             'attr' => array('class' => 'btn btn-primary'),

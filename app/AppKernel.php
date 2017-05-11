@@ -21,6 +21,7 @@ class AppKernel extends Kernel
         new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(), # https://github.com/lexik/LexikFormFilterBundle --> Install and Config
         new Symfony\Bundle\AsseticBundle\AsseticBundle(), # https://github.com/symfony/assetic-bundle --> Install and Config
         new Oneup\FlysystemBundle\OneupFlysystemBundle(), # https://github.com/1up-lab/OneupFlysystemBundle/blob/master/Resources/doc/index.md
+        new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(), # https://github.com/javiereguiluz/EasyAdminBundle
         new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
         new Symfony\Bundle\SecurityBundle\SecurityBundle(),
         new Symfony\Bundle\TwigBundle\TwigBundle(),

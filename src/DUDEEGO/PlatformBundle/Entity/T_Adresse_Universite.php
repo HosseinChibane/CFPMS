@@ -18,7 +18,7 @@ class T_Adresse_Universite
    * @ORM\JoinColumn(nullable=false)
    */
     private $ville;
-   
+
     /**
      * @var int
      *
@@ -42,7 +42,11 @@ class T_Adresse_Universite
      */
     private $rue;
 
-
+    public function __toString()
+    {
+        return $this->getRue();
+    }
+    
     /**
      * Get id
      *

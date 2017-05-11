@@ -1,0 +1,44 @@
+{% extends ":backend:sidebar.html.twig" %}
+
+{% block title %}
+	Inscription Langue - {{ parent() }}
+{% endblock %}
+
+{% block BackContent %} 
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Etape 1</h2>
+			<p>Veuillez sélectionner les champs ci-dessous et rechercher afin de passer à l'étape suivante.</p>
+			{{ form_start(form) }}
+			{% if not form.vars.valid %}
+				<div class="alert alert-error">
+					{{ form_errors(form) }}
+				</div>
+			{% endif %}
+			<div class="form-group">
+				{{dump(form)}}
+				
+
+				{{ form_label(form.personne.pays, 'Pays') }}
+				{{ form_errors(form.personne.pays) }}
+				{{ form_widget(form.personne.pays) }}
+
+				{{ form_label(form.raisonsocial, 'Raison social') }}
+				{{ form_errors(form.raisonsocial) }}
+				{{ form_widget(form.raisonsocial) }}
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						{{ form_widget(form.reinitialiser) }}
+						{{ form_widget(form.rechercher) }}
+					</div>
+				</div>
+			</div>
+			{# Token CSRF #}
+			{{ form_widget(form._token) }}
+			
+			{{ form_end(form,{'render_rest': false}) }}
+		</div>
+	</div>
+{% endblock %}

@@ -51,7 +51,11 @@ class T_Document_Universite
      * @var \DateTime
     */
     private $updatedAt;
-
+    
+    public function __toString()
+    {
+        return $this->getPdfName();
+    }
 
     /**
      * Get id
@@ -68,8 +72,8 @@ class T_Document_Universite
      *
      * @return EA_Document
     */
-    public function setpdfFile(File $pdf = null)
-    {
+       public function setpdfFile(File $pdf = null)
+       {
         $this->pdfFile = $pdf;
 
         if ($pdf) 

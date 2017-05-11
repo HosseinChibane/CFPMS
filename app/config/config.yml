@@ -7,6 +7,11 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    app.path.users_images: /users/image
+    app.path.users_pdf: /users/pdf
+    app.path.universites_pdf: /universites/pdf
+    app.path.demandes_pdf: /demandes/pdf
+
 
 framework:
     #esi: ~
@@ -157,23 +162,125 @@ vich_uploader:
     mappings:
         users_images:
             namer:              vich_uploader.namer_origname
-            uri_prefix:         /users/image
+            uri_prefix:         '%app.path.users_images%'
             upload_destination: '%kernel.root_dir%/../web/users/image'            
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
         users_pdf:
             namer:              vich_uploader.namer_origname
-            uri_prefix:         /users/pdf
+            uri_prefix:         '%app.path.users_pdf%'
             upload_destination: '%kernel.root_dir%/../web/users/pdf'            
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
         universites_pdf:
             namer:              vich_uploader.namer_origname
-            uri_prefix:         /universites/pdf
+            uri_prefix:         '%app.path.universites_pdf%'
             upload_destination: '%kernel.root_dir%/../web/universites/pdf'            
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
+        demandes_pdf:
+            namer:              vich_uploader.namer_origname
+            uri_prefix:         '%app.path.demandes_pdf%'
+            upload_destination: '%kernel.root_dir%/../web/demandes/pdf'            
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
 
+# FOSRestBundle Configuration 
+#fos_rest:
+#    format_listener:
+#        enabled: true
+#        rules:
+            # ... previous rules declarations
+#            - { path: '^/admin', stop: true }  # <-- add this line
+# Easy Admin Configuration            
+easy_admin:
+    site_name: 'DUDEEGO PlatformAdmin.'
+    design:
+        form_theme: ['horizontal', 'VichUploaderBundle:Form:fields.html.twig']
+        brand_color: 'blue' # any color or rgb
+        color_scheme: 'light' #dark
+        menu:
+            - label: 'Front-End'
+              children: ['Universite', 'Adresse_Universite', 'Ville_Universite', 'Pays_Universite', 'Formation_Universite', 'Langue_Formation_Universite', 'Image_Universite']
+            - label: 'Back-End'
+              children: ['Personne', 'Etudiant', 'Entreprise', 'Utilisateur', 'Image', 'Demandes_Inscriptions', 'Documents_Inscriptions', 'Documents_Utilisateur']
+    entities:
+        Universite:
+            class: DUDEEGO\PlatformBundle\Entity\T_Universite
+#            form:
+#                fields:
+#                    - { property: 'description', type: 'ckeditor' }
+        Documents_Inscriptions_Universite:
+            class: DUDEEGO\PlatformBundle\Entity\T_Document_Universite
+        Adresse_Universite:
+            class: DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite
+        Ville_Universite:
+            class: DUDEEGO\PlatformBundle\Entity\T_Ville_Universite
+        Pays_Universite:
+            class: DUDEEGO\PlatformBundle\Entity\T_Pays_Universite
+        Formation_Universite:
+            class: DUDEEGO\PlatformBundle\Entity\T_Formation_Universite
+        Langue_Formation_Universite:
+            class: DUDEEGO\PlatformBundle\Entity\T_Langue_Universite
+        Image_Universite:
+            class: DUDEEGO\PlatformBundle\Entity\T_Image_Universite
+        Personne:
+            class: DUDEEGO\PlatformBundle\Entity\EA_Personne
+        Etudiant:
+            class: DUDEEGO\PlatformBundle\Entity\EA_Physique
+        Entreprise:
+            class: DUDEEGO\PlatformBundle\Entity\EA_Morale
+        Langue:
+            class: DUDEEGO\PlatformBundle\Entity\EA_Langue
+        Utilisateur:
+            class: DUDEEGO\PlatformBundle\Entity\User
+        Image:
+            class: DUDEEGO\PlatformBundle\Entity\EA_Image
+            list:
+                fields:
+                    - { property: 'imageName', type: 'image', base_path: '%app.path.users_images%' }
+            show:
+                fields:
+                    - { property: 'imageName', type: 'image', base_path: '%app.path.users_images%' }
+            form:
+                fields:
+                    - { property: 'imageFile', type: 'vich_image' }
+        Demandes_Inscriptions:
+            class: DUDEEGO\PlatformBundle\Entity\EA_Demande_Inscription
+        Documents_Inscriptions:
+            class: DUDEEGO\PlatformBundle\Entity\EA_Document_Inscription
+        Documents_Utilisateur:
+            class: DUDEEGO\PlatformBundle\Entity\EA_Document
+            list:
+                fields:
+                    - { property: 'PasseportName', template: 'contract.html.twig', type: 'file', base_path: '%app.path.users_pdf%' }
+                    - { property: 'CarteIdentiteName', template: 'contract.html.twig', type: 'file', base_path: '%app.path.users_pdf%' }
+                    - { property: 'BulletinNoteName', template: 'contract.html.twig', type: 'file', base_path: '%app.path.users_pdf%' }
+                    - { property: 'BacName', template: 'contract.html.twig', type: 'file', base_path: '%app.path.users_pdf%' }
+                    - { property: 'CredentialName', template: 'contract.html.twig', type: 'file', base_path: '%app.path.users_pdf%' }
+                    - { property: 'LettreRecommendationName', template: 'contract.html.twig', type: 'file', base_path: '%app.path.users_pdf%' }
+                    - { property: 'LettreMotivationName', template: 'contract.html.twig', type: 'file', base_path: '%app.path.users_pdf%' }
+            show:
+                fields:
+                    - { property: 'PasseportName', type: 'file', base_path: '%app.path.users_pdf%' }
+                    - { property: 'CarteIdentiteName', type: 'file', base_path: '%app.path.users_pdf%' }
+                    - { property: 'BulletinNoteName', type: 'file', base_path: '%app.path.users_pdf%' }
+                    - { property: 'BacName', type: 'file', base_path: '%app.path.users_pdf%' }
+                    - { property: 'CredentialName', type: 'file', base_path: '%app.path.users_pdf%' }
+                    - { property: 'LettreRecommendationName', type: 'file', base_path: '%app.path.users_pdf%' }
+                    - { property: 'LettreMotivationName', type: 'file', base_path: '%app.path.users_pdf%' }
+            form:
+                fields:
+                    - { property: 'PasseportFile', type: 'vich_file' }
+                    - { property: 'CarteIdentiteFile', type: 'vich_file' }
+                    - { property: 'BulletinNoteFile', type: 'vich_file' }
+                    - { property: 'BacFile', type: 'vich_file' }
+                    - { property: 'CredentialFile', type: 'vich_file' }
+                    - { property: 'LettreRecommendationFile', type: 'vich_file' }
+                    - { property: 'LettreMotivationFile', type: 'vich_file' }
+        FAQ:
+            class: DUDEEGO\PlatformBundle\Entity\EA_FAQ

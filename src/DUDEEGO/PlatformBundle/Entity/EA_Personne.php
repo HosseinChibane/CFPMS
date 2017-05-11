@@ -78,7 +78,11 @@ class EA_Personne
      */
     private $courriel;
 
-
+    public function __toString()
+    {
+        return $this->getCourriel();
+    }
+    
     /**
      * Get id
      *

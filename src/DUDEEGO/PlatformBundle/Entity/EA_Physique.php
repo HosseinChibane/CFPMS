@@ -29,6 +29,11 @@ class EA_Physique
     private $documents;
 
     /**
+     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Demande_Inscription", mappedBy="physique", cascade={"persist"})
+     */
+    private $demandes;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -54,7 +59,7 @@ class EA_Physique
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datenaissance", type="datetimetz", nullable=true)
+     * @ORM\Column(name="datenaissance", type="datetime", nullable=true)
      */
     private $datenaissance;
 
@@ -65,7 +70,11 @@ class EA_Physique
      */
     private $numerocarteid;
 
-
+    public function __toString()
+    {
+        return $this->getNom();
+    }
+    
     /**
      * Get id
      *
@@ -382,5 +391,39 @@ class EA_Physique
     public function getDocuments()
     {
         return $this->documents;
+    }
+
+    /**
+     * Add demande
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\EA_Demande_Inscription $demande
+     *
+     * @return EA_Physique
+     */
+    public function addDemande(\DUDEEGO\PlatformBundle\Entity\EA_Demande_Inscription $demande)
+    {
+        $this->demandes[] = $demande;
+
+        return $this;
+    }
+
+    /**
+     * Remove demande
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\EA_Demande_Inscription $demande
+     */
+    public function removeDemande(\DUDEEGO\PlatformBundle\Entity\EA_Demande_Inscription $demande)
+    {
+        $this->demandes->removeElement($demande);
+    }
+
+    /**
+     * Get demandes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDemandes()
+    {
+        return $this->demandes;
     }
 }

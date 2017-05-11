@@ -20,10 +20,21 @@
                 {% if listDemandeInscription is defined %}
                     {% for rowDemande in listDemandeInscription %}
                         <tr>
-                            <td>rowDemande.id</td>
-                            <td>rowDemande.type</td>
-                            <td>rowDemande.etat</td>
-                            <td></td>
+                            <td>{{rowDemande.id}}</td>
+                            <td>{{rowDemande.type}}</td>
+                            <td>{{rowDemande.etat}}</td>
+                            <td>           
+                                <div style="float:left;">
+                                    <a href="{{ path('dudeego_platform_abonne_detailsDemandes', { 'id' : rowDemande.id } ) }}" >
+                                        <span class="glyphicon glyphicon-list-alt"></span> Détails
+                                    </a>
+                                </div>
+                                <div style="float:right;">
+                                    <a href="{{ path('dudeego_platform_abonne_modifierDemandes', { 'id' : rowDemande.id } ) }}" >
+                                        <span class="glyphicon glyphicon-pencil"></span> Modifier
+                                    </a>
+                                </div>                               
+                            </td>
                         </tr>
                     {% endfor %}
                 {% endif %}

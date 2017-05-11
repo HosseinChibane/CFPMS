@@ -48,7 +48,11 @@ class T_Ville_Universite
      * @ORM\Column(name="region", type="string", length=255)
      */
     private $region;
-
+    
+    public function __toString()
+    {
+        return $this->getCodepostal();
+    }
 
     /**
      * Get id

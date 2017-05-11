@@ -16,6 +16,11 @@ class EA_Morale
    * @ORM\OneToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Personne", cascade={"persist"})
    */
     private $personne;
+
+     /**
+     * @ORM\OneToMany(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Langue", mappedBy="morale", cascade={"persist"})
+     */
+    private $langues;
     
     /**
      * @var int
@@ -36,45 +41,44 @@ class EA_Morale
     /**
      * @var string
      *
-     * @ORM\Column(name="siret", type="string", length=255)
+     * @ORM\Column(name="siret", type="string", length=255, nullable=true)
      */
     private $siret;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fax", type="string", length=255)
+     * @ORM\Column(name="fax", type="string", length=255, nullable=true)
      */
     private $fax;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="naf", type="string", length=255)
+     * @ORM\Column(name="naf", type="string", length=255, nullable=true)
      */
     private $naf;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="datecreation", type="string", length=255)
-     */
-    private $datecreation;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(name="url", type="string", length=255, nullable=true)
      */
     private $url;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="alt", type="string", length=255)
+     * @ORM\Column(name="alt", type="string", length=255, nullable=true)
      */
     private $alt;
 
+
+    public function __toString()
+    {
+        return $this->getRaisonsocial();
+    }
+    
 
     /**
      * Get id
@@ -183,30 +187,6 @@ class EA_Morale
     }
 
     /**
-     * Set datecreation
-     *
-     * @param string $datecreation
-     *
-     * @return EA_Morale
-     */
-    public function setDatecreation($datecreation)
-    {
-        $this->datecreation = $datecreation;
-
-        return $this;
-    }
-
-    /**
-     * Get datecreation
-     *
-     * @return string
-     */
-    public function getDatecreation()
-    {
-        return $this->datecreation;
-    }
-
-    /**
      * Set url
      *
      * @param string $url
@@ -276,5 +256,46 @@ class EA_Morale
     public function getPersonne()
     {
         return $this->personne;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->langues = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add langue
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\EA_Langue $langue
+     *
+     * @return EA_Morale
+     */
+    public function addLangue(\DUDEEGO\PlatformBundle\Entity\EA_Langue $langue)
+    {
+        $this->langues[] = $langue;
+
+        return $this;
+    }
+
+    /**
+     * Remove langue
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\EA_Langue $langue
+     */
+    public function removeLangue(\DUDEEGO\PlatformBundle\Entity\EA_Langue $langue)
+    {
+        $this->langues->removeElement($langue);
+    }
+
+    /**
+     * Get langues
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLangues()
+    {
+        return $this->langues;
     }
 }

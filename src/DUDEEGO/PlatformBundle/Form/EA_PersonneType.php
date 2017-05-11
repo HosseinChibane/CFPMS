@@ -6,6 +6,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
+use Doctrine\ORM\EntityRepository;
+
+
 class EA_PersonneType extends AbstractType
 {
     /**
@@ -18,10 +24,21 @@ class EA_PersonneType extends AbstractType
         ->add('rue')
         ->add('codepostal')
         ->add('ville')
-        ->add('pays')
+        ->add('pays', EntityType::class, array(
+            'class' => 'DUDEEGOPlatformBundle:EA_Personne',
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                ->orderBy('u.pays', 'ASC');
+            },
+            'choice_label' => 'pays',
+            'required'    => true,
+            'placeholder' => 'Choisir un pays',
+            'empty_data'  => null,
+            ))
         ->add('gsm')
         ->add('telephone')
-        ->add('courriel');
+        ->add('courriel')
+        ;
     }
     
     /**

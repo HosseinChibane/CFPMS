@@ -1,0 +1,47 @@
+{% extends ":backend:sidebar.html.twig" %}
+
+{% block title %}
+    Détails Demandes - {{ parent() }}
+{% endblock %}
+
+{% block BackContent %} 
+    <!-- Détails Demandes -->
+    <div class="col-md-12">
+        <h1>Modification de la demande</h1>
+
+        {{ form_start(edit_form) }}
+
+        {% if not edit_form.vars.valid %}
+            <div class="alert alert-error">
+                {{ form_errors(edit_form) }}
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            {{ form_label(edit_form.documentinscription.nom, 'Document d\'Inscription') }}
+            {{ form_widget(edit_form.documentinscription.nom) }}
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    {{ form_widget(edit_form.documentinscription.pdfFile) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <a class="btn btn-info" href="{{ path('dudeego_platform_abonne_mesDemandes') }}" role="button">Retour à la liste des demandes</a>
+                    {{ form_widget(edit_form.documentinscription.Enregistrer) }}
+                </div>
+            </div>
+        </div>
+
+        {# Token CSRF #}
+        {{ form_widget(edit_form._token) }}
+
+        {{ form_end(edit_form, {'render_rest': false }) }}
+    </div>
+{% endblock %}

@@ -31,11 +31,15 @@ class T_Pays_Universite
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="pays", type="string", length=255)
      */
     private $pays;
 
-
+    public function __toString()
+    {
+        return $this->getPays();
+    }
+    
     /**
      * Get id
      *
@@ -44,30 +48,6 @@ class T_Pays_Universite
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return T_Pays_Universite
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string
-     */
-    public function getNom()
-    {
-        return $this->nom;
     }
 
     /**

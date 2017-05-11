@@ -51,10 +51,10 @@ class EA_Document
      * 
      * @var File
      */
-    private $CarteIdentiteFile;
+     private $CarteIdentiteFile;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
@@ -65,7 +65,7 @@ class EA_Document
      * 
      * @var File
      */
-    private $BulletinNoteFile;
+     private $BulletinNoteFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -137,6 +137,11 @@ class EA_Document
     */
     private $updatedAt;
 
+    public function __toString()
+    {
+        return $this->getCarteIdentiteName();
+    }
+
     /**
      * Get id
      *
@@ -176,8 +181,8 @@ class EA_Document
      *
      * @return EA_Document
     */
-    public function setPasseportFile(File $pdf = null)
-    {
+     public function setPasseportFile(File $pdf = null)
+     {
         $this->PasseportFile = $pdf;
 
         if ($pdf) 
@@ -199,15 +204,15 @@ class EA_Document
      *
      * @return EA_Document
     */
-    public function setCarteIdentiteFile(File $pdf = null)
-    {
-        $this->CarteIdentiteFile = $pdf;
+         public function setCarteIdentiteFile(File $pdf = null)
+         {
+            $this->CarteIdentiteFile = $pdf;
 
-        if ($pdf) 
-            $this->updatedAt = new \DateTimeImmutable();
-        
-        return $this;
-    }
+            if ($pdf) 
+                $this->updatedAt = new \DateTimeImmutable();
+
+            return $this;
+        }
 
     /**
      * @return File|null
@@ -222,15 +227,15 @@ class EA_Document
      *
      * @return EA_Document
     */
-    public function setBulletinNoteFile(File $pdf = null)
-    {
-        $this->BulletinNoteFile = $pdf;
+          public function setBulletinNoteFile(File $pdf = null)
+          {
+            $this->BulletinNoteFile = $pdf;
 
-        if ($pdf) 
-            $this->updatedAt = new \DateTimeImmutable();
-        
-        return $this;
-    }
+            if ($pdf) 
+                $this->updatedAt = new \DateTimeImmutable();
+
+            return $this;
+        }
 
     /**
      * @return File|null
@@ -245,15 +250,15 @@ class EA_Document
      *
      * @return EA_Document
     */
-    public function setBacFile(File $pdf = null)
-    {
-        $this->BacFile = $pdf;
+          public function setBacFile(File $pdf = null)
+          {
+            $this->BacFile = $pdf;
 
-        if ($pdf) 
-            $this->updatedAt = new \DateTimeImmutable();
-        
-        return $this;
-    }
+            if ($pdf) 
+                $this->updatedAt = new \DateTimeImmutable();
+
+            return $this;
+        }
 
     /**
      * @return File|null
@@ -268,15 +273,15 @@ class EA_Document
      *
      * @return EA_Document
     */
-    public function setCredentialFile(File $pdf = null)
-    {
-        $this->CredentialFile = $pdf;
+              public function setCredentialFile(File $pdf = null)
+              {
+                $this->CredentialFile = $pdf;
 
-        if ($pdf) 
-            $this->updatedAt = new \DateTimeImmutable();
-        
-        return $this;
-    }
+                if ($pdf) 
+                    $this->updatedAt = new \DateTimeImmutable();
+
+                return $this;
+            }
 
     /**
      * @return File|null
@@ -291,15 +296,15 @@ class EA_Document
      *
      * @return EA_Document
     */
-    public function setLettreRecommendationFile(File $pdf = null)
-    {
-        $this->LettreRecommendationFile = $pdf;
+                  public function setLettreRecommendationFile(File $pdf = null)
+                  {
+                    $this->LettreRecommendationFile = $pdf;
 
-        if ($pdf) 
-            $this->updatedAt = new \DateTimeImmutable();
-        
-        return $this;
-    }
+                    if ($pdf) 
+                        $this->updatedAt = new \DateTimeImmutable();
+
+                    return $this;
+                }
 
     /**
      * @return File|null
@@ -314,15 +319,15 @@ class EA_Document
      *
      * @return EA_Document
     */
-    public function setLettreMotivationFile(File $pdf = null)
-    {
-        $this->LettreMotivationFile = $pdf;
+                  public function setLettreMotivationFile(File $pdf = null)
+                  {
+                    $this->LettreMotivationFile = $pdf;
 
-        if ($pdf) 
-            $this->updatedAt = new \DateTimeImmutable();
-        
-        return $this;
-    }
+                    if ($pdf) 
+                        $this->updatedAt = new \DateTimeImmutable();
+
+                    return $this;
+                }
 
     /**
      * @return File|null
