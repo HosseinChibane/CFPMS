@@ -4,6 +4,13 @@
 	Inscription Langue - {{ parent() }}
 {% endblock %}
 
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Home</a></li>
+        <li class="active">Inscription</li>
+    </ol>
+{% endblock %}
+
 {% block BackContent %} 
 	<div class="row">
 		<div class="col-md-12">
@@ -16,14 +23,15 @@
 				</div>
 			{% endif %}
 			<div class="form-group">
-				{{dump(form)}}
-				
+				{{ form_label(form.languePartenaire, 'Langue') }}
+				{{ form_errors(form.languePartenaire) }}
+				{{ form_widget(form.languePartenaire) }}
 
-				{{ form_label(form.personne.pays, 'Pays') }}
-				{{ form_errors(form.personne.pays) }}
-				{{ form_widget(form.personne.pays) }}
+				{{ form_label(form.pays, 'Pays') }}
+				{{ form_errors(form.pays) }}
+				{{ form_widget(form.pays) }}
 
-				{{ form_label(form.raisonsocial, 'Raison social') }}
+				{{ form_label(form.raisonsocial, 'Partenaire') }}
 				{{ form_errors(form.raisonsocial) }}
 				{{ form_widget(form.raisonsocial) }}
 			</div>

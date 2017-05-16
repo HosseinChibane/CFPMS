@@ -6,14 +6,21 @@
 {% endblock %}
 
 {% block FrontContent %}
+    <!-- Page Heading/Breadcrumbs -->
     <div class="row">
-        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
-           <a href="{{ path('dudeego_platform_showComparateur') }}">
-            <i class="glyphicon glyphicon-th-list"></i>Retour à la liste des universités</a>
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Détails 
+                <small>{% if listUniversite is defined %} {{ listUniversite.nometablissement }} {% endif %}</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('dudeego_platform_home') }}">Accueil</a></li>
+                <li><a href="{{ path('dudeego_platform_showComparateur') }}">Comparateur</a></li>
+                <li class="active">Comparer</li>
+            </ol>
         </div>
-        <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
-        </div>  
     </div>
+    <!-- /.row -->
 
     <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
@@ -21,7 +28,7 @@
                 {% if listFavUniversite is defined %}
                     {% for key, item in listFavUniversite %}
                         {% for subItem in item %}
-                            <a class="list-group-item" href="#{{ subItem.id }}"><i class="glyphicon glyphicon-chevron-right"></i>{{ subItem.nometablissement }} </a>
+                            <a class="list-group-item" href="#{{ subItem.id }}"><i class="glyphicon glyphicon-chevron-right"></i> {{ subItem.nometablissement }} </a>
                         {% endfor %}     
                     {% endfor %}
                 {% endif %}

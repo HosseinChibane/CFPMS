@@ -21,17 +21,7 @@ class EA_MoraleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('raisonsocial', EntityType::class, array(
-            'class' => 'DUDEEGOPlatformBundle:EA_Morale',
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('u')
-                ->orderBy('u.raisonsocial', 'ASC');
-            },
-            'choice_label' => 'raisonsocial',
-            'required'    => true,
-            'placeholder' => 'Choisir un partenaire',
-            'empty_data'  => null,
-            ))
+        ->add('raisonsocial')
         ->add('siret')
         ->add('fax')
         ->add('naf')
@@ -40,9 +30,9 @@ class EA_MoraleType extends AbstractType
 
         ->add('personne', EA_PersonneType::class)
 
-        ->add('langues', CollectionType::class, array(
-            'entry_type' => EA_LangueType::class
-            ))
+        ->add('langues')
+        
+        ->add('pays')
 
         ->add('rechercher', SubmitType::class, array(
             'attr' => array('class' => 'btn btn-primary'),

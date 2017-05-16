@@ -1,28 +1,23 @@
-  {% if listUniversite is defined %}
-    {% for rowUniversite in listUniversite %}
-      <tr>
-        <td>
-          <div style="float:left;">
-            {% for itemimage in rowUniversite.images %}
-              <img class="media-object img-rounded img-responsive"  src="{{ itemimage.url }}" alt="{{ itemimage.alt }}">
-            {% endfor %}
-          </div>
-          <div style="float:right;" id="nom-etablissement-{{ rowUniversite.id }}">
-            {{ rowUniversite.nometablissement }}
-          </div>  
-        </td>
-        <td>
-          {{ rowUniversite.description|slice(0, 50) ~ '...' }}
-        </td>
-        <td>
-          <div style="float:left;">
-            <a href="{{ path('dudeego_platform_detailsComparateur', { 'id' : rowUniversite.id } ) }}" ><span class="glyphicon glyphicon-cog"></span>Détails</a>
-          </div>
-          <div style="float:right;">
-            
-            <a  class="add_comparateur" href="#" data-id="{{ rowUniversite.id }}"> <span class="glyphicon glyphicon-plus"></span>Favoris</a>
-          </div>                
-        </td>
-      </tr>
-    {% endfor %}
-  {% endif %}
+{% if listUniversite is defined %}
+  {% for rowUniversite in listUniversite %}
+    <tr>
+      <td>
+        {{ rowUniversite.id }}
+      </td>
+      <td>
+        {% for itemimage in rowUniversite.images %}
+          <img class="media-object img-rounded img-responsive"  src="{{ itemimage.url }}" alt="{{ itemimage.alt }}">
+        {% endfor %}
+        {{ rowUniversite.nometablissement }}
+      </td>
+      <td>{{ rowUniversite.adresse.ville.commune }}</td>
+      <td>{{ rowUniversite.adresse.ville.pays.pays }}</td>
+      <td>1 €</td>
+      <td>Oui</td>
+      <td>
+        <a href="{{ path('dudeego_platform_detailsComparateur', { 'id' : rowUniversite.id } ) }}" ><span class="glyphicon glyphicon-cog"></span>Détails</a>
+        <a  class="add_comparateur" href="#" data-id="{{ rowUniversite.id }}"> <span class="glyphicon glyphicon-plus"></span>Favoris</a>
+      </td>
+    </tr>
+  {% endfor %}
+{% endif %}

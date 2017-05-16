@@ -1,9 +1,15 @@
 dudeego_platform_home:
     path:      /
     defaults: { _controller: DUDEEGOPlatformBundle:Front:index }
+
+
 dudeego_platform_accueil:
     path:      /Front/accueil
-    defaults: { _controller: DUDEEGOPlatformBundle:Front:accueil }    
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:showAccueil }    
+dudeego_platform_about:
+    path:      /Front/about
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:showAbout } 
+
 dudeego_platform_showComparateur:
     path:      /Front/comparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Front:showComparateur }
@@ -15,7 +21,7 @@ dudeego_platform_PanierComparateur:
     defaults: { _controller: DUDEEGOPlatformBundle:Front:PanierComparateur }
 dudeego_platform_comparerComparateur:
     path:      /Front/comparer
-    defaults: { _controller: DUDEEGOPlatformBundle:Front:comparerComparateur }
+    defaults: { _controller: DUDEEGOPlatformBundle:Front:comparerUniversite }
 dudeego_platform_filterComparateur:
     path:      /Front/filtercomparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Front:filterComparateur }
@@ -24,6 +30,7 @@ dudeego_platform_itemsComparateur:
     path:      /Front/itemsComparateur
     defaults: { _controller: DUDEEGOPlatformBundle:Front:itemsComparateur }
     methods: POST|GET
+
 dudeego_platform_voirJob:
     path:      /Front/job
     defaults: { _controller: DUDEEGOPlatformBundle:Front:job }
@@ -46,9 +53,16 @@ dudeego_platform_voirTest:
 dudeego_platform_abonne_monProfil:
     path:      /Back/monprofil/
     defaults: { _controller: DUDEEGOPlatformBundle:Back:monprofil }
+
 dudeego_platform_abonne_mesParametres:
     path:      /Back/mesparametres
     defaults: { _controller: DUDEEGOPlatformBundle:Back:mesparametres }
+dudeego_platform_abonne_mesParametresMDP:
+    path:      /Back/mesparametresMDP
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:mesparametresMDP }
+dudeego_platform_abonne_mesParametresMAIL:
+    path:      /Back/mesparametresMAIL
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:mesparametresMAIL }
 
 dudeego_platform_abonne_mesDemandes:
     path:      /Back/mesdemandes
@@ -102,9 +116,18 @@ dudeego_platform_abonne_logementStepsThree:
     path:      /Back/logementThree
     defaults: { _controller: DUDEEGOPlatformBundle:Back:logementTwo } 
 
-dudeego_platform_abonne_preparation:
-    path:      /Back/preparation
-    defaults: { _controller: DUDEEGOPlatformBundle:Back:preparation }    
+dudeego_platform_abonne_preparationStepsOne:
+    path:      /Back/preparationOne
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:preparationOne }    
+dudeego_platform_abonne_preparationStepsTwo:
+    path:      /Back/preparationTwo
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:preparationTwo } 
+dudeego_platform_abonne_preparationStepsThree:
+    path:      /Back/preparationThree
+    defaults: { _controller: DUDEEGOPlatformBundle:Back:preparationTwo } 
+
+  
+
 dudeego_platform_abonne_mutuelle:
     path:      /Back/mutuelle
     defaults: { _controller: DUDEEGOPlatformBundle:Back:mutuelle }       

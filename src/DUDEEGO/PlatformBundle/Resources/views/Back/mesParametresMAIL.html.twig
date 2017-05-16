@@ -1,0 +1,36 @@
+{% extends ":backend:sidebar.html.twig" %}
+
+{% block title %}
+  Mes Parametres - {{ parent() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Home</a></li>
+        <li class="active">Mes Paramètres</li>
+    </ol>
+{% endblock %}
+
+{% block BackContent %} 
+
+
+<!-- Mes Parametres -->
+{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+
+{% if not form.vars.valid %}
+  <div class="alert alert-error">
+    {{ form_errors(form) }}
+  </div>
+{% endif %}
+
+<div class="col-md-5">
+  <div class="form-group">
+    {{ form_widget(form) }}
+    <div>
+      <input type="submit" class="btn btn-primary" value="Enregistrer" /> {#value="{{ 'profile.edit.submit'|trans }}" #}
+    </div>
+    {{ form_end(form) }}
+  </div>
+</div>
+
+{% endblock %}

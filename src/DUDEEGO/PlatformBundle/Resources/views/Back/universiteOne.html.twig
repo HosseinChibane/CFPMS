@@ -4,6 +4,13 @@
     Inscription Université - {{ parent() }}
 {% endblock %}
 
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Home</a></li>
+        <li class="active">Inscription</li>
+    </ol>
+{% endblock %}
+
 {% block BackContent %} 
     <div class="row">
         <div class="col-md-12">
@@ -16,13 +23,13 @@
                 </div>
             {% endif %}
             <div class="form-group">
-                {{ form_label(form.formations.langues, 'Langue') }}
-                {{ form_errors(form.formations.langues) }}
-                {{ form_widget(form.formations.langues) }}
+                {{ form_label(form.langueUniversite, 'Langue') }}
+                {{ form_errors(form.langueUniversite) }}
+                {{ form_widget(form.langueUniversite) }}
 
-                {{ form_label(form.formations.formation, 'Formation') }}
-                {{ form_errors(form.formations.formation) }}
-                {{ form_widget(form.formations.formation) }}
+                {{ form_label(form.formation, 'Formation') }}
+                {{ form_errors(form.formation) }}
+                {{ form_widget(form.formation) }}
 
                 {{ form_label(form.nometablissement, 'Université') }}
                 {{ form_errors(form.nometablissement) }}
@@ -39,7 +46,7 @@
             {# Token CSRF #}
             {{ form_widget(form._token) }}
             
-            {{ form_end(form) }}
+            {{ form_end(form, {'render_rest': false}) }}
         </div>
     </div>
 {% endblock %}

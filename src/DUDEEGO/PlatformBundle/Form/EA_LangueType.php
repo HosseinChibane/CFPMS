@@ -20,18 +20,7 @@ class EA_LangueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('langue', EntityType::class, array(
-            'class' => 'DUDEEGOPlatformBundle:EA_Langue',
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('u')
-                ->orderBy('u.langue', 'ASC');
-            },
-            'choice_label' => 'langue',
-            'required'    => true,
-            'placeholder' => 'Choisir une langue',
-            'empty_data'  => null,
-            ))
-
+        ->add('langue')
         ->add('morale', EA_MoraleType::class)
         ;
     }

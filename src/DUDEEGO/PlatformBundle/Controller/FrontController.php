@@ -26,15 +26,20 @@ use DUDEEGO\PlatformBundle\Form\T_Search_UniversiteType;
 
 class FrontController extends Controller
 {
-	public function indexAction()
+	public function indexAction(Request $request)
 	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:index.html.twig');
+		return $this->render('DUDEEGOPlatformBundle:Front:comparateur.html.twig');
+	}
+
+	public function showAccueilAction()
+	{    
+		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:accueil.html.twig');
 		return new Response($content);
 	}
 
-	public function accueilAction()
+	public function showAboutAction()
 	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:accueil.html.twig');
+		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:about.html.twig');
 		return new Response($content);
 	}
 
@@ -46,7 +51,7 @@ class FrontController extends Controller
 		->getDoctrine()
 		->getManager()
 		->getRepository('DUDEEGOPlatformBundle:T_Universite')
-		->findAll();
+		->getAllUniversite();
 
 	    // get the cart from  the session
 		$session = $request->getSession();
@@ -58,14 +63,14 @@ class FrontController extends Controller
 				$em = $this->getDoctrine()->getEntityManager();
 				$listFavUniversite[] = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->findById($id);
 			}           
-			
+
 			if(isset($listFavUniversite)) {
 				return $this->render('DUDEEGOPlatformBundle:Front:comparateur.html.twig', array(
 					'form' => $form->createView(),
 					'listUniversite' => $listUniversite,
 					'listFavUniversite' => $listFavUniversite,
 					));
-				
+
 			} else {
 				return $this->render('DUDEEGOPlatformBundle:Front:comparateur.html.twig', array(
 					'form' => $form->createView(),
@@ -134,7 +139,7 @@ class FrontController extends Controller
 
 	}
 
-	public function comparerComparateurAction(Request $request)
+	public function comparerUniversiteAction(Request $request)
 	{
 		// get the cart from  the session
 		$session = $request->getSession();
@@ -189,8 +194,8 @@ class FrontController extends Controller
 			$langues = $request->get('langues');
 			$villes = $request->get('villes');
 			$pays =  $request->get('pays');
-			$nomuniversite =  $request->get('nomuniversite');
-
+			$pays =  $request->get('nomuniversite');
+			dump($formations);exit();
 			$listUniversite = $this
 			->getDoctrine()
 			->getManager()
@@ -207,11 +212,8 @@ class FrontController extends Controller
 				'data' => $data,
 				));
 		}
-		return $this->render('DUDEEGOPlatformBundle:Front:comparateur.html.twig', array(
-			'form' => $form->createView(),
-			));
 
-		/*if ($request->query->has($form->getName())) {
+		/*if ($form->isSubmitted() && $form->isValid()) {
             // manually bind values from the request
 			$form->submit($request->query->get($form->getName()));
 			$data = $form->getData();
@@ -225,58 +227,59 @@ class FrontController extends Controller
 			$listUniversite = $this
 			->getDoctrine()->getManager()->getRepository('DUDEEGOPlatformBundle:T_Universite')
 			->getUniversiteWithSearchAND($formations, $langues, $villes, $pays, $nomuniversite);
-		}*/
-	}
+		}
 
-	public function itemsComparateurAction(Request $request)
-	{
-		$elementComparer = array('1' => $request->get('id0') , '2' => $request->get('id1'), '3' => $request->get('id2') );
-		if(isset($elementComparer)) {
-			foreach ($elementComparer as $key => $value) {
-				$em = $this->getDoctrine()->getEntityManager();
-				$listFavUniversite[] = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->findById($value);
+		return $this->render('DUDEEGOPlatformBundle:Front:comparateur.html.twig', array(
+			'form' => $form->createView(),
+			));*/
+		}
+
+		public function itemsComparateurAction(Request $request)
+		{
+			$elementComparer = array('1' => $request->get('id0') , '2' => $request->get('id1'), '3' => $request->get('id2'), '4' => $request->get('id3'), '5' => $request->get('id4'), '6' => $request->get('id5'), '7' => $request->get('id6'), '8' => $request->get('id7'), '9' => $request->get('id8'), '10' => $request->get('id9') );
+
+			if(isset($elementComparer)) {
+				foreach ($elementComparer as $key => $value) {
+					$em = $this->getDoctrine()->getEntityManager();
+					$listFavUniversite[] = $em->getRepository('DUDEEGOPlatformBundle:T_Universite')->findById($value);
+				}
+			}
+
+			if(isset($listFavUniversite)) {
+				return $this->render('DUDEEGOPlatformBundle:Front:comparer.html.twig', array(
+					'listFavUniversite' => $listFavUniversite,
+					));
 			}
 		}
-		if(isset($listFavUniversite)) {
-			return $this->render('DUDEEGOPlatformBundle:Front:comparer.html.twig', array(
-				'listFavUniversite' => $listFavUniversite,
-				));
+
+		public function jobAction()
+		{    
+			$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:job.html.twig');
+			return new Response($content);
 		}
-	}
 
-	public function jobAction()
-	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:job.html.twig');
-		return new Response($content);
-	}
+		public function stageAction()
+		{    
+			$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:stage.html.twig');
+			return new Response($content);
+		}
 
-	public function stageAction()
-	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:stage.html.twig');
-		return new Response($content);
-	}
+		public function logementAction()
+		{    
+			$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:logement.html.twig');
+			return new Response($content);
+		}
 
-	public function logementAction()
-	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:logement.html.twig');
-		return new Response($content);
-	}
+		public function langueAction()
+		{    
+			$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:langue.html.twig');
+			return new Response($content);
+		}  
 
-	public function langueAction()
-	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:langue.html.twig');
-		return new Response($content);
-	}  
+		public function blogAction()
+		{    
+			$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:blog.html.twig');
+			return new Response($content);
+		}
 
-	public function blogAction()
-	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:blog.html.twig');
-		return new Response($content);
 	}
-
-	public function testAction()
-	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Front:test.html.twig');
-		return new Response($content);
-	}
-}

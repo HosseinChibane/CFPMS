@@ -5,6 +5,9 @@
 namespace DUDEEGO\PlatformBundle\Controller;
 
 use DUDEEGO\PlatformBundle\Entity\EA_FAQ;
+use DUDEEGO\PlatformBundle\Form\ContactType;
+
+use DUDEEGO\PlatformBundle\Form\InscriptionType;
 
 use DUDEEGO\PlatformBundle\Entity\EA_Personne;
 use DUDEEGO\PlatformBundle\Form\EA_PersonneType;
@@ -84,8 +87,6 @@ class BackController extends Controller
 		if ($form->isSubmitted() && $form->isValid()) {
 
 			$physique = $form->getData();
-			//dump($form->getData());exit();
-			
 			$em->persist($physique);
 			$em->flush();
 
@@ -99,7 +100,7 @@ class BackController extends Controller
 			));		
 	}
 
-	public function mesparametresAction(Request $request)
+	public function mesparametresMDPAction(Request $request)
 	{    
 
 		$user = $this->getUser();
@@ -111,7 +112,6 @@ class BackController extends Controller
 		$dispatcher = $this->get('event_dispatcher');
 
 		$event = new GetResponseUserEvent($user, $request);
-		$dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_INITIALIZE, $event);
 		$dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_INITIALIZE, $event);
 
 		if (null !== $event->getResponse()) {
@@ -131,23 +131,71 @@ class BackController extends Controller
 			$userManager = $this->get('fos_user.user_manager');
 
 			$event = new FormEvent($form, $request);
-			$dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
 			$dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_SUCCESS, $event);
 
 			$userManager->updateUser($user);
 
 			if (null === $response = $event->getResponse()) {
-				$url = $this->generateUrl('fos_user_profile_show');
+				$url = $this->generateUrl('dudeego_platform_abonne_mesParametresMDP');
 				$response = new RedirectResponse($url);
 			}
 			
-			$dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 			$dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
 			return $response;
 		}
 
-		return $this->render('DUDEEGOPlatformBundle:Back:mesparametres.html.twig', array(
+		return $this->render('DUDEEGOPlatformBundle:Back:mesparametresMDP.html.twig', array(
+			'form' => $form->createView(),
+			));
+	}
+
+	public function mesparametresMAILAction(Request $request)
+	{    
+
+		$user = $this->getUser();
+		if (!is_object($user) || !$user instanceof UserInterface) {
+			throw new AccessDeniedException('This user does not have access to this section.');
+		}
+
+		/** @var $dispatcher EventDispatcherInterface */
+		$dispatcher = $this->get('event_dispatcher');
+
+		$event = new GetResponseUserEvent($user, $request);
+		$dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_INITIALIZE, $event);
+
+		if (null !== $event->getResponse()) {
+			return $event->getResponse();
+		}
+
+		/** @var $formFactory FactoryInterface */
+		$formFactory = $this->get('fos_user.profile.form.factory');
+
+		$form = $formFactory->createForm();
+		$form->setData($user);
+
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted() && $form->isValid()) {
+			/** @var $userManager UserManagerInterface */
+			$userManager = $this->get('fos_user.user_manager');
+
+			$event = new FormEvent($form, $request);
+			$dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
+
+			$userManager->updateUser($user);
+
+			if (null === $response = $event->getResponse()) {
+				$url = $this->generateUrl('dudeego_platform_abonne_mesParametresMAIL');
+				$response = new RedirectResponse($url);
+			}
+
+			$dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+			return $response;
+		}
+
+		return $this->render('DUDEEGOPlatformBundle:Back:mesparametresMAIL.html.twig', array(
 			'form' => $form->createView(),
 			));
 	}
@@ -201,18 +249,21 @@ class BackController extends Controller
 
 	public function modifierdemandesAction(Request $request, EA_Demande_Inscription $eA_Demande_Inscription)
 	{    
+		if (isset($eA_Demande_Inscription)) {
+			$type = $eA_Demande_Inscription->getType();
+			$etat = $eA_Demande_Inscription->getEtat();
+		}
+		
 		$editForm = $this->createForm('DUDEEGO\PlatformBundle\Form\EA_Demande_InscriptionType', $eA_Demande_Inscription);
 		$editForm->handleRequest($request);
 
 		if ($editForm->isSubmitted() && $editForm->isValid()) {
-			
-			$em = $this->getDoctrine()->getManager();
-			$demande = $em->getRepository('DUDEEGOPlatformBundle:EA_Demande_Inscription')->findOneById($eA_Demande_Inscription->getId());
-			dump($demande);exit();
-			$eA_Demande_Inscription->setType($demande->getType());
-			$eA_Demande_Inscription->setEtat('en attente');
-			$this->getDoctrine()->getManager()->flush();
 
+			$eA_Demande_Inscription->setType($type);
+			$eA_Demande_Inscription->setEtat($etat);
+
+			$this->getDoctrine()->getManager()->flush();
+			$this->addFlash('notice','Modifcation bien enregistrée.');
 			return $this->redirectToRoute('dudeego_platform_abonne_modifierDemandes', array('id' => $eA_Demande_Inscription->getId()));
 		}
 
@@ -233,16 +284,47 @@ class BackController extends Controller
 	}
 
 	public function contactAction(Request $request)
-	{    
+	{
+        // Create the form according to the FormType created previously.
+        // And give the proper parameters
+		$form = $this->createForm('DUDEEGO\PlatformBundle\Form\ContactType',null,array(
+            // To set the action use $this->generateUrl('route_identifier')
+			'action' => $this->generateUrl('dudeego_platform_abonne_contact'),
+			'method' => 'POST'
+			));
+
+		if ($request->isMethod('POST')) {
+            // Refill the fields in case the form is not valid.
+			$form->handleRequest($request);
+
+			if($form->isValid()){
+                // Send mail
+				if($this->sendEmail($form->getData())){
+
+                    // Everything OK, redirect to wherever you want ! :
+					$this->addFlash('notice','Email envoyé.');
+					return $this->redirectToRoute('dudeego_platform_abonne_contact');
+				}else{
+                    // An error ocurred, handle
+					var_dump("Errooooor :(");
+				}
+			}
+		}
+
+		return $this->render('DUDEEGOPlatformBundle:Back:contact.html.twig', array(
+			'form' => $form->createView()
+			));
+	}
+
+	private function sendEmail($data){
+		
 		$message = \Swift_Message::newInstance()
-		->setSubject('Hello Email')
+		->setSubject($data["subject"])
 		->setFrom('dudeego.contact@gmail.com')
-		->setTo('chibanehossein@gmail.com')
-		->setBody('test body');
-
-		$this->get('mailer')->send($message);
-
-		return $this->render('DUDEEGOPlatformBundle:Back:contact.html.twig');
+		->setTo($data["email"])
+		->setBody($data["message"])
+		;
+		return $this->get('mailer')->send($message);
 	}
 
 	public function universiteOneAction(Request $request)
@@ -250,26 +332,25 @@ class BackController extends Controller
 		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
 
-		$form = $this->createform(T_UniversiteType::class);
+		$form = $this->createform(InscriptionType::class);
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
 
 				#recherche le PDF
-			if ($form->get('nometablissement')->getData()->getNomEtablissement() !== null) {
 					//$langue = $form->get('formations')->get('langues')->getData()->getLangue();
 					//$formation = $form->get('formations')->get('formation')->getData()->getFormation();
-				$nometablissement = $form->get('nometablissement')->getData()->getNomEtablissement();
-				$universiteId = $form->get('nometablissement')->getData()->getId();
 
-				$document = $em->getRepository('DUDEEGOPlatformBundle:T_Document_Universite')
-				->getDocumentIncription($universiteId);
+			$nometablissement = $form->get('nometablissement')->getData()->getNomEtablissement();
+			$universiteId = $form->get('nometablissement')->getData()->getId();
 
-				return $this->render('DUDEEGOPlatformBundle:Back:universiteTwo.html.twig', array(
-					'form' => $form->createView(),
-					'document' => $document,
-					));	
-			}
+			$document = $em->getRepository('DUDEEGOPlatformBundle:T_Document_Universite')
+			->getDocumentIncription($universiteId);
+
+			return $this->render('DUDEEGOPlatformBundle:Back:universiteTwo.html.twig', array(
+				'form' => $form->createView(),
+				'document' => $document,
+				));	
 		}
 
 		return $this->render('DUDEEGOPlatformBundle:Back:universiteOne.html.twig', array(
@@ -313,7 +394,7 @@ class BackController extends Controller
 		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
 
-		$form = $this->createform(EA_MoraleType::class);
+		$form = $this->createform(InscriptionType::class);
 		//dump($form);exit();
 		$form->handleRequest($request);
 
@@ -373,7 +454,7 @@ class BackController extends Controller
 		$user = $this->getUser();
 		$em = $this->getDoctrine()->getManager();
 
-		$form = $this->createform(T_UniversiteType::class);
+		$form = $this->createform(InscriptionType::class);
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
@@ -427,15 +508,65 @@ class BackController extends Controller
 			));
 	}
 
-	public function preparationAction()
+	public function preparationOneAction(Request $request)
 	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Back:preparation.html.twig');
-		return new Response($content);
-	}
+		$user = $this->getUser();
+		$em = $this->getDoctrine()->getManager();
 
-	public function mutuelleAction()
-	{    
-		$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Back:mutuelle.html.twig');
-		return new Response($content);
+		$form = $this->createform(InscriptionType::class);
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted() && $form->isValid()) {
+				#recherche le PDF
+			$typePreparation = $form->get('typePreparation')->getData();
+				$universiteId = 1; //$form->get('typePreparation')->getData()->getId();
+
+				$document = $em->getRepository('DUDEEGOPlatformBundle:T_Document_Universite')
+				->getDocumentIncription($universiteId);
+
+				return $this->render('DUDEEGOPlatformBundle:Back:preparationTwo.html.twig', array(
+					'form' => $form->createView(),
+					'document' => $document,
+					));	
+			}
+
+			return $this->render('DUDEEGOPlatformBundle:Back:preparationOne.html.twig', array(
+				'form' => $form->createView(),
+				));	
+		}
+
+		public function preparationTwoAction(Request $request)
+		{    
+			$eA_Demande_Inscription = new EA_Demande_Inscription();
+			$form = $this->createForm('DUDEEGO\PlatformBundle\Form\EA_Demande_InscriptionType', $eA_Demande_Inscription);
+			$form->handleRequest($request);
+
+			if ($form->isSubmitted() && $form->isValid()) {
+
+				$user = $this->getUser();
+				$em = $this->getDoctrine()->getManager();
+				$physique = $em->getRepository('DUDEEGOPlatformBundle:EA_Physique')->findOneById($user->getPhysique()->getId());
+				$eA_Demande_Inscription->setPhysique($physique);
+				$eA_Demande_Inscription->setType('preparation');
+				$eA_Demande_Inscription->setEtat('creation');
+
+			//dump($eA_Demande_Inscription);exit();
+
+				$em = $this->getDoctrine()->getManager();
+				$em->persist($eA_Demande_Inscription);
+				$em->flush();
+
+				return $this->redirectToRoute('dudeego_platform_abonne_mesDemandes');
+			}
+
+			return $this->render('DUDEEGOPlatformBundle:Back:preparationThree.html.twig', array(
+				'eA_Demande_Inscription' => $eA_Demande_Inscription,
+				'form' => $form->createView(),
+				));
+		}
+		public function mutuelleAction()
+		{    
+			$content = $this->get('templating')->render('DUDEEGOPlatformBundle:Back:mutuelle.html.twig');
+			return new Response($content);
+		}
 	}
-}

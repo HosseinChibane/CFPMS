@@ -5,11 +5,16 @@
     Mon Profil - {{ parent() }}
 {% endblock %}
 
-{% block BackContent %} 
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Home</a></li>
+        <li class="active">Mon Profil</li>
+    </ol>
+{% endblock %}
 
+{% block BackContent %} 
     <!-- Mon profil -->
     {{ form_start(form) }}
-
 
     {% if not form.vars.valid %}
         <div class="alert alert-error">
@@ -36,7 +41,6 @@
             {{ form_errors(form.personne.codepostal) }}
             {{ form_widget(form.personne.codepostal) }}
 
-
             {{ form_label(form.personne.pays, 'Pays') }}
             {{ form_errors(form.personne.pays) }}
             {{ form_widget(form.personne.pays) }}
@@ -44,7 +48,6 @@
             {{ form_label(form.personne.telephone, 'Téléphone fixe') }}
             {{ form_errors(form.personne.telephone) }}
             {{ form_widget(form.personne.telephone) }}
-
 
         </div>
     </div>
@@ -75,6 +78,7 @@
             {{ form_label(form.personne.gsm, 'Portable') }}
             {{ form_errors(form.personne.gsm) }}
             {{ form_widget(form.personne.gsm) }}
+            
         </div>
     </div>
 

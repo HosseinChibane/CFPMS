@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class T_Formation_UniversiteType extends AbstractType
 {
@@ -29,13 +30,7 @@ class T_Formation_UniversiteType extends AbstractType
             'empty_data'  => null,
             ))
         //->add('universite')
-        ->add('langues', EntityType::class, array(
-            'class' => 'DUDEEGOPlatformBundle:T_Langue_Universite',
-            'choice_label' => 'langue',
-            'required'    => false,
-            'placeholder' => 'Choisir une langue',
-            'empty_data'  => null,
-            ))
+        ->add('langues', T_Langue_UniversiteType::class)
         ;
     }
 
@@ -45,7 +40,7 @@ class T_Formation_UniversiteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => null // 'DUDEEGO\PlatformBundle\Entity\T_Formation_Universite'
+            'data_class' => 'DUDEEGO\PlatformBundle\Entity\T_Formation_Universite'
             ));
     }
 

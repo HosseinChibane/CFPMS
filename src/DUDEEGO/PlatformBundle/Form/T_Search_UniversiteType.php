@@ -6,11 +6,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\ResetType;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type as Filters;
 
@@ -27,93 +28,55 @@ class T_Search_UniversiteType extends AbstractType
             'required'    => false,
             'empty_data'  => null))
 
-        ->add('formations', ChoiceType::class, array(
-            'choices' => array(
-                'Kinésithérapeute' => 'Kinésithérapeute',
-                'Dentiste' => 'Dentiste',
-                'Psycologue' => 'Psycologue',
-                'Audioprothésiste' => 'Audioprothésiste',
-                'Biotechnologue' => 'Biotechnologue',
-                'Pharmacien' => 'Pharmacien',
-                'Médecin' => 'Médecin',
-                'Vétérinaire' => 'Vétérinaire',
-                'Infirmier' => 'Infirmier',
-                'Sciences et techniques des activités physiques et sportives' => 'Sciences et techniques des activités physiques et sportives',
-                'Podologie' => 'Podologie',
-                'Orthopédiste' => 'Orthopédiste',
-                'Science de la santé' => 'Science de la santé',
-                'Physiothérapie' => 'Physiothérapie',
-                'Prothésiste dentaire' => 'Prothésiste dentaire'
-                ),
+        ->add('formations', EntityType::class, array(
+            'class' => 'DUDEEGOPlatformBundle:T_Formation_Universite',
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                ->orderBy('u.formation', 'ASC');
+            },
+            'choice_label' => 'formation',
             'required'    => false,
             'placeholder' => 'Choisir une formation',
-            'empty_data'  => null))
+            'empty_data'  => null,
+            ))
 
-        ->add('langues', ChoiceType::class, array(
-            'choices' => array(
-                'Anglais' => 'Anglais',
-                'Espagnol' => 'Espagnol',
-                'Français' => 'Français'
-                ),
+        ->add('langues', EntityType::class, array(
+            'class' => 'DUDEEGOPlatformBundle:T_Langue_Universite',
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                ->orderBy('u.langue', 'ASC');
+            },
+            'choice_label' => 'langue',
             'required'    => false,
             'placeholder' => 'Choisir une langue',
-            'empty_data'  => null))
+            'empty_data'  => null,
+            ))
 
-        ->add('villes', ChoiceType::class, array(
-            'choices' => array(
-                'Madrid' => 'Madrid',
-                'Valencia' => 'Valencia',
-                'Santa Cruz de Tenerife' => 'Santa Cruz de Tenerife',
-                'Murcia' => 'Murcia',
-                'Barcelone' => 'Barcelone',
-                'Zaragoza' => 'Zaragoza',
-                'Ávila' => 'Ávila',
-                'Navarra' => 'Navarra',
-                'Sevilla' => 'Sevilla',
-                'Egkomi' => 'Egkomi',
-                'Budapest' => 'Budapest',
-                'Pécs' => 'Pécs',
-                'Szeged' => 'Szeged',
-                'Gödöllő' => 'Gödöllő',
-                'Differdange' => 'Differdange',
-                'CASABLANCA' => 'CASABLANCA',
-                'Gdańsk' => 'Gdańsk',
-                'KraKow' => 'KraKow',
-                'Łódź' => 'Łódź',
-                'Lublin' => 'Lublin',
-                'Poznan' => 'Poznan',
-                'Varsovie' => 'Varsovie',
-                'Wroclaw' => 'Wroclaw',
-                'Barcarena' => 'Barcarena',
-                'Almada' => 'Almada',
-                'București' => 'București',
-                'Constanta' => 'Constanta',
-                'lasi' => 'lasi',
-                'Timisoara' => 'Timisoara',
-                'Targu Mures' => 'Targu Mures',
-                'Arad' => 'Arad',
-                'Cluj-Napoca' => 'Cluj-Napoca',
-                'Oradea' => 'Oradea'
-                ),
+        ->add('villes', EntityType::class, array(
+            'class' => 'DUDEEGOPlatformBundle:T_Ville_Universite',
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                ->orderBy('u.commune', 'ASC');
+            },
+            'choice_label' => 'commune',
             'required'    => false,
             'placeholder' => 'Choisir une ville',
-            'empty_data'  => null))
+            'empty_data'  => null,
+            ))
 
-        ->add('pays', ChoiceType::class, array(
-            'choices' => array(
-                'Chypre' => 'Chypre',
-                'Espagne' => 'Espagne',
-                'Hongrie' => 'Hongrie',
-                'Maroc' => 'Maroc',
-                'Roumanie' => 'Roumanie',
-                'Pologne' => 'Pologne',
-                'Portugal' => 'Portugal'
-                ),
+        ->add('pays', EntityType::class, array(
+            'class' => 'DUDEEGOPlatformBundle:T_Pays_Universite',
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                ->orderBy('u.pays', 'ASC');
+            },
+            'choice_label' => 'pays',
             'required'    => false,
             'placeholder' => 'Choisir un pays',
-            'empty_data'  => null))
+            'empty_data'  => null,
+            ))
 
-        ->add('rechercher', SubmitType::class, array(
+        ->add('comparez', SubmitType::class, array(
             'attr' => array('class' => 'btn btn-primary'),
             ))
 
@@ -129,7 +92,6 @@ class T_Search_UniversiteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'csrf_protection' => false,
             'data_class' => 'DUDEEGO\PlatformBundle\Entity\T_Search_Universite'
             ));
 
@@ -140,7 +102,8 @@ class T_Search_UniversiteType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'dudeego_platformbundle_t_search_universite';
+        return 'dudeego_platform_filterComparateur';
+        //return 'dudeego_platformbundle_t_search_universite';
     }
 
 

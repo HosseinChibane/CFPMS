@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
 
 class T_Langue_UniversiteType extends AbstractType
 {
@@ -15,10 +16,20 @@ class T_Langue_UniversiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('langue')
+        ->add('langue', EntityType::class, array(
+            'class' => 'DUDEEGOPlatformBundle:T_Langue_Universite',
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                ->orderBy('u.langue', 'ASC');
+            },
+            'choice_label' => 'langue',
+            'required'    => false,
+            'placeholder' => 'Choisir une langue',
+            'empty_data'  => null,
+            ))
         //->add('formation')
-;
-}
+        ;
+    }
 
     /**
      * {@inheritdoc}

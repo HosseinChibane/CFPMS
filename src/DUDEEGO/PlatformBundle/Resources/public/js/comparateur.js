@@ -8,9 +8,9 @@
             
             $.ajax({
             beforeSend: function(){
-             $("#content_result").html('<tr><td> Chargement en cours...</td><td></td><td></td></tr>');
+             $("#content_result").html('<tr><td> Chargement en cours...</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
             },
-            url : "filtercomparateur",
+            url : "{{ path('dudeego_platform_filterComparateur') }}",
             method: "POST",
             data : {
                 'formations': formations,
@@ -27,13 +27,14 @@
                 $table = $('#universite').DataTable( {
                     paging: true,
                     responsive: true,
-                    searching: false
+                    searching: false,
+                    "lengthChange": false
                   } );
 
                 addInComparateur();
 
             }).fail(function() {
-                $("#content_result").html('<tr><td><span class="label label-danger">!</span> Erreur de chargement des resultats...</td><td></td><td></td></tr>');
+                $("#content_result").html('<tr><td><span class="label label-danger">!</span> Erreur de chargement des resultats...</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
             }); 
 
         }
@@ -41,11 +42,11 @@
         $("#dudeego_platformbundle_t_search_universite_rechercher").on('click',function(e) {
             e.preventDefault();
             loadResult(
-                $('#dudeego_platformbundle_t_search_universite_formations').val(),
-                $('#dudeego_platformbundle_t_search_universite_langues').val(),
-                $('#dudeego_platformbundle_t_search_universite_villes').val(),
-                $('#dudeego_platformbundle_t_search_universite_pays').val(),
-                $('#dudeego_platformbundle_t_search_universite_nomuniversite').val()
+                $('#dudeego_platform_filterComparateur_formations').val(),
+                $('#dudeego_platform_filterComparateur_langues').val(),
+                $('#dudeego_platform_filterComparateur_villes').val(),
+                $('#dudeego_platform_filterComparateur_pays').val(),
+                $('#dudeego_platform_filterComparateur_nomuniversite').val()
             );
         });
 
@@ -57,8 +58,8 @@
                 e.preventDefault();
 
                 var nbr = $("#comparateur-universites tr").length;
-                if (nbr>=3) {
-                    alert("Vous pouvez comparer uniquement que 3 universités !");
+                if (nbr>=10) {
+                    alert("Vous pouvez comparer uniquement que 10 universités !");
                     return;
                 }
 

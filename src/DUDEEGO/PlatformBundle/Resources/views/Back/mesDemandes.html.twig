@@ -4,6 +4,13 @@
     Mes Demandes - {{ parent() }}
 {% endblock %}
 
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Home</a></li>
+        <li class="active">Mes Demandes</li>
+    </ol>
+{% endblock %}
+
 {% block BackContent %} 
     <!-- Mes Demandes -->
     <div class="col-md-12">

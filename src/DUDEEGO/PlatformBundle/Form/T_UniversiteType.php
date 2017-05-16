@@ -61,7 +61,7 @@ class T_UniversiteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => null //'DUDEEGO\PlatformBundle\Entity\T_Universite'
+            'data_class' => 'DUDEEGO\PlatformBundle\Entity\T_Universite'
             ));
     }
 

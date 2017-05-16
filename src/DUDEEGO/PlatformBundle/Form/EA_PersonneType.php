@@ -24,17 +24,7 @@ class EA_PersonneType extends AbstractType
         ->add('rue')
         ->add('codepostal')
         ->add('ville')
-        ->add('pays', EntityType::class, array(
-            'class' => 'DUDEEGOPlatformBundle:EA_Personne',
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('u')
-                ->orderBy('u.pays', 'ASC');
-            },
-            'choice_label' => 'pays',
-            'required'    => true,
-            'placeholder' => 'Choisir un pays',
-            'empty_data'  => null,
-            ))
+        ->add('pays')
         ->add('gsm')
         ->add('telephone')
         ->add('courriel')

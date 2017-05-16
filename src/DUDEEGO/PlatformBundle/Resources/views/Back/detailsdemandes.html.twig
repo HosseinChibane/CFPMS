@@ -1,7 +1,15 @@
 {% extends ":backend:sidebar.html.twig" %}
 
 {% block title %}
-    Modifier Demandes - {{ parent() }}
+    Détails Demandes - {{ parent() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Home</a></li>
+        <li ><a href="{{ path('dudeego_platform_abonne_mesDemandes') }}">Mes Demandes</a></li>
+        <li class="active">Détails</li>
+    </ol>
 {% endblock %}
 
 {% block BackContent %} 
@@ -17,7 +25,9 @@
             </div>
             <div class="panel-footer">
                 <a class="btn btn-info" href="{{ path('dudeego_platform_abonne_mesDemandes') }}" role="button">Retour à la liste des demandes</a>
+                {#
                 <a class="btn btn-primary" href="{{ path('dudeego_platform_abonne_modifierDemandes', { 'id': eA_Demande_Inscription.id }) }}">Modifier</a>
+                #}
             </div>
         </div>
     </div>

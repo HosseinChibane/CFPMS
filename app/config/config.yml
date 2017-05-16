@@ -77,6 +77,8 @@ doctrine:
 swiftmailer:
     transport: '%mailer_transport%'
     host: '%mailer_host%'
+    port:       '%mailer_port%'
+    encryption: '%mailer_encryption%'
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
@@ -198,6 +200,12 @@ vich_uploader:
 #            - { path: '^/admin', stop: true }  # <-- add this line
 # Easy Admin Configuration            
 easy_admin:
+    list:
+        max_results: 30
+        actions:
+            - { name: 'show', icon: 'search', label: false }
+            - { name: 'edit', icon: 'pencil', label: false  }
+            - { name: 'delete', icon: 'trash', label: false }
     site_name: 'DUDEEGO PlatformAdmin.'
     design:
         form_theme: ['horizontal', 'VichUploaderBundle:Form:fields.html.twig']
@@ -205,30 +213,36 @@ easy_admin:
         color_scheme: 'light' #dark
         menu:
             - label: 'Front-End'
-              children: ['Universite', 'Adresse_Universite', 'Ville_Universite', 'Pays_Universite', 'Formation_Universite', 'Langue_Formation_Universite', 'Image_Universite']
+              children: ['Universite', 'Image', 'Adresse', 'Ville', 'Pays', 'Formation', 'Langue', 'Documents']
             - label: 'Back-End'
-              children: ['Personne', 'Etudiant', 'Entreprise', 'Utilisateur', 'Image', 'Demandes_Inscriptions', 'Documents_Inscriptions', 'Documents_Utilisateur']
+              children: ['Adresse', 'Etudiant', 'Entreprise','Langue', 'Utilisateur', 'Image', 'Demandes_Inscriptions', 'Documents_Inscriptions', 'Documents_Utilisateur', 'FAQ']
     entities:
         Universite:
             class: DUDEEGO\PlatformBundle\Entity\T_Universite
-#            form:
-#                fields:
-#                    - { property: 'description', type: 'ckeditor' }
-        Documents_Inscriptions_Universite:
+            form:
+                fields:
+                    - { property: 'nometablissement' }
+                    - { property: 'siteinternet' }
+                    - { property: 'description', type: 'ckeditor' }
+                    - { property: 'documents' }
+                    - { property: 'formations' }
+                    - { property: 'images' }
+                    - { property: 'adresse' }
+        Documents:
             class: DUDEEGO\PlatformBundle\Entity\T_Document_Universite
-        Adresse_Universite:
+        Adresse:
             class: DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite
-        Ville_Universite:
+        Ville:
             class: DUDEEGO\PlatformBundle\Entity\T_Ville_Universite
-        Pays_Universite:
+        Pays:
             class: DUDEEGO\PlatformBundle\Entity\T_Pays_Universite
-        Formation_Universite:
+        Formation:
             class: DUDEEGO\PlatformBundle\Entity\T_Formation_Universite
-        Langue_Formation_Universite:
+        Langue:
             class: DUDEEGO\PlatformBundle\Entity\T_Langue_Universite
-        Image_Universite:
+        Image:
             class: DUDEEGO\PlatformBundle\Entity\T_Image_Universite
-        Personne:
+        Adresse:
             class: DUDEEGO\PlatformBundle\Entity\EA_Personne
         Etudiant:
             class: DUDEEGO\PlatformBundle\Entity\EA_Physique

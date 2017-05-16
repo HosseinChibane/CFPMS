@@ -1,63 +1,65 @@
 {% extends ":backend:sidebar.html.twig" %}
 
 {% block title %}
-	Aide - {{ parent() }}
+	Contact - {{ parent() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Home</a></li>
+        <li class="active">Contact</li>
+    </ol>
 {% endblock %}
 
 {% block BackContent %}
-	<!-- Page Content -->
-	<div class="container">
-
-		<!-- Content Row -->
+	<!-- Content Row -->
+	<div class="row">
+		<!-- Contact Form -->
 		<div class="row">
-			
-			<!-- Contact Form -->
-			<!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
-			<div class="row">
-				<div class="col-md-8">
-					<h3>Contacter nous</h3>
-					{#<form name="sentMessage" id="contactForm" novalidate>#}
-					<form  action="{{ path("dudeego_platform_abonne_contact") }}" method="POST">
-						<div class="control-group form-group">
-							<div class="controls">
-								<label>Nom</label>
-								<input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">
-								<p class="help-block"></p>
-							</div>
-						</div>
-						<div class="control-group form-group">
-							<div class="controls">
-								<label>Téléphone</label>
-								<input type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number.">
-							</div>
-						</div>
-						<div class="control-group form-group">
-							<div class="controls">
-								<label>Email</label>
-								<input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address.">
-							</div>
-						</div>
-						<div class="control-group form-group">
-							<div class="controls">
-								<label>Message</label>
-								<textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
-							</div>
-						</div>
-						<div id="success"></div>
-						<!-- For success/fail messages -->
-						<button type="submit" class="btn btn-primary">Envoyer</button>
-					</form>
+			<div class="col-md-10">
+				<h3>Contactez nous</h3>
+				{{ form_start(form) }}
+				<div class="control-group form-group">
+					<div class="controls">
+						<label>Sujet</label>
+						{{ form_widget(form.subject) }}
+						{{ form_errors(form.subject) }}
+					</div>
 				</div>
-
+				<div class="control-group form-group">
+					<div class="controls">
+						<label>Nom</label>
+						{{ form_widget(form.name) }}
+						{{ form_errors(form.name) }}
+					</div>
+				</div>
+				<div class="control-group form-group">
+					<div class="controls">
+						<label>Email</label>
+						{{ form_widget(form.email) }}
+						{{ form_errors(form.email) }}
+					</div>
+				</div>
+				<div class="control-group form-group">
+					<div class="controls">
+						<label>Message</label>
+						{{ form_widget(form.message) }}
+						{{ form_errors(form.message) }}
+					</div>
+				</div>
+				{# Render CSRF token etc .#}
+				<div style="display:none">
+					{{ form_rest(form) }}
+				</div>
+				{% for flash_message in app.session.flashBag.get('notice') %}
+					<div class="flash-notice">
+						{{ flash_message }}
+					</div>
+				{% endfor %}
+				<input class="btn btn-primary" type="submit" value="Envoyer">
+				{{ form_end(form) }}
 			</div>
 		</div>
 		<!-- /.row -->
-
-
-		<!-- Contact Form JavaScript -->
-		<!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
-		{#
-		<script src="{{ asset('bundles/dudeegoplatform/js/jqBootstrapValidation.js') }}"></script>
-		<script src="{{ asset('bundles/dudeegoplatform/js/contact_me.js') }}"></script>
-		#}
+	</div>
 	{% endblock %}

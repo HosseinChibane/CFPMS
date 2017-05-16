@@ -10,6 +10,20 @@ namespace DUDEEGO\PlatformBundle\Repository;
  */
 class T_UniversiteRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function getAllUniversite()
+	{
+		$qb = $this
+		->createQueryBuilder('u')
+		->leftJoin('u.formations', 'for')
+		->leftJoin('for.langues', 'lan')
+		->leftJoin('u.adresse', 'adr')
+		->leftJoin('adr.ville', 'vil')
+		->leftJoin('vil.pays', 'pay')
+		;
+
+		return $qb->getQuery()->getResult();
+	}
+
 	public function getUniversiteWithSearchAND( $formations,  $langues,  $villes,  $pays,  $nomuniversite)
 	{
 		$qb = $this

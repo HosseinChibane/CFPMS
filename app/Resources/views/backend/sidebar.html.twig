@@ -16,11 +16,13 @@
                     <h1 class="page-header">Espace Abonné
                         <small></small>
                     </h1>
-                    <ol class="breadcrumb">
-                        <liclass="active"><a href="#">Home</a>
-                    </li>
-                    <li></li>
-                </ol>
+                    {% block breadcrumb %}
+                        <ol class="breadcrumb">
+                            <li class="active">Home
+                        </li>
+                        <li></li>
+                    </ol>
+                {% endblock %}
             </div>
         </div>
         <!-- /.row -->
@@ -31,7 +33,11 @@
             <div class="col-md-3">
                 <div class="list-group">
                     <a href="{{ path('dudeego_platform_abonne_monProfil') }}" class="list-group-item">Mon Profil</a>
-                    <a href="{{ path('dudeego_platform_abonne_mesParametres') }}" class="list-group-item">Mes Paramètres</a>
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#sl" data-parent="#menu">Mes Paramètres</a>
+                    <div id="sl" class="sublinks collapse">
+                        <a href="{{ path('dudeego_platform_abonne_mesParametresMAIL') }}" class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> Changer d'email</a>
+                        <a href="{{ path('dudeego_platform_abonne_mesParametresMDP') }}" class="list-group-item small"><span class="glyphicon glyphicon-chevron-right"></span> Changer de mot de passe</a>
+                    </div>
                     <a href="{{ path('dudeego_platform_abonne_mesDocuments') }}" class="list-group-item">Mes Documents</a>
                     <a href="{{ path('dudeego_platform_abonne_mesDemandes') }}" class="list-group-item">Mes Demandes</a>
                 </div>
@@ -39,11 +45,11 @@
                     <a href="{{ path('dudeego_platform_abonne_universiteStepsOne') }}" class="list-group-item">Inscription Universitaire</a>
                     <a href="{{ path('dudeego_platform_abonne_langueStepsOne') }}" class="list-group-item">Inscription cours de langue</a>
                     <a href="{{ path('dudeego_platform_abonne_logementStepsOne') }}" class="list-group-item">Inscription logement</a>
-                    <a href="{{ path('dudeego_platform_abonne_preparation') }}" class="list-group-item">Inscription cours préparation</a>
+                    <a href="{{ path('dudeego_platform_abonne_preparationStepsOne') }}" class="list-group-item">Inscription cours préparation</a>
                     <a href="{{ path('dudeego_platform_abonne_mutuelle') }}" class="list-group-item">Inscription mutuelle</a>
                 </div>
                 <div class="list-group">
-                    <a href="{{ path('dudeego_platform_abonne_aide') }}" class="list-group-item">FAQ</a>
+                    <a href="{{ path('dudeego_platform_abonne_aide') }}" class="list-group-item">Aide</a>
                     <a href="{{ path('dudeego_platform_abonne_contact') }}" class="list-group-item">Contact</a>
                 </div>
                 <div class="list-group">

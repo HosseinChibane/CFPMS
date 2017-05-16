@@ -1,13 +1,21 @@
 {% extends ":backend:sidebar.html.twig" %}
 
 {% block title %}
-    Détails Demandes - {{ parent() }}
+    Modifier Demandes - {{ parent() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Home</a></li>
+        <li ><a href="{{ path('dudeego_platform_abonne_mesDemandes') }}">Mes Demandes</a></li>
+        <li class="active">Modifier</li>
+    </ol>
 {% endblock %}
 
 {% block BackContent %} 
     <!-- Détails Demandes -->
     <div class="col-md-12">
-        <h1>Modification de la demande</h1>
+        <h1>Modification de la demande n°{{ eA_Demande_Inscription.id }} :</h1>
 
         {{ form_start(edit_form) }}
 
@@ -18,6 +26,12 @@
         {% endif %}
 
         <div class="form-group">
+            {{ form_label(edit_form.type, 'Type d\'Inscription') }}
+            {{ form_widget(edit_form.type, { 'attr':{'disabled':'disabled'} }) }}
+
+            {{ form_label(edit_form.etat, 'Etat de l\'Inscription') }}
+            {{ form_widget(edit_form.etat, { 'attr':{'disabled':'disabled'} }) }}
+
             {{ form_label(edit_form.documentinscription.nom, 'Document d\'Inscription') }}
             {{ form_widget(edit_form.documentinscription.nom) }}
         </div>
@@ -33,15 +47,20 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <a class="btn btn-info" href="{{ path('dudeego_platform_abonne_mesDemandes') }}" role="button">Retour à la liste des demandes</a>
-                    {{ form_widget(edit_form.documentinscription.Enregistrer) }}
-                </div>
+                 {% for flash_message in app.session.flashBag.get('notice') %}
+                    <div class="flash-notice">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+                <a class="btn btn-info" href="{{ path('dudeego_platform_abonne_mesDemandes') }}" role="button">Retour à la liste des demandes</a>
+                {{ form_widget(edit_form.documentinscription.Enregistrer) }}
             </div>
         </div>
-
-        {# Token CSRF #}
-        {{ form_widget(edit_form._token) }}
-
-        {{ form_end(edit_form, {'render_rest': false }) }}
     </div>
+
+    {# Token CSRF #}
+    {{ form_widget(edit_form._token) }}
+
+    {{ form_end(edit_form, {'render_rest': false }) }}
+</div>
 {% endblock %}
