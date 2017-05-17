@@ -19,7 +19,7 @@ class EA_Demande_InscriptionType extends AbstractType
         $builder
         ->add('type', TextType::class)
         ->add('etat', TextType::class)
-        //->add('physique', EA_PhysiqueType::class)
+        ->add('physique', EA_PhysiqueType::class)
         ->add('documentinscription', EA_Document_InscriptionType::class)
         ;
     }

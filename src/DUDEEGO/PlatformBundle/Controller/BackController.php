@@ -324,6 +324,7 @@ class BackController extends Controller
 		->setTo($data["email"])
 		->setBody($data["message"])
 		;
+		
 		return $this->get('mailer')->send($message);
 	}
 
@@ -373,11 +374,22 @@ class BackController extends Controller
 			$eA_Demande_Inscription->setType('universite');
 			$eA_Demande_Inscription->setEtat('creation');
 
-			//dump($eA_Demande_Inscription);exit();
-
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($eA_Demande_Inscription);
 			$em->flush();
+
+			$email = $user->getEmail();
+			$utilisateur = $user->getUserName();
+			$typeInscription = $eA_Demande_Inscription->getType();
+
+			$message = \Swift_Message::newInstance();
+			$message->setSubject('Inscription à ' . $eA_Demande_Inscription->getType());
+			$message->setFrom('dudeego.contact@gmail.com');
+			$message->setTo($email);
+			$message->setBody('Information : l\'utilisateur '. $utilisateur . ' souhaite s\'inscrire à ' . $typeInscription);
+			//$message->attach(Swift_Attachment::fromPath('my-document.pdf'));
+			//dump($message);exit();
+			$this->get('mailer')->send($message);
 
 			return $this->redirectToRoute('dudeego_platform_abonne_mesDemandes');
 		}

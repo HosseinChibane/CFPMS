@@ -21,12 +21,12 @@ class EA_Document_InscriptionType extends AbstractType
         $builder
         ->add('nom', TextType::class, array(
             'attr' => array('class' => 'form-control'),
-            'required'    => true,
-            'empty_data'  => null))
+            'required'    => false,
+            'empty_data'  => 'null'))
         ->add('pdfName', TextType::class, array(
             'attr' => array('class' => 'form-control'),
             'required'    => false,
-            'empty_data'  => null))
+            'empty_data'  => 'null'))
         ->add('pdfFile', VichFileType::class, [
             'label' => 'Choissisez un document...',
             'required' => false,
