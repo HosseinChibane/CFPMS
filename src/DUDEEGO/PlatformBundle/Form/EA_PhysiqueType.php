@@ -36,19 +36,19 @@ class EA_PhysiqueType extends AbstractType
 
         ->add('personne', EA_PersonneType::class)
 
-        ->add('image', EA_ImageType::class)
+        //->add('image', EA_ImageType::class)
 
         ->add('documents', CollectionType::class, array(
             'entry_type' => EA_DocumentType::class,
             'allow_add' => true,
-            'allow_delete' => true,
+            'allow_delete' => false,
             'by_reference' => false,
             ))
 
         ->add('demandes', CollectionType::class, array(
             'entry_type' => EA_Demande_InscriptionType::class,
             'allow_add' => true,
-            'allow_delete' => true,
+            'allow_delete' => false,
             'by_reference' => false,
             ))
         

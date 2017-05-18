@@ -10,12 +10,10 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type as Filters;
 
-class T_Search_UniversiteType extends AbstractType
+class Search_UniversiteType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -26,7 +24,7 @@ class T_Search_UniversiteType extends AbstractType
         ->add('nomuniversite', SearchType::class, array(
             'attr' => array('class' => 'form-control'),
             'required'    => false,
-            'empty_data'  => null))
+            'empty_data'  => ''))
 
         ->add('formations', EntityType::class, array(
             'class' => 'DUDEEGOPlatformBundle:T_Formation_Universite',
@@ -37,7 +35,7 @@ class T_Search_UniversiteType extends AbstractType
             'choice_label' => 'formation',
             'required'    => false,
             'placeholder' => 'Choisir une formation',
-            'empty_data'  => null,
+            'empty_data'  => '',
             ))
 
         ->add('langues', EntityType::class, array(
@@ -49,7 +47,7 @@ class T_Search_UniversiteType extends AbstractType
             'choice_label' => 'langue',
             'required'    => false,
             'placeholder' => 'Choisir une langue',
-            'empty_data'  => null,
+            'empty_data'  => '',
             ))
 
         ->add('villes', EntityType::class, array(
@@ -61,7 +59,7 @@ class T_Search_UniversiteType extends AbstractType
             'choice_label' => 'commune',
             'required'    => false,
             'placeholder' => 'Choisir une ville',
-            'empty_data'  => null,
+            'empty_data'  => '',
             ))
 
         ->add('pays', EntityType::class, array(
@@ -73,7 +71,7 @@ class T_Search_UniversiteType extends AbstractType
             'choice_label' => 'pays',
             'required'    => false,
             'placeholder' => 'Choisir un pays',
-            'empty_data'  => null,
+            'empty_data'  => '',
             ))
 
         ->add('comparez', SubmitType::class, array(
@@ -92,10 +90,9 @@ class T_Search_UniversiteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'DUDEEGO\PlatformBundle\Entity\T_Search_Universite'
-            ));
-
-        }
+           'error_bubbling' => true
+           ));
+    }
 
     /**
      * {@inheritdoc}
@@ -103,7 +100,6 @@ class T_Search_UniversiteType extends AbstractType
     public function getBlockPrefix()
     {
         return 'dudeego_platform_filterComparateur';
-        //return 'dudeego_platformbundle_t_search_universite';
     }
 
 

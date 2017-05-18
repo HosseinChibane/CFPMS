@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 03 Mai 2017 à 06:59
+-- Généré le :  Jeu 18 Mai 2017 à 15:23
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -28,16 +28,57 @@ USE `dudeego`;
 -- Structure de la table `e_a__demande__inscription`
 --
 
-CREATE TABLE `e_a__demande__inscription` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `e_a__demande__inscription`;
+CREATE TABLE IF NOT EXISTS `e_a__demande__inscription` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `physique_id` int(11) NOT NULL,
-  `typeinscription_id` int(11) DEFAULT NULL,
-  `documentinscription_id` int(11) NOT NULL,
+  `documentinscription_id` int(11) DEFAULT NULL,
   `etat` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `creation` datetime NOT NULL,
-  `miseajour` datetime NOT NULL,
-  `verifier` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_8E069C48D553BD36` (`documentinscription_id`),
+  KEY `IDX_8E069C4853D0E798` (`physique_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Vider la table avant d'insérer `e_a__demande__inscription`
+--
+
+TRUNCATE TABLE `e_a__demande__inscription`;
+--
+-- Contenu de la table `e_a__demande__inscription`
+--
+
+INSERT INTO `e_a__demande__inscription` (`id`, `physique_id`, `documentinscription_id`, `etat`, `type`) VALUES
+(1, 2, 3, 'creation', 'universite'),
+(2, 2, 4, 'creation', 'langue'),
+(3, 2, 5, 'creation', 'universite'),
+(4, 2, 6, 'creation', 'universite'),
+(5, 2, 7, 'creation', 'logement'),
+(6, 2, 8, 'en cours de validation', 'universite'),
+(7, 2, 9, 'creation', 'universite'),
+(8, 2, 10, 'creation', 'universite'),
+(9, 2, 11, 'creation', 'preparation'),
+(10, 2, 12, 'creation', 'universite'),
+(11, 2, 13, 'creation', 'universite'),
+(12, 2, 14, 'creation', 'universite'),
+(13, 2, 15, 'creation', 'universite'),
+(14, 2, 16, 'creation', 'universite'),
+(15, 2, 17, 'creation', 'universite'),
+(16, 2, 18, 'creation', 'universite'),
+(17, 2, 19, 'creation', 'universite'),
+(18, 2, 20, 'creation', 'universite'),
+(19, 2, 21, 'creation', 'universite'),
+(20, 2, 22, 'creation', 'universite'),
+(21, 2, 23, 'creation', 'universite'),
+(22, 2, 24, 'creation', 'universite'),
+(23, 2, 25, 'creation', 'universite'),
+(24, 2, 26, 'creation', 'universite'),
+(25, 2, 27, 'creation', 'universite'),
+(26, 2, 28, 'creation', 'universite'),
+(27, 2, 29, 'creation', 'universite'),
+(28, 2, 30, 'creation', 'universite'),
+(29, 2, 31, 'creation', 'universite');
 
 -- --------------------------------------------------------
 
@@ -45,19 +86,33 @@ CREATE TABLE `e_a__demande__inscription` (
 -- Structure de la table `e_a__document`
 --
 
-CREATE TABLE `e_a__document` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `e_a__document`;
+CREATE TABLE IF NOT EXISTS `e_a__document` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `physique_id` int(11) NOT NULL,
-  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `prenom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `contenu` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `alt` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `creation` datetime NOT NULL,
-  `miseajour` datetime NOT NULL,
-  `verifier` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `passeport_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updated_at` datetime NOT NULL,
+  `carte_identite_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `bulletin_note_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bac_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `credential_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lettre_recommendation_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lettre_motivation_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_9BA2A53753D0E798` (`physique_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Vider la table avant d'insérer `e_a__document`
+--
+
+TRUNCATE TABLE `e_a__document`;
+--
+-- Contenu de la table `e_a__document`
+--
+
+INSERT INTO `e_a__document` (`id`, `physique_id`, `passeport_name`, `updated_at`, `carte_identite_name`, `bulletin_note_name`, `bac_name`, `credential_name`, `lettre_recommendation_name`, `lettre_motivation_name`) VALUES
+(1, 1, '5911df79c0a7b_Modelo do Pré-requisito.pdf', '2017-05-10 08:05:58', 'default.png', 'default.png', '5912c9e62329a_3729.png', 'default.png', 'default.png', 'default.png');
 
 -- --------------------------------------------------------
 
@@ -65,12 +120,87 @@ CREATE TABLE `e_a__document` (
 -- Structure de la table `e_a__document__inscription`
 --
 
-CREATE TABLE `e_a__document__inscription` (
-  `id` int(11) NOT NULL,
-  `physique_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `e_a__document__inscription`;
+CREATE TABLE IF NOT EXISTS `e_a__document__inscription` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `alt` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `pdf_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Vider la table avant d'insérer `e_a__document__inscription`
+--
+
+TRUNCATE TABLE `e_a__document__inscription`;
+--
+-- Contenu de la table `e_a__document__inscription`
+--
+
+INSERT INTO `e_a__document__inscription` (`id`, `nom`, `pdf_name`, `updated_at`) VALUES
+(3, 'doc', '59197893c1be1_3729.png', '2017-05-15 09:44:51'),
+(4, 'nope', NULL, NULL),
+(5, 'mademande', NULL, NULL),
+(6, 'nope', NULL, NULL),
+(7, 'nope', NULL, NULL),
+(8, 'pasencorefait', NULL, NULL),
+(9, 'prepa', NULL, NULL),
+(10, 'test', NULL, NULL),
+(11, 'test', NULL, NULL),
+(12, 'null', 'null', NULL),
+(13, 'null', 'null', NULL),
+(14, 'null', 'null', NULL),
+(15, 'null', 'null', NULL),
+(16, 'null', 'null', NULL),
+(17, 'null', 'null', NULL),
+(18, 'null', 'null', NULL),
+(19, 'null', 'null', NULL),
+(20, 'null', 'null', NULL),
+(21, 'null', 'null', NULL),
+(22, 'null', 'null', NULL),
+(23, 'null', 'null', NULL),
+(24, 'null', 'null', NULL),
+(25, 'null', 'null', NULL),
+(26, 'null', 'null', NULL),
+(27, 'null', 'null', NULL),
+(28, 'null', 'null', NULL),
+(29, 'null', 'null', NULL),
+(30, 'null', 'null', NULL),
+(31, 'null', 'null', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `e_a__f_a_q`
+--
+
+DROP TABLE IF EXISTS `e_a__f_a_q`;
+CREATE TABLE IF NOT EXISTS `e_a__f_a_q` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `question` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `reponse` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Vider la table avant d'insérer `e_a__f_a_q`
+--
+
+TRUNCATE TABLE `e_a__f_a_q`;
+--
+-- Contenu de la table `e_a__f_a_q`
+--
+
+INSERT INTO `e_a__f_a_q` (`id`, `question`, `reponse`) VALUES
+(1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit?', 'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.'),
+(2, 'Curabitur eget leo at velit imperdiet varius. In eu ipsum vitae velit congue iaculis vitae at risus?', 'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.'),
+(3, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit?', 'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.'),
+(4, 'Curabitur eget leo at velit imperdiet varius. In eu ipsum vitae velit congue iaculis vitae at risus?', 'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.'),
+(5, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit?', 'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.'),
+(6, 'Curabitur eget leo at velit imperdiet varius. In eu ipsum vitae velit congue iaculis vitae at risus?', 'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.'),
+(7, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit?', 'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.'),
+(8, 'Curabitur eget leo at velit imperdiet varius. In eu ipsum vitae velit congue iaculis vitae at risus?', 'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.');
 
 -- --------------------------------------------------------
 
@@ -78,11 +208,54 @@ CREATE TABLE `e_a__document__inscription` (
 -- Structure de la table `e_a__image`
 --
 
-CREATE TABLE `e_a__image` (
-  `id` int(11) NOT NULL,
-  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `alt` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `e_a__image`;
+CREATE TABLE IF NOT EXISTS `e_a__image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `image_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `image_size` int(11) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Vider la table avant d'insérer `e_a__image`
+--
+
+TRUNCATE TABLE `e_a__image`;
+--
+-- Contenu de la table `e_a__image`
+--
+
+INSERT INTO `e_a__image` (`id`, `image_name`, `image_size`, `updated_at`) VALUES
+(1, '591209690ab2f_0021e128dofl2r6t.jpg', NULL, '2017-05-09 18:24:41'),
+(5, '591b286030b5d_3729.png', NULL, '2017-05-16 16:27:12');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `e_a__langue`
+--
+
+DROP TABLE IF EXISTS `e_a__langue`;
+CREATE TABLE IF NOT EXISTS `e_a__langue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `morale_id` int(11) NOT NULL,
+  `langue` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_320D6FAD338B5CE8` (`morale_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Vider la table avant d'insérer `e_a__langue`
+--
+
+TRUNCATE TABLE `e_a__langue`;
+--
+-- Contenu de la table `e_a__langue`
+--
+
+INSERT INTO `e_a__langue` (`id`, `morale_id`, `langue`) VALUES
+(1, 1, 'Francais');
 
 -- --------------------------------------------------------
 
@@ -90,17 +263,31 @@ CREATE TABLE `e_a__image` (
 -- Structure de la table `e_a__morale`
 --
 
-CREATE TABLE `e_a__morale` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `e_a__morale`;
+CREATE TABLE IF NOT EXISTS `e_a__morale` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `personne_id` int(11) DEFAULT NULL,
   `raisonsocial` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `siret` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `fax` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `naf` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `datecreation` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `alt` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `siret` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fax` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `naf` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `alt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_C3233FE4A21BD112` (`personne_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Vider la table avant d'insérer `e_a__morale`
+--
+
+TRUNCATE TABLE `e_a__morale`;
+--
+-- Contenu de la table `e_a__morale`
+--
+
+INSERT INTO `e_a__morale` (`id`, `personne_id`, `raisonsocial`, `siret`, `fax`, `naf`, `url`, `alt`) VALUES
+(1, 5, 'Alten SIR', NULL, NULL, 'Alten SIR', NULL, 'Alten SIR');
 
 -- --------------------------------------------------------
 
@@ -108,24 +295,33 @@ CREATE TABLE `e_a__morale` (
 -- Structure de la table `e_a__personne`
 --
 
-CREATE TABLE `e_a__personne` (
-  `id` int(11) NOT NULL,
-  `numero` int(11) NOT NULL,
-  `rue` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `codepostal` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `ville` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `pays` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `gsm` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `telephone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `courriel` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `e_a__personne`;
+CREATE TABLE IF NOT EXISTS `e_a__personne` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `numero` int(11) DEFAULT NULL,
+  `rue` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `codepostal` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ville` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pays` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `gsm` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telephone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `courriel` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Vider la table avant d'insérer `e_a__personne`
+--
+
+TRUNCATE TABLE `e_a__personne`;
 --
 -- Contenu de la table `e_a__personne`
 --
 
 INSERT INTO `e_a__personne` (`id`, `numero`, `rue`, `codepostal`, `ville`, `pays`, `gsm`, `telephone`, `courriel`) VALUES
-(1, 2, 'Rue des tisserands', '76770', '(Le) Houlme', 'France', '0616353468', '0616353468', 'chibanehossein@gmail.com');
+(1, 2, 'Rue des tisserands', '76770', '(Le) Houlme', 'France', '0616353468', '0616353468', 'chibanehossein@gmail.com'),
+(4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'dudeego.contact@gmail.com'),
+(5, 221, 'Boulevard Jean Jaures', '92100', 'Boulogne Bilancourt', 'France', NULL, '01 46 08 70 00', 'contact@altensir.fr');
 
 -- --------------------------------------------------------
 
@@ -133,34 +329,32 @@ INSERT INTO `e_a__personne` (`id`, `numero`, `rue`, `codepostal`, `ville`, `pays
 -- Structure de la table `e_a__physique`
 --
 
-CREATE TABLE `e_a__physique` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `e_a__physique`;
+CREATE TABLE IF NOT EXISTS `e_a__physique` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `personne_id` int(11) DEFAULT NULL,
   `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `prenom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `datenaissance` datetime NOT NULL,
-  `numerocarteid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `image_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `datenaissance` datetime DEFAULT NULL,
+  `numerocarteid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_DC3207A6A21BD112` (`personne_id`),
+  UNIQUE KEY `UNIQ_DC3207A63DA5256D` (`image_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Vider la table avant d'insérer `e_a__physique`
+--
+
+TRUNCATE TABLE `e_a__physique`;
 --
 -- Contenu de la table `e_a__physique`
 --
 
 INSERT INTO `e_a__physique` (`id`, `personne_id`, `nom`, `prenom`, `datenaissance`, `numerocarteid`, `image_id`) VALUES
-(1, 1, 'CHIBANE', 'Hossein', '2017-01-01 00:00:00', 'test', NULL);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `e_a__type__inscription`
---
-
-CREATE TABLE `e_a__type__inscription` (
-  `id` int(11) NOT NULL,
-  `libelle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+(1, 1, 'CHIBANE', 'Hossein', '2017-01-01 00:00:00', 'test', 1),
+(2, 4, 'Admin', 'Admin', '2017-05-16 00:00:00', '123', 5);
 
 -- --------------------------------------------------------
 
@@ -168,8 +362,9 @@ CREATE TABLE `e_a__type__inscription` (
 -- Structure de la table `fos_user`
 --
 
-CREATE TABLE `fos_user` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `fos_user`;
+CREATE TABLE IF NOT EXISTS `fos_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `physique_id` int(11) NOT NULL,
   `username` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
   `username_canonical` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
@@ -181,15 +376,26 @@ CREATE TABLE `fos_user` (
   `last_login` datetime DEFAULT NULL,
   `confirmation_token` varchar(180) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password_requested_at` datetime DEFAULT NULL,
-  `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_957A647992FC23A8` (`username_canonical`),
+  UNIQUE KEY `UNIQ_957A6479A0D96FBF` (`email_canonical`),
+  UNIQUE KEY `UNIQ_957A6479C05FB297` (`confirmation_token`),
+  KEY `IDX_957A647953D0E798` (`physique_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Vider la table avant d'insérer `fos_user`
+--
+
+TRUNCATE TABLE `fos_user`;
 --
 -- Contenu de la table `fos_user`
 --
 
 INSERT INTO `fos_user` (`id`, `physique_id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 1, 'test1', 'test1', 'chibanehossein@gmail.com', 'chibanehossein@gmail.com', 1, NULL, '$2y$13$1Sq1Un48bfMo6oUShAoFXOWlfvP.9WsypTWV/0bACTQ52pZIBOyb2', '2017-05-02 13:19:05', NULL, NULL, 'a:1:{i:0;s:9:"ROLE_USER";}');
+(1, 1, 'test1', 'test1', 'chibanehossein@gmail.com', 'chibanehossein@gmail.com', 1, NULL, '$2y$13$idfasSO01.guFrA1m65ET.7D1FxSgvUAqR/0cWo.pHv9heqQ7D/hC', '2017-05-12 10:35:13', NULL, NULL, 'a:1:{i:0;s:9:"ROLE_USER";}'),
+(2, 2, 'adminuser', 'adminuser', 'dudeego.contact@gmail.com', 'dudeego.contact@gmail.com', 1, NULL, '$2y$13$.CI2VEAJKLnwT/E3/nIn.e.TmZATByOJhjspxj/iKnquHIoCyZnQO', '2017-05-18 12:59:12', NULL, NULL, 'a:2:{i:0;s:9:"ROLE_USER";i:1;s:10:"ROLE_ADMIN";}');
 
 -- --------------------------------------------------------
 
@@ -197,13 +403,21 @@ INSERT INTO `fos_user` (`id`, `physique_id`, `username`, `username_canonical`, `
 -- Structure de la table `t__adresse__universite`
 --
 
-CREATE TABLE `t__adresse__universite` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `t__adresse__universite`;
+CREATE TABLE IF NOT EXISTS `t__adresse__universite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `ville_id` int(11) NOT NULL,
   `numero` int(11) DEFAULT NULL,
-  `rue` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `rue` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_86296BDFA73F0036` (`ville_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Vider la table avant d'insérer `t__adresse__universite`
+--
+
+TRUNCATE TABLE `t__adresse__universite`;
 --
 -- Contenu de la table `t__adresse__universite`
 --
@@ -226,7 +440,7 @@ INSERT INTO `t__adresse__universite` (`id`, `ville_id`, `numero`, `rue`) VALUES
 (39, 15, 6, 'Diogenous'),
 (40, 16, NULL, 'Bethlen Gábor tér'),
 (41, 17, NULL, 'Műegyetem rakpart. 3-9. Bldg 116'),
-(42, 18, NULL, ''),
+(42, 18, NULL, 'Dohány u. 1-3'),
 (43, 19, 2, 'Dugonics tér'),
 (44, 20, 1, 'Páter Károly u.'),
 (45, 21, NULL, 'L-, 50 Avenue du Parc des Sports, 4671 '),
@@ -246,8 +460,36 @@ INSERT INTO `t__adresse__universite` (`id`, `ville_id`, `numero`, `rue`) VALUES
 (79, 35, 2, 'Piața Eftimie Murgu'),
 (80, 36, 38, 'Strada Gheorghe Marinescu '),
 (81, 37, 94, 'Bulevardul Revoluției'),
-(82, 38, NULL, ''),
+(82, 38, NULL, 'Cluj-Napoca'),
 (83, 39, NULL, 'Campus Universita');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `t__document__universite`
+--
+
+DROP TABLE IF EXISTS `t__document__universite`;
+CREATE TABLE IF NOT EXISTS `t__document__universite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `universite_id` int(11) NOT NULL,
+  `pdf_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_62DE32FA2A52F05F` (`universite_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Vider la table avant d'insérer `t__document__universite`
+--
+
+TRUNCATE TABLE `t__document__universite`;
+--
+-- Contenu de la table `t__document__universite`
+--
+
+INSERT INTO `t__document__universite` (`id`, `universite_id`, `pdf_name`, `updated_at`) VALUES
+(1, 2, 'Valencia solicitud admission', '2017-05-10 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -255,12 +497,20 @@ INSERT INTO `t__adresse__universite` (`id`, `ville_id`, `numero`, `rue`) VALUES
 -- Structure de la table `t__formation__universite`
 --
 
-CREATE TABLE `t__formation__universite` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `t__formation__universite`;
+CREATE TABLE IF NOT EXISTS `t__formation__universite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `formation` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `universite_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `universite_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_69F4D6342A52F05F` (`universite_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Vider la table avant d'insérer `t__formation__universite`
+--
+
+TRUNCATE TABLE `t__formation__universite`;
 --
 -- Contenu de la table `t__formation__universite`
 --
@@ -384,14 +634,22 @@ INSERT INTO `t__formation__universite` (`id`, `formation`, `universite_id`) VALU
 -- Structure de la table `t__image__universite`
 --
 
-CREATE TABLE `t__image__universite` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `t__image__universite`;
+CREATE TABLE IF NOT EXISTS `t__image__universite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `universite_id` int(11) DEFAULT NULL,
   `libelle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `alt` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `alt` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_207771F82A52F05F` (`universite_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Vider la table avant d'insérer `t__image__universite`
+--
+
+TRUNCATE TABLE `t__image__universite`;
 --
 -- Contenu de la table `t__image__universite`
 --
@@ -407,12 +665,20 @@ INSERT INTO `t__image__universite` (`id`, `universite_id`, `libelle`, `url`, `al
 -- Structure de la table `t__langue__universite`
 --
 
-CREATE TABLE `t__langue__universite` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `t__langue__universite`;
+CREATE TABLE IF NOT EXISTS `t__langue__universite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `langue` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `formation_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `formation_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_8F8174E65200282E` (`formation_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Vider la table avant d'insérer `t__langue__universite`
+--
+
+TRUNCATE TABLE `t__langue__universite`;
 --
 -- Contenu de la table `t__langue__universite`
 --
@@ -451,21 +717,28 @@ INSERT INTO `t__langue__universite` (`id`, `langue`, `formation_id`) VALUES
 -- Structure de la table `t__pays__universite`
 --
 
-CREATE TABLE `t__pays__universite` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `t__pays__universite`;
+CREATE TABLE IF NOT EXISTS `t__pays__universite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pays` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Vider la table avant d'insérer `t__pays__universite`
+--
+
+TRUNCATE TABLE `t__pays__universite`;
 --
 -- Contenu de la table `t__pays__universite`
 --
 
-INSERT INTO `t__pays__universite` (`id`, `nom`) VALUES
+INSERT INTO `t__pays__universite` (`id`, `pays`) VALUES
 (1, 'Espagne'),
 (2, 'Chypre'),
 (3, 'Hongrie'),
 (4, 'Luxembourg'),
-(5, 'Marox'),
+(5, 'Maroc'),
 (6, 'Pologne'),
 (7, 'Portugal'),
 (8, 'Roumanie');
@@ -476,29 +749,44 @@ INSERT INTO `t__pays__universite` (`id`, `nom`) VALUES
 -- Structure de la table `t__search__universite`
 --
 
-CREATE TABLE `t__search__universite` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `t__search__universite`;
+CREATE TABLE IF NOT EXISTS `t__search__universite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `formations` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `langues` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `villes` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `pays` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `nomuniversite` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `nomuniversite` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Vider la table avant d'insérer `t__search__universite`
+--
+
+TRUNCATE TABLE `t__search__universite`;
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `t__universite`
 --
 
-CREATE TABLE `t__universite` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `t__universite`;
+CREATE TABLE IF NOT EXISTS `t__universite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nometablissement` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `siteinternet` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
-  `adresse_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `adresse_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_87610DDA4DE7DC5C` (`adresse_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Vider la table avant d'insérer `t__universite`
+--
+
+TRUNCATE TABLE `t__universite`;
 --
 -- Contenu de la table `t__universite`
 --
@@ -550,14 +838,22 @@ INSERT INTO `t__universite` (`id`, `nometablissement`, `siteinternet`, `descript
 -- Structure de la table `t__ville__universite`
 --
 
-CREATE TABLE `t__ville__universite` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `t__ville__universite`;
+CREATE TABLE IF NOT EXISTS `t__ville__universite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `pays_id` int(11) NOT NULL,
   `codepostal` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `commune` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `region` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `region` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_96A3DE36A6E44244` (`pays_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Vider la table avant d'insérer `t__ville__universite`
+--
+
+TRUNCATE TABLE `t__ville__universite`;
 --
 -- Contenu de la table `t__ville__universite`
 --
@@ -600,222 +896,9 @@ INSERT INTO `t__ville__universite` (`id`, `pays_id`, `codepostal`, `commune`, `r
 (35, 8, '300041\r\n\r\n', 'Timisoara\r\n', ''),
 (36, 8, '5401389', 'Targu Mures\r\n', ''),
 (37, 8, 'Arad\r\n', '', ''),
-(38, 8, 'Cluj-Napoca\r\n', '', ''),
-(39, 8, 'Oradea', '', '');
+(38, 8, '400xxx', 'Cluj-Napoca', 'la vallée du Someșul Mic'),
+(39, 8, '410100', 'Oradea', 'Transylvanie');
 
---
--- Index pour les tables exportées
---
-
---
--- Index pour la table `e_a__demande__inscription`
---
-ALTER TABLE `e_a__demande__inscription`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_8E069C488211AE88` (`typeinscription_id`),
-  ADD KEY `IDX_8E069C4853D0E798` (`physique_id`),
-  ADD KEY `IDX_8E069C48D553BD36` (`documentinscription_id`);
-
---
--- Index pour la table `e_a__document`
---
-ALTER TABLE `e_a__document`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_9BA2A53753D0E798` (`physique_id`);
-
---
--- Index pour la table `e_a__document__inscription`
---
-ALTER TABLE `e_a__document__inscription`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_50737E6953D0E798` (`physique_id`);
-
---
--- Index pour la table `e_a__image`
---
-ALTER TABLE `e_a__image`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `e_a__morale`
---
-ALTER TABLE `e_a__morale`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_C3233FE4A21BD112` (`personne_id`);
-
---
--- Index pour la table `e_a__personne`
---
-ALTER TABLE `e_a__personne`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `e_a__physique`
---
-ALTER TABLE `e_a__physique`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_DC3207A6A21BD112` (`personne_id`),
-  ADD UNIQUE KEY `UNIQ_DC3207A63DA5256D` (`image_id`);
-
---
--- Index pour la table `e_a__type__inscription`
---
-ALTER TABLE `e_a__type__inscription`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `fos_user`
---
-ALTER TABLE `fos_user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_957A647992FC23A8` (`username_canonical`),
-  ADD UNIQUE KEY `UNIQ_957A6479A0D96FBF` (`email_canonical`),
-  ADD UNIQUE KEY `UNIQ_957A6479C05FB297` (`confirmation_token`),
-  ADD KEY `IDX_957A647953D0E798` (`physique_id`);
-
---
--- Index pour la table `t__adresse__universite`
---
-ALTER TABLE `t__adresse__universite`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_86296BDFA73F0036` (`ville_id`);
-
---
--- Index pour la table `t__formation__universite`
---
-ALTER TABLE `t__formation__universite`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_69F4D6342A52F05F` (`universite_id`);
-
---
--- Index pour la table `t__image__universite`
---
-ALTER TABLE `t__image__universite`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_207771F82A52F05F` (`universite_id`);
-
---
--- Index pour la table `t__langue__universite`
---
-ALTER TABLE `t__langue__universite`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_8F8174E65200282E` (`formation_id`);
-
---
--- Index pour la table `t__pays__universite`
---
-ALTER TABLE `t__pays__universite`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `t__search__universite`
---
-ALTER TABLE `t__search__universite`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `t__universite`
---
-ALTER TABLE `t__universite`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_87610DDA4DE7DC5C` (`adresse_id`);
-
---
--- Index pour la table `t__ville__universite`
---
-ALTER TABLE `t__ville__universite`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_96A3DE36A6E44244` (`pays_id`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `e_a__demande__inscription`
---
-ALTER TABLE `e_a__demande__inscription`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `e_a__document`
---
-ALTER TABLE `e_a__document`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `e_a__document__inscription`
---
-ALTER TABLE `e_a__document__inscription`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `e_a__image`
---
-ALTER TABLE `e_a__image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `e_a__morale`
---
-ALTER TABLE `e_a__morale`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `e_a__personne`
---
-ALTER TABLE `e_a__personne`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT pour la table `e_a__physique`
---
-ALTER TABLE `e_a__physique`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT pour la table `e_a__type__inscription`
---
-ALTER TABLE `e_a__type__inscription`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `fos_user`
---
-ALTER TABLE `fos_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT pour la table `t__adresse__universite`
---
-ALTER TABLE `t__adresse__universite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
---
--- AUTO_INCREMENT pour la table `t__formation__universite`
---
-ALTER TABLE `t__formation__universite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
---
--- AUTO_INCREMENT pour la table `t__image__universite`
---
-ALTER TABLE `t__image__universite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT pour la table `t__langue__universite`
---
-ALTER TABLE `t__langue__universite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
---
--- AUTO_INCREMENT pour la table `t__pays__universite`
---
-ALTER TABLE `t__pays__universite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT pour la table `t__search__universite`
---
-ALTER TABLE `t__search__universite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `t__universite`
---
-ALTER TABLE `t__universite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
---
--- AUTO_INCREMENT pour la table `t__ville__universite`
---
-ALTER TABLE `t__ville__universite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- Contraintes pour les tables exportées
 --
@@ -825,7 +908,6 @@ ALTER TABLE `t__ville__universite`
 --
 ALTER TABLE `e_a__demande__inscription`
   ADD CONSTRAINT `FK_8E069C4853D0E798` FOREIGN KEY (`physique_id`) REFERENCES `e_a__physique` (`id`),
-  ADD CONSTRAINT `FK_8E069C488211AE88` FOREIGN KEY (`typeinscription_id`) REFERENCES `e_a__type__inscription` (`id`),
   ADD CONSTRAINT `FK_8E069C48D553BD36` FOREIGN KEY (`documentinscription_id`) REFERENCES `e_a__document__inscription` (`id`);
 
 --
@@ -835,10 +917,10 @@ ALTER TABLE `e_a__document`
   ADD CONSTRAINT `FK_9BA2A53753D0E798` FOREIGN KEY (`physique_id`) REFERENCES `e_a__physique` (`id`);
 
 --
--- Contraintes pour la table `e_a__document__inscription`
+-- Contraintes pour la table `e_a__langue`
 --
-ALTER TABLE `e_a__document__inscription`
-  ADD CONSTRAINT `FK_50737E6953D0E798` FOREIGN KEY (`physique_id`) REFERENCES `e_a__physique` (`id`);
+ALTER TABLE `e_a__langue`
+  ADD CONSTRAINT `FK_320D6FAD338B5CE8` FOREIGN KEY (`morale_id`) REFERENCES `e_a__morale` (`id`);
 
 --
 -- Contraintes pour la table `e_a__morale`
@@ -864,6 +946,12 @@ ALTER TABLE `fos_user`
 --
 ALTER TABLE `t__adresse__universite`
   ADD CONSTRAINT `FK_86296BDFA73F0036` FOREIGN KEY (`ville_id`) REFERENCES `t__ville__universite` (`id`);
+
+--
+-- Contraintes pour la table `t__document__universite`
+--
+ALTER TABLE `t__document__universite`
+  ADD CONSTRAINT `FK_62DE32FA2A52F05F` FOREIGN KEY (`universite_id`) REFERENCES `t__universite` (`id`);
 
 --
 -- Contraintes pour la table `t__formation__universite`

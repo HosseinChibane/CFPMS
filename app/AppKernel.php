@@ -17,7 +17,7 @@ class AppKernel extends Kernel
         #new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(), # https://github.com/KnpLabs/KnpPaginatorBundle --> Install and No Config
         #new Mremi\ContactBundle\MremiContactBundle(), #  https://github.com/mremi/ContactBundle --> no version for Symfony v3.2.7
         #new Knp\Bundle\MenuBundle\KnpMenuBundle(), # https://github.com/KnpLabs/KnpMenuBundle --> Install and No Config
-        new Avanzu\AdminThemeBundle\AvanzuAdminThemeBundle(), # https://github.com/avanzu/AdminThemeBundle -->  Install and No Config
+        #new Avanzu\AdminThemeBundle\AvanzuAdminThemeBundle(), # https://github.com/avanzu/AdminThemeBundle -->  Install and No Config
         new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(), # https://github.com/lexik/LexikFormFilterBundle --> Install and Config
         new Symfony\Bundle\AsseticBundle\AsseticBundle(), # https://github.com/symfony/assetic-bundle --> Install and Config
         new Oneup\FlysystemBundle\OneupFlysystemBundle(), # https://github.com/1up-lab/OneupFlysystemBundle/blob/master/Resources/doc/index.md

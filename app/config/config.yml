@@ -212,9 +212,9 @@ easy_admin:
         brand_color: 'blue' # any color or rgb
         color_scheme: 'light' #dark
         menu:
-            - label: 'Front-End'
+            - label: 'Gestion Universite'
               children: ['Universite', 'Image', 'Adresse', 'Ville', 'Pays', 'Formation', 'Langue', 'Documents']
-            - label: 'Back-End'
+            - label: 'Gestion Utilisateur'
               children: ['Adresse', 'Etudiant', 'Entreprise','Langue', 'Utilisateur', 'Image', 'Demandes_Inscriptions', 'Documents_Inscriptions', 'Documents_Utilisateur', 'FAQ']
     entities:
         Universite:
