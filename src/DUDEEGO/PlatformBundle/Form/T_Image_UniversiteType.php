@@ -29,7 +29,8 @@ class T_Image_UniversiteType extends AbstractType
 
         ->add('imageSize')
         ->add('updatedAt')
-        //->add('universite', T_UniversiteType::class);
+        ->add('universite', T_UniversiteType::class)
+        ;
     }
     
     /**

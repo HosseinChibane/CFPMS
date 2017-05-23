@@ -20,15 +20,6 @@ class T_UniversiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('type', ChoiceType::class, array(
-            'choices' => array(
-                'Campus' => 'Campus',
-                'Partenaire' => 'Partenaire'
-                ),
-            'required'    => true,
-            'placeholder' => 'Choisir un type de logement',
-            'empty_data'  => null))
-
         ->add('nometablissement', EntityType::class, array(
             'class' => 'DUDEEGOPlatformBundle:T_Universite',
             'query_builder' => function (EntityRepository $er) {
@@ -40,9 +31,19 @@ class T_UniversiteType extends AbstractType
             'placeholder' => 'Choisir un établissement',
             'empty_data'  => null,
             ))
-        //->add('siteinternet')
-        //->add('description')
-        //->add('adresse', T_Adresse_UniversiteType::class)
+        ->add('siteinternet')
+        ->add('description')
+        ->add('longetitude')
+        ->add('latitude')
+        ->add('telephone')
+        ->add('classement')
+        ->add('bourse')
+        ->add('montantbourse')
+        ->add('logement')
+        ->add('partenaire')
+        ->add('type')
+        ->add('taille')
+        ->add('adresse', T_Adresse_UniversiteType::class)
         ->add('formations', T_Formation_UniversiteType::class)
         
         ->add('rechercher', SubmitType::class, array(

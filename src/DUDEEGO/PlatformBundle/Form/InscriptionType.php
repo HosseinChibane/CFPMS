@@ -23,6 +23,15 @@ class InscriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+        ->add('type', ChoiceType::class, array(
+            'choices' => array(
+                'Campus' => 'Campus',
+                'Partenaire' => 'Partenaire'
+                ),
+            'required'    => true,
+            'placeholder' => 'Choisir un type de logement',
+            'empty_data'  => null))
+        
         ->add('languePartenaire', EntityType::class, array(
             'class' => 'DUDEEGOPlatformBundle:EA_Langue',
             'query_builder' => function (EntityRepository $er) {

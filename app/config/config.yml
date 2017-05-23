@@ -185,8 +185,8 @@ vich_uploader:
         users_images:
             namer:              vich_uploader.namer_origname
             uri_prefix:         '%app.path.users_images%'
-            upload_destination: '%kernel.root_dir%/../web/users/image'            
-            inject_on_load:     false
+            upload_destination: '%kernel.root_dir%/../web/users/images'            
+            inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true
         universites_images:

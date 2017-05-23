@@ -29,7 +29,13 @@ class T_Formation_UniversiteType extends AbstractType
             'placeholder' => 'Choisir une formation',
             'empty_data'  => null,
             ))
-        //->add('universite')
+        ->add('prix')
+        ->add('salaire')
+        ->add('tauxembauche')
+        ->add('tauxreussite')
+        ->add('concours')
+        ->add('niveau')
+        ->add('universite', T_UniversiteType::class)
         ->add('langues', T_Langue_UniversiteType::class)
         ;
     }

@@ -71,37 +71,39 @@
         <th>Nom de l'établissement</th>
         <th>Ville</th>
         <th>Pays</th>
-        <th>Prix</th>
         <th>Bourse</th>
+        <th>Montant</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody id="content_result">
       {% if listUniversite is defined %}
-        {{dump(listUniversite)}}
         {% for rowUniversite in listUniversite %}
           <tr>
             <td>
               {{ rowUniversite.classement }}
             </td>
             <td>
-             <img class="media-object img-rounded img-responsive"src="{{ vich_uploader_asset(rowUniversite.images, 'imageFile' )  | imagine_filter('my_thumb') }}" alt="{{ rowUniversite.images.imageName }}" />
              <div id="nom-etablissement-{{ rowUniversite.id}}">
               {{ rowUniversite.nometablissement }}
             </div>  
           </td>
           <td>{{ rowUniversite.adresse.ville.commune }}</td>
           <td>{{ rowUniversite.adresse.ville.pays.pays }}</td>
-          <td>{{ rowUniversite.formations.prix }}</td>
-          <td>{{ rowUniversite.bourse }}</td>
-          <td>
-            <a href="{{ path('dudeego_platform_detailsComparateur', { 'id' : rowUniversite.id } ) }}" ><span class="glyphicon glyphicon-cog"></span>Détails</a>
-            <a  class="add_comparateur" href="#" data-id="{{ rowUniversite.id }}"> <span class="glyphicon glyphicon-plus"></span>Favoris</a>
-          </td>
-        </tr>
-      {% endfor %}
-    {% endif %}
-  </tbody>
+          {% if rowUniversite.bourse %}
+            <td>Oui</td>
+          {% else %}
+           <td>Non</td>
+         {% endif %}
+         <td>{{ rowUniversite.montantbourse }}</td>
+         <td>
+          <a href="{{ path('dudeego_platform_detailsComparateur', { 'id' : rowUniversite.id } ) }}" ><span class="glyphicon glyphicon-cog"></span>Détails</a>
+          <a  class="add_comparateur" href="#" data-id="{{ rowUniversite.id }}"> <span class="glyphicon glyphicon-plus"></span>Favoris</a>
+        </td>
+      </tr>
+    {% endfor %}
+  {% endif %}
+</tbody>
 </table>
 </div>
 <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
