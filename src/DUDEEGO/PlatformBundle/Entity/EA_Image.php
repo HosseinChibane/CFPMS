@@ -34,6 +34,10 @@ class EA_Image
     private $imageName;
 
     /**
+     * @Assert\File(
+     *     maxSize="200k",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     * )
      * @Vich\UploadableField(mapping="users_images", fileNameProperty="imageName", size="imageSize")
      * 
      * @var File

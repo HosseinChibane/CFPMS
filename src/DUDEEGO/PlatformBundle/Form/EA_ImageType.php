@@ -16,12 +16,16 @@ class EA_ImageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('imageFile', VichImageType::class, [
+        $builder
+        ->add('imageName', TextType::class)
+
+        ->add('imageFile', VichImageType::class, [
             'label' => 'Choissisez une image...',
             'required' => false,
-            'allow_delete' => true, // optional, default is true
-            'download_link' => true, // optional, default is true
+            'allow_delete' => false, // optional, default is true
+            'download_link' => false, // optional, default is true
             ])
+
         ->add('upload', SubmitType::class, array(
             'attr' => array('class' => 'btn btn-primary'),
             ))

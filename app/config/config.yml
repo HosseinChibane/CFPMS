@@ -7,7 +7,8 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
-    app.path.users_images: /users/image
+    app.path.users_images: /users/images
+    app.path.universites_images: /universites/images
     app.path.users_pdf: /users/pdf
     app.path.universites_pdf: /universites/pdf
     app.path.demandes_pdf: /demandes/pdf
@@ -82,6 +83,25 @@ swiftmailer:
     port: '%mailer_port%'
     encryption: '%mailer_encryption%'
     spool: { type: memory }
+
+# LiipImageBundle Configuration
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
+    filter_sets:
+        cache: ~
+        my_thumb:
+            # adjust the image quality
+            quality: 100
+            # list of transformations to apply (the "filters")
+            filters:
+                # create a thumbnail: set size to 120x90 and use the "outbound" mode
+                # to crop the image when the size ratio of the input differs
+                thumbnail: { size: [260, 260], mode: outbound }
+                # create a 2px black border: center the thumbnail on a black background
+                # 4px larger to create a 2px border around the final image
+                #background: { size: [124, 94], position: center, color: '#000000' }
 
 # LexikFormFilter Configuration
 lexik_form_filter:
@@ -169,6 +189,13 @@ vich_uploader:
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
+        universites_images:
+            namer:              vich_uploader.namer_origname
+            uri_prefix:         '%app.path.universites_images%'
+            upload_destination: '%kernel.root_dir%/../web/universites/images'            
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
         users_pdf:
             namer:              vich_uploader.namer_origname
             uri_prefix:         '%app.path.users_pdf%'
@@ -212,18 +239,50 @@ easy_admin:
         brand_color: 'blue' # any color or rgb
         color_scheme: 'light' #dark
         menu:
-            - label: 'Gestion Universite'
-              children: ['Universite', 'Image', 'Adresse', 'Ville', 'Pays', 'Formation', 'Langue', 'Documents']
-            - label: 'Gestion Utilisateur'
-              children: ['Adresse', 'Etudiant', 'Entreprise','Langue', 'Utilisateur', 'Image', 'Demandes_Inscriptions', 'Documents_Inscriptions', 'Documents_Utilisateur', 'FAQ']
+            - label: 'Gestion Université'
+              children: ['Universite', 'Image']
+            - label: 'Gestion Coordonnées Université'
+              children: ['Adresse', 'Ville', 'Pays']
+            - label: 'Gestion Formations Université'
+              children: ['Formation', 'Langue']
+            - label: 'Gestion Documents Université'
+              children: ['Documents']
+            - label: 'Gestion Partenaires'
+              children: ['Entreprise','Coordonnees', 'Offre', 'Logo']
+            - label: 'Gestion Etudiants'
+              children: ['Etudiant','Coordonnees']
+            - label: 'Gestion Utilisateurs'
+              children: ['Utilisateur', 'Documents_Utilisateur']
+            - label: 'Gestion Demandes Inscription'
+              children: ['Demandes_Inscriptions', 'Documents_Inscriptions']
+            - label: 'Gestion F.A.Q'
+              children: ['FAQ']
     entities:
         Universite:
             class: DUDEEGO\PlatformBundle\Entity\T_Universite
             form:
                 fields:
+                    - { property: 'classement' }
                     - { property: 'nometablissement' }
+                    - { property: 'telephone' }
                     - { property: 'siteinternet' }
                     - { property: 'description', type: 'ckeditor' }
+                    - { property: 'longetitude' }
+                    - { property: 'latitude' }
+                    - { property: 'bourse' }
+                    - { property: 'montantbourse' }
+                    - { property: 'logement' }
+                    - { property: 'partenaire' }
+                    - { property: 'type' }
+                    - { property: 'taille' }
+                    - { property: 'documents' }
+                    - { property: 'formations' }
+                    - { property: 'images' }
+                    - { property: 'adresse' }
+            list:
+                fields:
+                    - { property: 'id' }
+                    - { property: 'nometablissement' }
                     - { property: 'documents' }
                     - { property: 'formations' }
                     - { property: 'images' }
@@ -236,29 +295,52 @@ easy_admin:
             class: DUDEEGO\PlatformBundle\Entity\T_Ville_Universite
         Pays:
             class: DUDEEGO\PlatformBundle\Entity\T_Pays_Universite
+            form:
+                fields:
+                    - { property: 'pays' }
         Formation:
             class: DUDEEGO\PlatformBundle\Entity\T_Formation_Universite
+            list:
+                fields:
+                    - { property: 'id' }
+                    - { property: 'formation' }
+                    - { property: 'universite' }
+                    - { property: 'langues' }
+                    - { property: 'niveau' }
         Langue:
             class: DUDEEGO\PlatformBundle\Entity\T_Langue_Universite
         Image:
             class: DUDEEGO\PlatformBundle\Entity\T_Image_Universite
-        Adresse:
+            list:
+                fields:
+                    - { property: 'id' }
+                    - { property: 'imageName', type: 'image', base_path: '%app.path.universites_images%' }
+            show:
+                fields:
+                    - { property: 'id' }
+                    - { property: 'imageName', type: 'image', base_path: '%app.path.universites_images%' }
+            form:
+                fields:
+                    - { property: 'imageFile', type: 'vich_image' }
+        Coordonnees:
             class: DUDEEGO\PlatformBundle\Entity\EA_Personne
         Etudiant:
             class: DUDEEGO\PlatformBundle\Entity\EA_Physique
         Entreprise:
             class: DUDEEGO\PlatformBundle\Entity\EA_Morale
-        Langue:
+        Offre:
             class: DUDEEGO\PlatformBundle\Entity\EA_Langue
         Utilisateur:
             class: DUDEEGO\PlatformBundle\Entity\User
-        Image:
+        Logo:
             class: DUDEEGO\PlatformBundle\Entity\EA_Image
             list:
                 fields:
+                    - { property: 'id' }
                     - { property: 'imageName', type: 'image', base_path: '%app.path.users_images%' }
             show:
                 fields:
+                    - { property: 'id' }
                     - { property: 'imageName', type: 'image', base_path: '%app.path.users_images%' }
             form:
                 fields:
@@ -271,6 +353,7 @@ easy_admin:
             class: DUDEEGO\PlatformBundle\Entity\EA_Document
             list:
                 fields:
+                    - { property: 'id' }
                     - { property: 'PasseportName', template: 'contract.html.twig', type: 'file', base_path: '%app.path.users_pdf%' }
                     - { property: 'CarteIdentiteName', template: 'contract.html.twig', type: 'file', base_path: '%app.path.users_pdf%' }
                     - { property: 'BulletinNoteName', template: 'contract.html.twig', type: 'file', base_path: '%app.path.users_pdf%' }
@@ -280,6 +363,7 @@ easy_admin:
                     - { property: 'LettreMotivationName', template: 'contract.html.twig', type: 'file', base_path: '%app.path.users_pdf%' }
             show:
                 fields:
+                    - { property: 'id' }
                     - { property: 'PasseportName', type: 'file', base_path: '%app.path.users_pdf%' }
                     - { property: 'CarteIdentiteName', type: 'file', base_path: '%app.path.users_pdf%' }
                     - { property: 'BulletinNoteName', type: 'file', base_path: '%app.path.users_pdf%' }

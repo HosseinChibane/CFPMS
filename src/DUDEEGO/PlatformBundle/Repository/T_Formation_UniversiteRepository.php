@@ -10,4 +10,15 @@ namespace DUDEEGO\PlatformBundle\Repository;
  */
 class T_Formation_UniversiteRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function getFormation($idEtablissement) {
+
+		$qb = $this
+		->createQueryBuilder('u')
+		->where('u.id = :idEtablissement')
+		->setParameter('idEtablissement', $idEtablissement)
+		->orderBy('u.formation', 'ASC')
+		;
+
+		return $qb;
+	}
 }

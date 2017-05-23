@@ -7,6 +7,7 @@ services:
         class: DUDEEGO\PlatformBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
+    #remplace acme_user par ...
     acme_user.password_resetting:
         class: DUDEEGO\PlatformBundle\EventListener\PasswordResettingListener
         arguments: ['@router']

@@ -46,9 +46,9 @@ dudeego_platform_voirLangue:
 dudeego_platform_voirBlog:
     path:      /front/blog
     defaults: { _controller: DUDEEGOPlatformBundle:front:blog }
-dudeego_platform_voirTest:
-    path:      /front/test
-    defaults: { _controller: DUDEEGOPlatformBundle:front:test }
+dudeego_platform_voirOrientation:
+    path:      /front/orientation
+    defaults: { _controller: DUDEEGOPlatformBundle:front:showOrientation }
 
 dudeego_platform_abonne_monProfil:
     path:      /back/monprofil/

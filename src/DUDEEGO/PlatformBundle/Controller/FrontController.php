@@ -81,6 +81,11 @@ class frontController extends Controller
 		return $this->render('DUDEEGOPlatformBundle:front:about.html.twig');
 	}
 
+	public function showOrientationAction()
+	{    
+		return $this->render('DUDEEGOPlatformBundle:front:orientation.html.twig');
+	}
+
 	public function showComparateurAction(Request $request)
 	{
 		$form = $this->createform(Search_UniversiteType::class);
@@ -229,8 +234,7 @@ class frontController extends Controller
 		if($request->isXMLHttpRequest()) {
 			$em = $this->getDoctrine()->getManager();
 
-			$nomuniversite =  $request->getNomUniversite();
-			
+			$nomuniversite =  $request->getNomUniversite();			
 			$formations = $em->getRepository('DUDEEGOPlatformBundle:T_Formation_Universite')->findOneById($request->getFormations());
 			$langues = $em->getRepository('DUDEEGOPlatformBundle:T_Langue_Universite')->findOneById($request->getLangues());
 			$villes = $em->getRepository('DUDEEGOPlatformBundle:T_Ville_Universite')->findOneById($request->getVilles());
@@ -252,13 +256,8 @@ class frontController extends Controller
 				'data' => $data,
 				));
 		}
-		else {
-			$this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
-		}
+		/*elseif ($form->isSubmitted() && $form->isValid()) {
 
-		/*if ($form->isSubmitted() && $form->isValid()) {
-            // manually bind values from the request
-            dump($form->submit($request->query->get($form->getName())));exit();
 			$form->submit($request->query->get($form->getName()));
 			$data = $form->getData();
 
@@ -271,6 +270,14 @@ class frontController extends Controller
 			$listUniversite = $this
 			->getDoctrine()->getManager()->getRepository('DUDEEGOPlatformBundle:T_Universite')
 			->getUniversiteWithSearchAND($formations, $langues, $villes, $pays, $nomuniversite);
+
+			return $this->render('DUDEEGOPlatformBundle:front:comparateur.html.twig', array(
+				'form' => $form->createView(),
+				'listUniversite' => $listUniversite,
+				));
+		}
+		else {
+			$this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
 		}*/
 
 		return $this->render('DUDEEGOPlatformBundle:front:comparateur.html.twig', array(

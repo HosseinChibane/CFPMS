@@ -16,11 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class EA_Document
 {
-    /**
-   * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\EA_Physique", inversedBy = "documents")
-   * @ORM\JoinColumn(nullable=false)
-   */
-    private $physique;
 
     /**
      * @var int
@@ -54,7 +49,7 @@ class EA_Document
      private $CarteIdentiteFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @var string
      */
@@ -131,7 +126,7 @@ class EA_Document
     private $LettreMotivationName;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      *
      * @var \DateTime
     */
@@ -314,7 +309,7 @@ class EA_Document
         return $this->LettreRecommendationFile;
     }
 
-                  /**
+    /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $pdf
      *
      * @return EA_Document

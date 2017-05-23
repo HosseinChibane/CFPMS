@@ -1,5 +1,3 @@
-//<img  src="{{ asset("bundles/dudeegoplatform/gif/site/loading.gif") }}">
-
     // ========================= AJAX RELOAD ==========================================
 
     $( document ).ready(function() {
@@ -8,35 +6,38 @@
 
             $.ajax({
                 beforeSend: function(){
-                 $("#content_result").html('<tr><td> Chargement en cours...</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
-             },
-             url : "filtercomparateur",
-             method: "POST",
-             data : {
+                   $("#content_result").html('<tr><td> Chargement en cours...</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+               },
+               url : "{{ path('dudeego_platform_filterComparateur') }}",
+               method: "POST",
+               data : {
+                'nomuniversite': nomuniversite,
                 'formations': formations,
                 'langues': langues,
                 'villes': villes,
-                'pays': pays,
-                'nomuniversite': nomuniversite
+                'pays': pays                
             }
         }).done(function(response) {
             $table = $('#tableUniversite').DataTable();
             $table.destroy();
             $("#content_result").html(response);
-
             $table = $('#tableUniversite').DataTable( {
-                paging: true,
-                responsive: true,
-                searching: false,
-                "lengthChange": false
-            } );
+                language: {
+                  emptyTable: "Pas de données"
+              },
+              responsive: true,
+              retrieve: true,
+              paging: true,
+              searching: false,
+              ordering:  true,
+              info: false
+          });
 
             addInComparateur();
 
         }).fail(function() {
             $("#content_result").html('<tr><td><span class="label label-danger">!</span> Erreur de chargement des resultats...</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
         }); 
-
     }
 
     $("#dudeego_platform_filterComparateur_comparez").on('click',function(e) {

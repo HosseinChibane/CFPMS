@@ -51,7 +51,7 @@ class T_Ville_Universite
     
     public function __toString()
     {
-        return $this->getCodepostal();
+        return $this->getCommune();
     }
 
     /**

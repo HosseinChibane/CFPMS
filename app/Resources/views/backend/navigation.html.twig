@@ -14,48 +14,37 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-       <li><a href="{{ path('dudeego_platform_accueil') }}">Accueil</a></li>
-       <li><a href="{{ path('dudeego_platform_showComparateur') }}">Comparateur</a></li>       
-       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-         <li><a href="{{ path('dudeego_platform_voirJob') }}">Trouver un job</a></li>
-         <li><a href="{{ path('dudeego_platform_voirStage') }}">Trouver un stage</a></li>
-         <li><a href="{{ path('dudeego_platform_voirLogement') }}">Trouver un logement</a></li>
-         <li><a href="{{ path('dudeego_platform_voirLangue') }}">Trouver un cours de langue</a></li>
-       </ul>
-     </li>
-     <li><a href="{{ path('dudeego_platform_voirBlog') }}">Blog</a></li>
-     
-     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-         <li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Mon Compte</a></li>
-         <li><a href="{{ path('dudeego_platform_abonne_mesDemandes') }}">Suivi de mes candidatures</a></li>
-         <li class="divider"></li>
-         <li class="dropdown-header">Inscription</li>
-         <li><a href="{{ path('dudeego_platform_abonne_universiteStepsOne') }}">Universitaires</a></li>
-         <li><a href="{{ path('dudeego_platform_abonne_langueStepsOne') }}">Cours de langues</a></li>
-         <li><a href="{{ path('dudeego_platform_abonne_logementStepsOne') }}">Logements étudiants</a></li>
-         <li><a href="{{ path('dudeego_platform_abonne_preparationStepsOne') }}">Cours préparatoires</a></li>
-         <li><a href="{{ path('dudeego_platform_abonne_mutuelle') }}">Mutuelle étudiante</a></li>
-         <li class="divider"></li>
-         <li class="dropdown-header">Aide</li>
-         <li><a href="{{ path('dudeego_platform_abonne_aide') }}">Aide</a></li>
-         <li><a href="{{ path('dudeego_platform_abonne_contact') }}">Contact</a></li>
-         <li class="divider"></li>
-         <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
-       </ul>
-     </li>     
-     {% if is_granted("ROLE_SUPER_ADMIN") %}
-       <li><a href="{{ path('dudeego_platform_admin_panel') }}">Admin Panel</a></li>
-     {% endif %} 
-   {% else %}
-    <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
-  {% endif %}  
 
-</ul>
+       {% if is_granted("ROLE_SUPER_ADMIN") %}
+         <li><a href="{{ path('dudeego_platform_admin_panel') }}">Admin Panel</a></li>
+       {% endif %}
+
+       {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+           <li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Mon Compte</a></li>
+           <li><a href="{{ path('dudeego_platform_abonne_mesDemandes') }}">Suivi de mes candidatures</a></li>
+           <li class="divider"></li>
+           <li class="dropdown-header">Inscription</li>
+           <li><a href="{{ path('dudeego_platform_abonne_universiteStepsOne') }}">Universitaires</a></li>
+           <li><a href="{{ path('dudeego_platform_abonne_langueStepsOne') }}">Cours de langues</a></li>
+           <li><a href="{{ path('dudeego_platform_abonne_logementStepsOne') }}">Logements étudiants</a></li>
+           <li><a href="{{ path('dudeego_platform_abonne_preparationStepsOne') }}">Cours préparatoires</a></li>
+           <li><a href="{{ path('dudeego_platform_abonne_mutuelle') }}">Mutuelle étudiante</a></li>
+           <li class="divider"></li>
+           <li class="dropdown-header">Aide</li>
+           <li><a href="{{ path('dudeego_platform_abonne_aide') }}">Aide</a></li>
+           <li><a href="{{ path('dudeego_platform_abonne_contact') }}">Contact</a></li>
+           <li class="divider"></li>
+           <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+         </ul>
+       </li>     
+     {% else %}
+      <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+    {% endif %}  
+
+  </ul>
 </div>
 <!-- /.navbar-collapse -->
 </div>

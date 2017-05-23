@@ -10,4 +10,15 @@ namespace DUDEEGO\PlatformBundle\Repository;
  */
 class T_Langue_UniversiteRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function getLangue($idFormation) {
+
+		$qb = $this
+		->createQueryBuilder('u')
+		->where('u.id = :idFormation')
+		->setParameter('idFormation', $idFormation)
+		->orderBy('u.langue', 'ASC')
+		;
+
+		return $qb;
+	}
 }

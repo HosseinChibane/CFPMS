@@ -2,8 +2,30 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block fos_user_content %}
-<p>
-{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
-</p>
-{% endblock %}
+	{% block fos_user_content %}
+		<div class="container">
+			<!-- Page Heading/Breadcrumbs -->
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Connexion d'un compte
+						<small></small>
+					</h1>
+					<ol class="breadcrumb">
+						<li><a href="">Accueil</a>
+						</li>
+						<li class="active">Mot de passe oublié</li>
+					</ol>
+				</div>
+			</div>
+			<!-- /.row -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="jumbotron">
+						<p>
+							{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

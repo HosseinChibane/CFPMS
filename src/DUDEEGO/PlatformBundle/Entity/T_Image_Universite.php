@@ -3,20 +3,24 @@
 namespace DUDEEGO\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * T_Image_Universite
- *
  * @ORM\Table(name="t__image__universite")
  * @ORM\Entity(repositoryClass="DUDEEGO\PlatformBundle\Repository\T_Image_UniversiteRepository")
+ * @Vich\Uploadable
+ * @ORM\HasLifecycleCallbacks
  */
 class T_Image_Universite
 {
-        /**
+     /**
      * @ORM\ManyToOne(targetEntity="DUDEEGO\PlatformBundle\Entity\T_Universite", inversedBy="images")
      * @ORM\JoinColumn(name="universite_id", referencedColumnName="id")
      */
-        private $universite;
+    private $universite;
 
     /**
      * @var int
@@ -30,27 +34,38 @@ class T_Image_Universite
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=255)
+     * @ORM\Column(name="imageName", type="string", length=255)
      */
-    private $libelle;
+    private $imageName;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @Assert\File(
+     *     maxSize="200k",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     * )
+     * @Vich\UploadableField(mapping="universites_images", fileNameProperty="imageName", size="imageSize")
+     * 
+     * @var File
      */
-    private $url;
+    private $imageFile;
 
     /**
-     * @var string
+     * @ORM\Column(type="integer", nullable=true)
      *
-     * @ORM\Column(name="alt", type="string", length=255)
+     * @var integer
      */
-    private $alt;
+    private $imageSize;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     public function __toString()
     {
-        return $this->getLibelle();
+        return $this->getImageName();
     }
 
     /**
@@ -64,75 +79,99 @@ class T_Image_Universite
     }
 
     /**
-     * Set libelle
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
      *
-     * @param string $libelle
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
-     * @return T_Image_Universite
+     * @return EA_Image
      */
-    public function setLibelle($libelle)
+    public function setImageFile(File $image = null)
     {
-        $this->libelle = $libelle;
+        $this->imageFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+        
+        return $this;
+    }
+
+      /**
+     * @return File|null
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param string $imageName
+     *
+     * @return EA_Image
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+        
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+    
+    /**
+     * @param integer $imageSize
+     *
+     * @return EA_Image
+     */
+    public function setImageSize($imageSize)
+    {
+        $this->imagesize = $imageSize;
+        
+        return $this;
+    }
+
+    /**
+     * @return integer|null
+     */
+    public function getImageSize()
+    {
+        return $this->imageSize;
+    }
+
+      /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return EA_Image
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Get libelle
+     * Get updatedAt
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getLibelle()
+    public function getUpdatedAt()
     {
-        return $this->libelle;
-    }
-
-    /**
-     * Set url
-     *
-     * @param string $url
-     *
-     * @return T_Image_Universite
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * Set alt
-     *
-     * @param string $alt
-     *
-     * @return T_Image_Universite
-     */
-    public function setAlt($alt)
-    {
-        $this->alt = $alt;
-
-        return $this;
-    }
-
-    /**
-     * Get alt
-     *
-     * @return string
-     */
-    public function getAlt()
-    {
-        return $this->alt;
+        return $this->updatedAt;
     }
 
 

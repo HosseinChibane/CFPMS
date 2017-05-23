@@ -31,16 +31,12 @@
                             <td>{{rowDemande.type}}</td>
                             <td>{{rowDemande.etat}}</td>
                             <td>           
-                                <div style="float:left;">
-                                    <a href="{{ path('dudeego_platform_abonne_detailsDemandes', { 'id' : rowDemande.id } ) }}" >
-                                        <span class="glyphicon glyphicon-list-alt"></span> Détails
-                                    </a>
-                                </div>
-                                <div style="float:right;">
-                                    <a href="{{ path('dudeego_platform_abonne_modifierDemandes', { 'id' : rowDemande.id } ) }}" >
-                                        <span class="glyphicon glyphicon-pencil"></span> Modifier
-                                    </a>
-                                </div>                               
+                                <a href="{{ path('dudeego_platform_abonne_detailsDemandes', { 'id' : rowDemande.id } ) }}" >
+                                    <span class="glyphicon glyphicon-list-alt"></span> Détails
+                                </a>
+                                <a href="{{ path('dudeego_platform_abonne_modifierDemandes', { 'id' : rowDemande.id } ) }}" >
+                                    <span class="glyphicon glyphicon-pencil"></span> Modifier
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -49,12 +45,23 @@
         </table>
     </div>
 
-    <script type="text/javascript" class="init">
-        $(document).ready(function() {
-            var table = $('#demandeInsciption').DataTable( {
-                responsive: true
-            } );
-            new $.fn.dataTable.FixedHeader( table );
-        } );
-    </script>
+<script type="text/javascript" class="init">
+ $(document).ready( function () {
+  $.extend( true, $.fn.dataTable.defaults, {
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.10.10/i18n/French.json"
+  }
+});
+  var table = $('#demandeInsciption').DataTable({
+    language: {
+        emptyTable: "Pas encore de demande"
+    },
+    retrieve: true,
+    paging: true,
+    searching: true,
+    ordering:  true,
+    info: false
+});
+} );
+</script>
 {% endblock %}

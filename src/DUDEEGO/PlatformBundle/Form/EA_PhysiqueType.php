@@ -36,31 +36,22 @@ class EA_PhysiqueType extends AbstractType
 
         ->add('personne', EA_PersonneType::class)
 
-        //->add('image', EA_ImageType::class)
+        ->add('image', EA_ImageType::class)
 
-        ->add('documents', CollectionType::class, array(
-            'entry_type' => EA_DocumentType::class,
-            'allow_add' => true,
-            'allow_delete' => false,
-            'by_reference' => false,
-            ))
+        ->add('documents', EA_DocumentType::class)
 
-        ->add('demandes', CollectionType::class, array(
-            'entry_type' => EA_Demande_InscriptionType::class,
-            'allow_add' => true,
-            'allow_delete' => false,
-            'by_reference' => false,
-            ))
-        
+        //->add('demandes', EA_Demande_InscriptionType::class)
+
         ->add('enregistrer', SubmitType::class, array(
             'attr' => array('class' => 'btn btn-primary'),
             ))
-        /*->add('reinitialiser', ResetType::class, array(
+
+        ->add('reinitialiser', ResetType::class, array(
             'attr' => array('class' => 'btn btn-danger'),
-            ))*/
+            ))
         ;
     }
-    
+
     /**
      * {@inheritdoc}
      */

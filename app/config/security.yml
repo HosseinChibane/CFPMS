@@ -35,6 +35,6 @@ security:
         - { path: ^/login$, roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_ADMIN, ROLE_SUPER_ADMIN] }
         - { path: ^/register, roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_ADMIN, ROLE_SUPER_ADMIN] }
         - { path: ^/resetting, roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_ADMIN, ROLE_ADMIN] }
-        - { path: ^/admin, roles: ROLE_SUPER_ADMIN }
-        - { path: ^/back, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+        - { path: ^/admin/*, roles: [ROLE_SUPER_ADMIN] }
+        - { path: ^/back/*, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
         

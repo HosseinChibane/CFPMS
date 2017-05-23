@@ -23,17 +23,19 @@
                 </div>
             {% endif %}
             <div class="form-group">
-                {{ form_label(form.langueUniversite, 'Langue') }}
-                {{ form_errors(form.langueUniversite) }}
-                {{ form_widget(form.langueUniversite) }}
+
+                {{ form_label(form.nometablissement, 'Université') }}
+                {{ form_errors(form.nometablissement) }}
+                {{ form_widget(form.nometablissement) }}
 
                 {{ form_label(form.formation, 'Formation') }}
                 {{ form_errors(form.formation) }}
                 {{ form_widget(form.formation) }}
 
-                {{ form_label(form.nometablissement, 'Université') }}
-                {{ form_errors(form.nometablissement) }}
-                {{ form_widget(form.nometablissement) }}
+                {{ form_label(form.langue, 'Langue') }}
+                {{ form_errors(form.langue) }}
+                {{ form_widget(form.langue) }}
+
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -45,8 +47,8 @@
             </div>
             {# Token CSRF #}
             {{ form_widget(form._token) }}
-            
-            {{ form_end(form, {'render_rest': false}) }}
+            {# , {'render_rest': false} #}
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}
