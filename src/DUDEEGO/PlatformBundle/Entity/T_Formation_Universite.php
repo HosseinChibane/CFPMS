@@ -193,16 +193,6 @@ class T_Formation_Universite
     }
 
     /**
-     * Get universite
-     *
-     * @return \DUDEEGO\PlatformBundle\Entity\T_Universite
-     */
-    public function getUniversite()
-    {
-        return $this->universite;
-    }
-
-    /**
      * Set duree
      *
      * @param integer $duree
@@ -392,6 +382,16 @@ class T_Formation_Universite
     public function removeUniversite(\DUDEEGO\PlatformBundle\Entity\T_Universite $universite)
     {
         $this->universite->removeElement($universite);
+    }
+
+    /**
+     * Get universite
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUniversite()
+    {
+        return $this->universite;
     }
 
     /**

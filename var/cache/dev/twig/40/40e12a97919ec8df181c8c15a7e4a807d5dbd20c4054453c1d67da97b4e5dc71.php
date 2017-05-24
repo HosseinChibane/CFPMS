@@ -22,29 +22,29 @@ class __TwigTemplate_680125a98bb563fe3f463c8cdc89230bf441790421f0ece368730753cde
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_2e2cd4639f87eb1c6d1e20211f4790d3d4186a6b23f42ef0c34da0595307c8fb = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_2e2cd4639f87eb1c6d1e20211f4790d3d4186a6b23f42ef0c34da0595307c8fb->enter($__internal_2e2cd4639f87eb1c6d1e20211f4790d3d4186a6b23f42ef0c34da0595307c8fb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DUDEEGOPlatformBundle:front:comparateur.html.twig"));
+        $__internal_6effc1d95032923a24b0617bf3cf1d0595c5c7039f6f9e3774d26cddd65f4ea8 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_6effc1d95032923a24b0617bf3cf1d0595c5c7039f6f9e3774d26cddd65f4ea8->enter($__internal_6effc1d95032923a24b0617bf3cf1d0595c5c7039f6f9e3774d26cddd65f4ea8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DUDEEGOPlatformBundle:front:comparateur.html.twig"));
 
-        $__internal_194ecaa73a10700fa382060170d406efc46f12d38ddb4003c65b6f915c2a2ce3 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_194ecaa73a10700fa382060170d406efc46f12d38ddb4003c65b6f915c2a2ce3->enter($__internal_194ecaa73a10700fa382060170d406efc46f12d38ddb4003c65b6f915c2a2ce3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DUDEEGOPlatformBundle:front:comparateur.html.twig"));
+        $__internal_21175ea518e097db1293bca389ac51fee2e5c049444619ec8a4cfb3ce5cc2098 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_21175ea518e097db1293bca389ac51fee2e5c049444619ec8a4cfb3ce5cc2098->enter($__internal_21175ea518e097db1293bca389ac51fee2e5c049444619ec8a4cfb3ce5cc2098_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DUDEEGOPlatformBundle:front:comparateur.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_2e2cd4639f87eb1c6d1e20211f4790d3d4186a6b23f42ef0c34da0595307c8fb->leave($__internal_2e2cd4639f87eb1c6d1e20211f4790d3d4186a6b23f42ef0c34da0595307c8fb_prof);
+        $__internal_6effc1d95032923a24b0617bf3cf1d0595c5c7039f6f9e3774d26cddd65f4ea8->leave($__internal_6effc1d95032923a24b0617bf3cf1d0595c5c7039f6f9e3774d26cddd65f4ea8_prof);
 
         
-        $__internal_194ecaa73a10700fa382060170d406efc46f12d38ddb4003c65b6f915c2a2ce3->leave($__internal_194ecaa73a10700fa382060170d406efc46f12d38ddb4003c65b6f915c2a2ce3_prof);
+        $__internal_21175ea518e097db1293bca389ac51fee2e5c049444619ec8a4cfb3ce5cc2098->leave($__internal_21175ea518e097db1293bca389ac51fee2e5c049444619ec8a4cfb3ce5cc2098_prof);
 
     }
 
     // line 3
     public function block_title($context, array $blocks = array())
     {
-        $__internal_d3e84ac6e5c40fe90325c001fd618e14f180da6aaf828966bbb68f986e519a41 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_d3e84ac6e5c40fe90325c001fd618e14f180da6aaf828966bbb68f986e519a41->enter($__internal_d3e84ac6e5c40fe90325c001fd618e14f180da6aaf828966bbb68f986e519a41_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_596e13e842278644b1e11fdc549c97a2eba71b5523c65dfe8e93d5ae0e137cc5 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_596e13e842278644b1e11fdc549c97a2eba71b5523c65dfe8e93d5ae0e137cc5->enter($__internal_596e13e842278644b1e11fdc549c97a2eba71b5523c65dfe8e93d5ae0e137cc5_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
-        $__internal_18a8c21dc61d8186a0e54af87ecbc367a162ce675e3b024dc6423edee3abcc99 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_18a8c21dc61d8186a0e54af87ecbc367a162ce675e3b024dc6423edee3abcc99->enter($__internal_18a8c21dc61d8186a0e54af87ecbc367a162ce675e3b024dc6423edee3abcc99_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_fb9d6166c576f8cdf4f5c0a1cb35c81ceed5ad2b4873ce3d13f0b558f4d2526f = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_fb9d6166c576f8cdf4f5c0a1cb35c81ceed5ad2b4873ce3d13f0b558f4d2526f->enter($__internal_fb9d6166c576f8cdf4f5c0a1cb35c81ceed5ad2b4873ce3d13f0b558f4d2526f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
         // line 4
         echo "  Comparateur - ";
@@ -52,21 +52,21 @@ class __TwigTemplate_680125a98bb563fe3f463c8cdc89230bf441790421f0ece368730753cde
         echo "
 ";
         
-        $__internal_18a8c21dc61d8186a0e54af87ecbc367a162ce675e3b024dc6423edee3abcc99->leave($__internal_18a8c21dc61d8186a0e54af87ecbc367a162ce675e3b024dc6423edee3abcc99_prof);
+        $__internal_fb9d6166c576f8cdf4f5c0a1cb35c81ceed5ad2b4873ce3d13f0b558f4d2526f->leave($__internal_fb9d6166c576f8cdf4f5c0a1cb35c81ceed5ad2b4873ce3d13f0b558f4d2526f_prof);
 
         
-        $__internal_d3e84ac6e5c40fe90325c001fd618e14f180da6aaf828966bbb68f986e519a41->leave($__internal_d3e84ac6e5c40fe90325c001fd618e14f180da6aaf828966bbb68f986e519a41_prof);
+        $__internal_596e13e842278644b1e11fdc549c97a2eba71b5523c65dfe8e93d5ae0e137cc5->leave($__internal_596e13e842278644b1e11fdc549c97a2eba71b5523c65dfe8e93d5ae0e137cc5_prof);
 
     }
 
     // line 7
     public function block_FrontContent($context, array $blocks = array())
     {
-        $__internal_ac08317ad331fb427af39b3eca01e5198861d428f337f019eccbec132a56377c = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_ac08317ad331fb427af39b3eca01e5198861d428f337f019eccbec132a56377c->enter($__internal_ac08317ad331fb427af39b3eca01e5198861d428f337f019eccbec132a56377c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "FrontContent"));
+        $__internal_bc589b23e7f0a0e2b7b2e43eb019abfa3b6364f6100862cd0334ab92950585a2 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_bc589b23e7f0a0e2b7b2e43eb019abfa3b6364f6100862cd0334ab92950585a2->enter($__internal_bc589b23e7f0a0e2b7b2e43eb019abfa3b6364f6100862cd0334ab92950585a2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "FrontContent"));
 
-        $__internal_8d92378041fae3860924f450db0b665a8490fad7bcc5c7c5eb9a90ecfabe2fc7 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_8d92378041fae3860924f450db0b665a8490fad7bcc5c7c5eb9a90ecfabe2fc7->enter($__internal_8d92378041fae3860924f450db0b665a8490fad7bcc5c7c5eb9a90ecfabe2fc7_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "FrontContent"));
+        $__internal_b2597fae9f8fa45c9530fa9c7c7710e432adb85a0ae60938566ddf43897f111d = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_b2597fae9f8fa45c9530fa9c7c7710e432adb85a0ae60938566ddf43897f111d->enter($__internal_b2597fae9f8fa45c9530fa9c7c7710e432adb85a0ae60938566ddf43897f111d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "FrontContent"));
 
         // line 8
         echo "
@@ -94,7 +94,7 @@ class __TwigTemplate_680125a98bb563fe3f463c8cdc89230bf441790421f0ece368730753cde
         echo "      ";
         // line 30
         echo "      ";
-        echo         $this->env->getRuntime('Symfony\Bridge\Twig\Form\TwigRenderer')->renderBlock(($context["form"] ?? $this->getContext($context, "form")), 'form_start', array("action" => $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("dudeego_platform_filterComparateur"), "method" => "POST"));
+        echo         $this->env->getRuntime('Symfony\Bridge\Twig\Form\TwigRenderer')->renderBlock(($context["form"] ?? $this->getContext($context, "form")), 'form_start', array("action" => $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("dudeego_platform_filterAjaxComparateur"), "method" => "POST"));
         echo "
       ";
         // line 32
@@ -159,17 +159,17 @@ class __TwigTemplate_680125a98bb563fe3f463c8cdc89230bf441790421f0ece368730753cde
         echo "
 
      </div>
+     
      <div class=\"form-group\">
        ";
-        // line 57
+        // line 58
         echo $this->env->getRuntime('Symfony\Bridge\Twig\Form\TwigRenderer')->searchAndRenderBlock($this->getAttribute(($context["form"] ?? $this->getContext($context, "form")), "reinitialiser", array()), 'widget');
         echo " 
        ";
-        // line 58
+        // line 59
         echo $this->env->getRuntime('Symfony\Bridge\Twig\Form\TwigRenderer')->searchAndRenderBlock($this->getAttribute(($context["form"] ?? $this->getContext($context, "form")), "comparez", array()), 'widget');
         echo "
      </div>
-
 
      ";
         // line 62
@@ -417,10 +417,10 @@ class __TwigTemplate_680125a98bb563fe3f463c8cdc89230bf441790421f0ece368730753cde
         echo "\" defer></script>
 ";
         
-        $__internal_8d92378041fae3860924f450db0b665a8490fad7bcc5c7c5eb9a90ecfabe2fc7->leave($__internal_8d92378041fae3860924f450db0b665a8490fad7bcc5c7c5eb9a90ecfabe2fc7_prof);
+        $__internal_b2597fae9f8fa45c9530fa9c7c7710e432adb85a0ae60938566ddf43897f111d->leave($__internal_b2597fae9f8fa45c9530fa9c7c7710e432adb85a0ae60938566ddf43897f111d_prof);
 
         
-        $__internal_ac08317ad331fb427af39b3eca01e5198861d428f337f019eccbec132a56377c->leave($__internal_ac08317ad331fb427af39b3eca01e5198861d428f337f019eccbec132a56377c_prof);
+        $__internal_bc589b23e7f0a0e2b7b2e43eb019abfa3b6364f6100862cd0334ab92950585a2->leave($__internal_bc589b23e7f0a0e2b7b2e43eb019abfa3b6364f6100862cd0334ab92950585a2_prof);
 
     }
 
@@ -436,7 +436,7 @@ class __TwigTemplate_680125a98bb563fe3f463c8cdc89230bf441790421f0ece368730753cde
 
     public function getDebugInfo()
     {
-        return array (  415 => 201,  410 => 197,  383 => 171,  379 => 169,  363 => 155,  349 => 143,  347 => 142,  342 => 140,  338 => 138,  331 => 136,  321 => 133,  314 => 129,  310 => 127,  305 => 126,  301 => 125,  291 => 117,  288 => 116,  279 => 113,  276 => 112,  272 => 111,  265 => 106,  262 => 105,  252 => 101,  248 => 100,  242 => 98,  238 => 96,  234 => 94,  232 => 93,  228 => 92,  224 => 91,  218 => 88,  214 => 87,  208 => 84,  204 => 82,  199 => 81,  197 => 80,  176 => 62,  169 => 58,  165 => 57,  158 => 53,  154 => 52,  149 => 50,  145 => 49,  140 => 47,  136 => 46,  131 => 44,  127 => 43,  122 => 41,  118 => 40,  113 => 37,  107 => 34,  104 => 33,  101 => 32,  96 => 30,  94 => 29,  72 => 8,  63 => 7,  50 => 4,  41 => 3,  11 => 1,);
+        return array (  415 => 201,  410 => 197,  383 => 171,  379 => 169,  363 => 155,  349 => 143,  347 => 142,  342 => 140,  338 => 138,  331 => 136,  321 => 133,  314 => 129,  310 => 127,  305 => 126,  301 => 125,  291 => 117,  288 => 116,  279 => 113,  276 => 112,  272 => 111,  265 => 106,  262 => 105,  252 => 101,  248 => 100,  242 => 98,  238 => 96,  234 => 94,  232 => 93,  228 => 92,  224 => 91,  218 => 88,  214 => 87,  208 => 84,  204 => 82,  199 => 81,  197 => 80,  176 => 62,  170 => 59,  166 => 58,  158 => 53,  154 => 52,  149 => 50,  145 => 49,  140 => 47,  136 => 46,  131 => 44,  127 => 43,  122 => 41,  118 => 40,  113 => 37,  107 => 34,  104 => 33,  101 => 32,  96 => 30,  94 => 29,  72 => 8,  63 => 7,  50 => 4,  41 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -478,7 +478,7 @@ class __TwigTemplate_680125a98bb563fe3f463c8cdc89230bf441790421f0ece368730753cde
 
       {#Formulaire de recherche#}
       {#{{form_start(form)}}#}
-      {{ form_start(form, {'action': path('dudeego_platform_filterComparateur'), 'method': 'POST'}) }}
+      {{ form_start(form, {'action': path('dudeego_platform_filterAjaxComparateur'), 'method': 'POST'}) }}
       {# Les erreurs générales du formulaire. #}
       {% if form_errors(form) %}
         <div class=\"alert alert-danger\" role=\"alert\">
@@ -504,11 +504,11 @@ class __TwigTemplate_680125a98bb563fe3f463c8cdc89230bf441790421f0ece368730753cde
        {{ form_widget(form.pays) }}
 
      </div>
+     
      <div class=\"form-group\">
        {{ form_widget(form.reinitialiser) }} 
        {{ form_widget(form.comparez) }}
      </div>
-
 
      {{ form_end(form) }}
 

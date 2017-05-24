@@ -2,54 +2,55 @@
 
     $( document ).ready(function() {
 
-        var loadResult = function(formations, langues, villes, pays, nomuniversite) {
+     var loadResult = function(formations, langues, villes, pays, nomuniversite) {
 
-            $.ajax({
-                beforeSend: function(){
-                   $("#content_result").html('<tr><td> Chargement en cours...</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
-               },
-               url : "{{ path('dudeego_platform_filterComparateur') }}",
-               method: "POST",
-               data : {
-                'nomuniversite': nomuniversite,
-                'formations': formations,
-                'langues': langues,
-                'villes': villes,
-                'pays': pays                
-            }
-        }).done(function(response) {
-            $table = $('#tableUniversite').DataTable();
-            $table.destroy();
-            $("#content_result").html(response);
-            $table = $('#tableUniversite').DataTable( {
-                language: {
-                  emptyTable: "Pas de données"
-              },
-              responsive: true,
-              retrieve: true,
-              paging: true,
-              searching: false,
-              ordering:  true,
-              info: false
-          });
+        $.ajax({
+            beforeSend: function(){
+               $("#content_result").html('<tr><td> Chargement en cours...</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+           },
+           url : "front/comparateurajax",
+           method: "POST",
+           data : {
+            'nomuniversite': nomuniversite,
+            'formations': formations,
+            'langues': langues,
+            'villes': villes,
+            'pays': pays                
+        }
+    }).done(function(response) {
+        $table = $('#tableUniversite').DataTable();
+        $table.destroy();
+        $("#content_result").html(response);
 
-            addInComparateur();
+        $table = $('#tableUniversite').DataTable( {
+            language: {
+              emptyTable: "Pas de données"
+          },
+          responsive: true,
+          retrieve: true,
+          paging: true,
+          searching: false,
+          ordering:  true,
+          info: false
+      });
 
-        }).fail(function() {
-            $("#content_result").html('<tr><td><span class="label label-danger">!</span> Erreur de chargement des resultats...</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
-        }); 
-    }
+        addInComparateur();
 
-    $("#dudeego_platform_filterComparateur_comparez").on('click',function(e) {
-        e.preventDefault();
-        loadResult(
-            $('#dudeego_platform_filterComparateur_formations').val(),
-            $('#dudeego_platform_filterComparateur_langues').val(),
-            $('#dudeego_platform_filterComparateur_villes').val(),
-            $('#dudeego_platform_filterComparateur_pays').val(),
-            $('#dudeego_platform_filterComparateur_nomuniversite').val()
-            );
-    });
+    }).fail(function() {
+        $("#content_result").html('<tr><td><span class="label label-danger">!</span> Erreur de chargement des resultats...</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+    }); 
+}
+
+$("#dudeego_platform_filterComparateur_comparez").on('click',function(e) {
+    e.preventDefault();
+    loadResult(
+        $('#dudeego_platform_filterComparateur_formations').val(),
+        $('#dudeego_platform_filterComparateur_langues').val(),
+        $('#dudeego_platform_filterComparateur_villes').val(),
+        $('#dudeego_platform_filterComparateur_pays').val(),
+        $('#dudeego_platform_filterComparateur_nomuniversite').val()
+        );
+});
 
         //==================== COMPARATEUR ==========================
 

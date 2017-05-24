@@ -231,32 +231,7 @@ class frontController extends Controller
 	{
 		$form = $this->get('form.factory')->create(Search_UniversiteType::class);
 		
-		if($request->isXMLHttpRequest()) {
-			$em = $this->getDoctrine()->getManager();
-
-			$nomuniversite =  $request->getNomUniversite();			
-			$formations = $em->getRepository('DUDEEGOPlatformBundle:T_Formation_Universite')->findOneById($request->getFormations());
-			$langues = $em->getRepository('DUDEEGOPlatformBundle:T_Langue_Universite')->findOneById($request->getLangues());
-			$villes = $em->getRepository('DUDEEGOPlatformBundle:T_Ville_Universite')->findOneById($request->getVilles());
-			$pays = $em->getRepository('DUDEEGOPlatformBundle:T_Pays_Universite')->findOneById($request->getPays());
-
-			$listUniversite = $this
-			->getDoctrine()
-			->getManager()
-			->getRepository('DUDEEGOPlatformBundle:T_Universite')
-			->getUniversiteWithSearchAND($formations, $langues, $villes, $pays, $nomuniversite);
-
-			$data = array(
-				'listUniversite' => $listUniversite,
-				);
-
-			return $this->render('DUDEEGOPlatformBundle:front:filtercomparateur.html.twig', array(
-				'form' => $form->createView(),
-				'listUniversite' => $listUniversite,
-				'data' => $data,
-				));
-		}
-		/*elseif ($form->isSubmitted() && $form->isValid()) {
+		if ($form->isSubmitted() && $form->isValid()) {
 
 			$form->submit($request->query->get($form->getName()));
 			$data = $form->getData();
@@ -278,10 +253,37 @@ class frontController extends Controller
 		}
 		else {
 			$this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
-		}*/
+		}
 
 		return $this->render('DUDEEGOPlatformBundle:front:comparateur.html.twig', array(
 			'form' => $form->createView(),
+			));
+	}
+
+	public function filterAjaxComparateurAction(Request $request)
+	{
+		$form = $this->get('form.factory')->create(Search_UniversiteType::class);
+
+		$formations = $request->get('formations');
+		$langues = $request->get('langues');
+		$villes = $request->get('villes');
+		$pays =  $request->get('pays');
+		$nomuniversite =  $request->get('nomuniversite');
+
+		$listUniversite = $this
+		->getDoctrine()
+		->getManager()
+		->getRepository('DUDEEGOPlatformBundle:T_Universite')
+		->getUniversiteWithSearchAND($formations, $langues, $villes, $pays, $nomuniversite);
+
+		$data = array(
+			'listUniversite' => $listUniversite,
+			);
+
+		return $this->render('DUDEEGOPlatformBundle:Front:comparateurAjax.html.twig', array(
+			'form' => $form->createView(),
+			'data' => $data,
+			'listUniversite' => $listUniversite,
 			));
 	}
 

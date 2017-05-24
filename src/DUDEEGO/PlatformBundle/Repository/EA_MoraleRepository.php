@@ -10,4 +10,14 @@ namespace DUDEEGO\PlatformBundle\Repository;
  */
 class EA_MoraleRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function getMutuel($name)
+	{
+		$qb = $this
+		->createQueryBuilder('u')
+		->where('u.raisonsocial = :nom')
+		->setParameter('nom', $name)
+		;
+
+		return $qb->getQuery()->getResult();
+	}
 }

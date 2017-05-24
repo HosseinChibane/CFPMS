@@ -26,6 +26,10 @@ dudeego_platform_filterComparateur:
     path:      /front/filtercomparateur
     defaults: { _controller: DUDEEGOPlatformBundle:front:filterComparateur }
     methods: POST
+dudeego_platform_filterAjaxComparateur:
+    path:      /front/comparateurajax
+    defaults: { _controller: DUDEEGOPlatformBundle:front:filterAjaxComparateur }
+    methods: POST
 dudeego_platform_itemsComparateur:
     path:      /front/itemsComparateur
     defaults: { _controller: DUDEEGOPlatformBundle:front:itemsComparateur }

@@ -431,7 +431,6 @@ class backController extends Controller
 				if ($form->isSubmitted() && $form->isValid()) {
 					#recherche le PDF
 					if ($form->get('nometablissement')->getData() !== null) {
-						# code...						
 						$formation = $form->get('formation')->getData()->getFormation();
 						$langue = $form->get('langue')->getData()->getLangue();
 						$nometablissement = $form->get('nometablissement')->getData()->getNomEtablissement();
@@ -491,8 +490,7 @@ class backController extends Controller
 					$message->setFrom('dudeego.contact@gmail.com');
 					$message->setTo($email);
 					$message->setBody('Information : l\'utilisateur '. $utilisateur . ' souhaite s\'inscrire à ' . $typeInscription);
-			//$message->attach(Swift_Attachment::fromPath('my-document.pdf'));
-			//dump($message);exit();
+					//$message->attach(Swift_Attachment::fromPath('my-document.pdf'));
 					$this->get('mailer')->send($message);
 
 					return $this->redirectToRoute('dudeego_platform_abonne_mesDemandes');
@@ -576,6 +574,18 @@ class backController extends Controller
 					$em->persist($eA_Demande_Inscription);
 					$em->flush();
 
+					$email = $user->getEmail();
+					$utilisateur = $user->getUserName();
+					$typeInscription = $eA_Demande_Inscription->getType();
+
+					$message = \Swift_Message::newInstance();
+					$message->setSubject('Inscription à ' . $eA_Demande_Inscription->getType());
+					$message->setFrom('dudeego.contact@gmail.com');
+					$message->setTo($email);
+					$message->setBody('Information : l\'utilisateur '. $utilisateur . ' souhaite s\'inscrire à ' . $typeInscription);
+					//$message->attach(Swift_Attachment::fromPath('my-document.pdf'));
+					$this->get('mailer')->send($message);
+
 					return $this->redirectToRoute('dudeego_platform_abonne_mesDemandes');
 				}
 
@@ -652,11 +662,21 @@ class backController extends Controller
 					$eA_Demande_Inscription->setType('logement');
 					$eA_Demande_Inscription->setEtat('creation');
 
-			//dump($eA_Demande_Inscription);exit();
-
 					$em = $this->getDoctrine()->getManager();
 					$em->persist($eA_Demande_Inscription);
 					$em->flush();
+
+					$email = $user->getEmail();
+					$utilisateur = $user->getUserName();
+					$typeInscription = $eA_Demande_Inscription->getType();
+
+					$message = \Swift_Message::newInstance();
+					$message->setSubject('Inscription à ' . $eA_Demande_Inscription->getType());
+					$message->setFrom('dudeego.contact@gmail.com');
+					$message->setTo($email);
+					$message->setBody('Information : l\'utilisateur '. $utilisateur . ' souhaite s\'inscrire à ' . $typeInscription);
+					//$message->attach(Swift_Attachment::fromPath('my-document.pdf'));
+					$this->get('mailer')->send($message);					
 
 					return $this->redirectToRoute('dudeego_platform_abonne_mesDemandes');
 				}
@@ -731,11 +751,21 @@ public function preparationTwoAction(Request $request)
 				$eA_Demande_Inscription->setType('preparation');
 				$eA_Demande_Inscription->setEtat('creation');
 
-			//dump($eA_Demande_Inscription);exit();
-
 				$em = $this->getDoctrine()->getManager();
 				$em->persist($eA_Demande_Inscription);
 				$em->flush();
+
+				$email = $user->getEmail();
+				$utilisateur = $user->getUserName();
+				$typeInscription = $eA_Demande_Inscription->getType();
+
+				$message = \Swift_Message::newInstance();
+				$message->setSubject('Inscription à ' . $eA_Demande_Inscription->getType());
+				$message->setFrom('dudeego.contact@gmail.com');
+				$message->setTo($email);
+				$message->setBody('Information : l\'utilisateur '. $utilisateur . ' souhaite s\'inscrire à ' . $typeInscription);
+				//$message->attach(Swift_Attachment::fromPath('my-document.pdf'));
+				$this->get('mailer')->send($message);
 
 				return $this->redirectToRoute('dudeego_platform_abonne_mesDemandes');
 			}
@@ -758,7 +788,12 @@ public function mutuelleAction()
 			throw new AccessDeniedException('Accès à cette page, le droit tu n\'as pas.');
 		}
 		else {  
-			return $this->render('DUDEEGOPlatformBundle:back:mutuelle.html.twig');
+			$em = $this->getDoctrine()->getManager();
+			$morale = $em->getRepository('DUDEEGOPlatformBundle:EA_Morale')->getMutuel('AVA');
+
+			return $this->render('DUDEEGOPlatformBundle:back:mutuelle.html.twig', array(
+				'morale' => $morale,
+				));
 		}
 	} catch (Exception $e) {
 		$this->addFlash('notice','J\ai glissé chef !.'. $e);

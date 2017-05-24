@@ -5,27 +5,30 @@
 {% endblock %}
 
 {% block breadcrumb %}
-    <ol class="breadcrumb">
-        <li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Home</a></li>
-        <li class="active">Inscription</li>
-    </ol>
+	<ol class="breadcrumb">
+		<li><a href="{{ path('dudeego_platform_abonne_monProfil') }}">Home</a></li>
+		<li class="active">Inscription</li>
+	</ol>
 {% endblock %}
 
 {% block BackContent %} 
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h4>Inscription à la mutuelle étudiante AVA</h4>
+	{% if morale is defined %}
+		{% for row in morale %}
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Inscription à la mutuelle étudiante {{ row.raisonsocial }}</h4>
+					</div>
+					<div class="panel-body">                                        
+						<p> Suspendisse ut lacinia sem. Praesent bibendum suscipit neque, vitae consequat nisi commodo et. Integer rhoncus dapibus nisl, quis maximus magna pharetra id. Nulla sit amet elit volutpat, sagittis neque vitae, dictum dolor. Ut finibus velit nec libero cursus, vel sollicitudin erat luctus. Morbi euismod ex quis leo pellentesque, sit amet tempus leo vehicula. Curabitur tellus dui, sodales eget ornare sit amet, molestie vel lacus. Mauris suscipit risus sollicitudin, rhoncus libero vitae, iaculis sapien. In fringilla augue eget mollis interdum. Donec erat quam, imperdiet consectetur malesuada ac, dictum id velit. Vivamus varius ultrices lectus, quis maximus dolor laoreet vel. </p>
+					</div>
+					<div class="panel-footer">
+						<div align="center">
+							<a class="btn btn-info" href="{{ row.url }}" role="button" target="_blank" alt="{{ row.alt }}">Cliquez Ici</a>
+						</div>				
+					</div>
+				</div>
 			</div>
-			<div class="panel-body">                                        
-				<p> Suspendisse ut lacinia sem. Praesent bibendum suscipit neque, vitae consequat nisi commodo et. Integer rhoncus dapibus nisl, quis maximus magna pharetra id. Nulla sit amet elit volutpat, sagittis neque vitae, dictum dolor. Ut finibus velit nec libero cursus, vel sollicitudin erat luctus. Morbi euismod ex quis leo pellentesque, sit amet tempus leo vehicula. Curabitur tellus dui, sodales eget ornare sit amet, molestie vel lacus. Mauris suscipit risus sollicitudin, rhoncus libero vitae, iaculis sapien. In fringilla augue eget mollis interdum. Donec erat quam, imperdiet consectetur malesuada ac, dictum id velit. Vivamus varius ultrices lectus, quis maximus dolor laoreet vel. </p>
-			</div>
-			<div class="panel-footer">
-				<div align="center">
-					<a class="btn btn-info" href="https://www.ava.fr/blog/produit/plan-sante-studies/" role="button" target="_blank">Cliquez Ici</a>
-				</div>				
-			</div>
-		</div>
-	</div>
-
+		{% endfor %}
+	{% endif %}
 {% endblock %}

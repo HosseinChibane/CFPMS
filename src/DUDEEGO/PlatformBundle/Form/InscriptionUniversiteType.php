@@ -36,16 +36,16 @@ class InscriptionUniversiteType extends AbstractType
             },
             'choice_label' => 'langue',
             'required'    => true,
-            'placeholder' => 'Sélectionner un élément dans la liste',
+            'placeholder' => 'Sélectionner un élément dans la liste des langues',
             'empty_data'  => '',
             ))
 
         ->add('formation', ChoiceType::class, array(
-            'placeholder' => 'En attente d\'un élément sélectionner',
+            'placeholder' => '',
             ))
 
         ->add('nometablissement', ChoiceType::class, array(
-            'placeholder' => 'En attente d\'un élément sélectionner',
+            'placeholder' => '',
             ))
 
         ->add('rechercher', SubmitType::class, array(
@@ -58,18 +58,20 @@ class InscriptionUniversiteType extends AbstractType
 
         $formModifier = function (FormInterface $form, T_Langue_Universite $langue = null) {
             $formation = null === $langue ? array() : $langue->getFormation();
+
             $form->add('formation', EntityType::class, array(
                 'class'       => 'DUDEEGOPlatformBundle:T_Formation_Universite',
-                'placeholder' => 'Sélectionner un élément dans la liste',
+                'placeholder' => 'Sélectionner un élément dans la liste des formations',
                 'choices'     => $formation,
                 ));        
         };
 
         $formModifierFormation = function (FormInterface $form, T_Formation_Universite $formation = null) {
             $nometablissement = null === $formation ? array() : $formation->getUniversite();
+
             $form->add('nometablissement', EntityType::class, array(
                 'class'       => 'DUDEEGOPlatformBundle:T_Universite',
-                'placeholder' => 'Sélectionner un élément dans la liste',
+                'placeholder' => 'Sélectionner un élément dans la liste des universités',
                 'choices'     => $nometablissement,
                 ));
         };
@@ -96,6 +98,7 @@ class InscriptionUniversiteType extends AbstractType
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) use ($formModifierFormation) {
                 $data = $event->getData();
+                
                 if($data === null || !method_exists($data, 'getFormation')) {
                     $formModifierFormation($event->getForm(), null);
                 } else {
@@ -107,6 +110,7 @@ class InscriptionUniversiteType extends AbstractType
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) use ($formModifierFormation) {
                 $formation = $event->getForm()->getData();
+                dump($formation);exit();
                 $formModifierFormation($event->getForm()->getParent(), $formation);
             });    
     }

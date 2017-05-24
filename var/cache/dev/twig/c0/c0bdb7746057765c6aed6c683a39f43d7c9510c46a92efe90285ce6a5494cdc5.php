@@ -1,6 +1,6 @@
 <?php
 
-/* @DUDEEGOPlatform/front/filtercomparateur.html.twig */
+/* DUDEEGOPlatformBundle:front:filtercomparateur.html.twig */
 class __TwigTemplate_76b4944d864d01741a847ad35bfb1d50b8a914392ad82348e1d2324d1cbe44c8 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -15,11 +15,11 @@ class __TwigTemplate_76b4944d864d01741a847ad35bfb1d50b8a914392ad82348e1d2324d1cb
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_b6f3f11352f73a18086f592d6d445b57359a9a063147cb4d8b620caa1c5ef796 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_b6f3f11352f73a18086f592d6d445b57359a9a063147cb4d8b620caa1c5ef796->enter($__internal_b6f3f11352f73a18086f592d6d445b57359a9a063147cb4d8b620caa1c5ef796_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@DUDEEGOPlatform/front/filtercomparateur.html.twig"));
+        $__internal_e58dacf77aa6920021bf4b991f33d7f8176a3d8453b6212e6f72f787b9c267b4 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_e58dacf77aa6920021bf4b991f33d7f8176a3d8453b6212e6f72f787b9c267b4->enter($__internal_e58dacf77aa6920021bf4b991f33d7f8176a3d8453b6212e6f72f787b9c267b4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DUDEEGOPlatformBundle:front:filtercomparateur.html.twig"));
 
-        $__internal_0961b98eaf836ceb308d29b908680b659204a136cf3a39d3e3e03fa4f4baf37e = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_0961b98eaf836ceb308d29b908680b659204a136cf3a39d3e3e03fa4f4baf37e->enter($__internal_0961b98eaf836ceb308d29b908680b659204a136cf3a39d3e3e03fa4f4baf37e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@DUDEEGOPlatform/front/filtercomparateur.html.twig"));
+        $__internal_29b754cb538daae3da992e3710f94a7cfb71219387db397e43ed24902ff91040 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_29b754cb538daae3da992e3710f94a7cfb71219387db397e43ed24902ff91040->enter($__internal_29b754cb538daae3da992e3710f94a7cfb71219387db397e43ed24902ff91040_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "DUDEEGOPlatformBundle:front:filtercomparateur.html.twig"));
 
         // line 1
         if (array_key_exists("listUniversite", $context)) {
@@ -33,69 +33,71 @@ class __TwigTemplate_76b4944d864d01741a847ad35bfb1d50b8a914392ad82348e1d2324d1cb
       <td>
         ";
                 // line 5
-                echo twig_escape_filter($this->env, $this->getAttribute($context["rowUniversite"], "id", array()), "html", null, true);
+                echo twig_escape_filter($this->env, $this->getAttribute($context["rowUniversite"], "classement", array()), "html", null, true);
                 echo "
       </td>
       <td>
-        ";
+       <div id=\"nom-etablissement-";
                 // line 8
-                $context['_parent'] = $context;
-                $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["rowUniversite"], "images", array()));
-                foreach ($context['_seq'] as $context["_key"] => $context["itemimage"]) {
-                    // line 9
-                    echo "          <img class=\"media-object img-rounded img-responsive\"  src=\"";
-                    echo twig_escape_filter($this->env, $this->getAttribute($context["itemimage"], "url", array()), "html", null, true);
-                    echo "\" alt=\"";
-                    echo twig_escape_filter($this->env, $this->getAttribute($context["itemimage"], "alt", array()), "html", null, true);
-                    echo "\">
+                echo twig_escape_filter($this->env, $this->getAttribute($context["rowUniversite"], "id", array()), "html", null, true);
+                echo "\">
         ";
-                }
-                $_parent = $context['_parent'];
-                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['itemimage'], $context['_parent'], $context['loop']);
-                $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 11
-                echo "        ";
+                // line 9
                 echo twig_escape_filter($this->env, $this->getAttribute($context["rowUniversite"], "nometablissement", array()), "html", null, true);
                 echo "
-      </td>
-      <td>";
-                // line 13
+      </div>  
+    </td>
+    <td>";
+                // line 12
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($context["rowUniversite"], "adresse", array()), "ville", array()), "commune", array()), "html", null, true);
                 echo "</td>
-      <td>";
-                // line 14
+    <td>";
+                // line 13
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($this->getAttribute($context["rowUniversite"], "adresse", array()), "ville", array()), "pays", array()), "pays", array()), "html", null, true);
                 echo "</td>
-      <td>1 €</td>
-      <td>Oui</td>
-      <td>
-        <a href=\"";
-                // line 18
+    ";
+                // line 14
+                if ($this->getAttribute($context["rowUniversite"], "bourse", array())) {
+                    // line 15
+                    echo "      <td>Oui</td>
+    ";
+                } else {
+                    // line 17
+                    echo "     <td>Non</td>
+   ";
+                }
+                // line 19
+                echo "   <td>";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["rowUniversite"], "montantbourse", array()), "html", null, true);
+                echo "</td>
+   <td>
+    <a href=\"";
+                // line 21
                 echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("dudeego_platform_detailsComparateur", array("id" => $this->getAttribute($context["rowUniversite"], "id", array()))), "html", null, true);
                 echo "\" ><span class=\"glyphicon glyphicon-cog\"></span>Détails</a>
-        <a  class=\"add_comparateur\" href=\"#\" data-id=\"";
-                // line 19
+    <a  class=\"add_comparateur\" href=\"#\" data-id=\"";
+                // line 22
                 echo twig_escape_filter($this->env, $this->getAttribute($context["rowUniversite"], "id", array()), "html", null, true);
                 echo "\"> <span class=\"glyphicon glyphicon-plus\"></span>Favoris</a>
-      </td>
-    </tr>
-  ";
+  </td>
+</tr>
+";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['rowUniversite'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
         }
         
-        $__internal_b6f3f11352f73a18086f592d6d445b57359a9a063147cb4d8b620caa1c5ef796->leave($__internal_b6f3f11352f73a18086f592d6d445b57359a9a063147cb4d8b620caa1c5ef796_prof);
+        $__internal_e58dacf77aa6920021bf4b991f33d7f8176a3d8453b6212e6f72f787b9c267b4->leave($__internal_e58dacf77aa6920021bf4b991f33d7f8176a3d8453b6212e6f72f787b9c267b4_prof);
 
         
-        $__internal_0961b98eaf836ceb308d29b908680b659204a136cf3a39d3e3e03fa4f4baf37e->leave($__internal_0961b98eaf836ceb308d29b908680b659204a136cf3a39d3e3e03fa4f4baf37e_prof);
+        $__internal_29b754cb538daae3da992e3710f94a7cfb71219387db397e43ed24902ff91040->leave($__internal_29b754cb538daae3da992e3710f94a7cfb71219387db397e43ed24902ff91040_prof);
 
     }
 
     public function getTemplateName()
     {
-        return "@DUDEEGOPlatform/front/filtercomparateur.html.twig";
+        return "DUDEEGOPlatformBundle:front:filtercomparateur.html.twig";
     }
 
     public function isTraitable()
@@ -105,7 +107,7 @@ class __TwigTemplate_76b4944d864d01741a847ad35bfb1d50b8a914392ad82348e1d2324d1cb
 
     public function getDebugInfo()
     {
-        return array (  78 => 19,  74 => 18,  67 => 14,  63 => 13,  57 => 11,  46 => 9,  42 => 8,  36 => 5,  32 => 3,  27 => 2,  25 => 1,);
+        return array (  80 => 22,  76 => 21,  70 => 19,  66 => 17,  62 => 15,  60 => 14,  56 => 13,  52 => 12,  46 => 9,  42 => 8,  36 => 5,  32 => 3,  27 => 2,  25 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -122,24 +124,27 @@ class __TwigTemplate_76b4944d864d01741a847ad35bfb1d50b8a914392ad82348e1d2324d1cb
   {% for rowUniversite in listUniversite %}
     <tr>
       <td>
-        {{ rowUniversite.id }}
+        {{ rowUniversite.classement }}
       </td>
       <td>
-        {% for itemimage in rowUniversite.images %}
-          <img class=\"media-object img-rounded img-responsive\"  src=\"{{ itemimage.url }}\" alt=\"{{ itemimage.alt }}\">
-        {% endfor %}
+       <div id=\"nom-etablissement-{{ rowUniversite.id }}\">
         {{ rowUniversite.nometablissement }}
-      </td>
-      <td>{{ rowUniversite.adresse.ville.commune }}</td>
-      <td>{{ rowUniversite.adresse.ville.pays.pays }}</td>
-      <td>1 €</td>
+      </div>  
+    </td>
+    <td>{{ rowUniversite.adresse.ville.commune }}</td>
+    <td>{{ rowUniversite.adresse.ville.pays.pays }}</td>
+    {% if rowUniversite.bourse %}
       <td>Oui</td>
-      <td>
-        <a href=\"{{ path('dudeego_platform_detailsComparateur', { 'id' : rowUniversite.id } ) }}\" ><span class=\"glyphicon glyphicon-cog\"></span>Détails</a>
-        <a  class=\"add_comparateur\" href=\"#\" data-id=\"{{ rowUniversite.id }}\"> <span class=\"glyphicon glyphicon-plus\"></span>Favoris</a>
-      </td>
-    </tr>
-  {% endfor %}
-{% endif %}", "@DUDEEGOPlatform/front/filtercomparateur.html.twig", "C:\\wamp64\\www\\Projet\\CFPMS\\siteweb\\dudeego\\src\\DUDEEGO\\PlatformBundle\\Resources\\views\\front\\filtercomparateur.html.twig");
+    {% else %}
+     <td>Non</td>
+   {% endif %}
+   <td>{{ rowUniversite.montantbourse }}</td>
+   <td>
+    <a href=\"{{ path('dudeego_platform_detailsComparateur', { 'id' : rowUniversite.id } ) }}\" ><span class=\"glyphicon glyphicon-cog\"></span>Détails</a>
+    <a  class=\"add_comparateur\" href=\"#\" data-id=\"{{ rowUniversite.id }}\"> <span class=\"glyphicon glyphicon-plus\"></span>Favoris</a>
+  </td>
+</tr>
+{% endfor %}
+{% endif %}", "DUDEEGOPlatformBundle:front:filtercomparateur.html.twig", "C:\\wamp64\\www\\Projet\\CFPMS\\siteweb\\dudeego\\src\\DUDEEGO\\PlatformBundle\\Resources\\views\\front\\filtercomparateur.html.twig");
     }
 }
