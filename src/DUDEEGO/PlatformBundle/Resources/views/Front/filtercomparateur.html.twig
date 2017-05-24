@@ -2,22 +2,25 @@
   {% for rowUniversite in listUniversite %}
     <tr>
       <td>
-        {{ rowUniversite.id }}
+        {{ rowUniversite.classement }}
       </td>
       <td>
-        {% for itemimage in rowUniversite.images %}
-          <img class="media-object img-rounded img-responsive"  src="{{ itemimage.url }}" alt="{{ itemimage.alt }}">
-        {% endfor %}
+       <div id="nom-etablissement-{{ rowUniversite.id}}">
         {{ rowUniversite.nometablissement }}
-      </td>
-      <td>{{ rowUniversite.adresse.ville.commune }}</td>
-      <td>{{ rowUniversite.adresse.ville.pays.pays }}</td>
-      <td>1 €</td>
+      </div>  
+    </td>
+    <td>{{ rowUniversite.adresse.ville.commune }}</td>
+    <td>{{ rowUniversite.adresse.ville.pays.pays }}</td>
+    {% if rowUniversite.bourse %}
       <td>Oui</td>
-      <td>
-        <a href="{{ path('dudeego_platform_detailsComparateur', { 'id' : rowUniversite.id } ) }}" ><span class="glyphicon glyphicon-cog"></span>Détails</a>
-        <a  class="add_comparateur" href="#" data-id="{{ rowUniversite.id }}"> <span class="glyphicon glyphicon-plus"></span>Favoris</a>
-      </td>
-    </tr>
-  {% endfor %}
+    {% else %}
+     <td>Non</td>
+   {% endif %}
+   <td>{{ rowUniversite.montantbourse }}</td>
+   <td>
+    <a href="{{ path('dudeego_platform_detailsComparateur', { 'id' : rowUniversite.id } ) }}" ><span class="glyphicon glyphicon-cog"></span>Détails</a>
+    <a  class="add_comparateur" href="#" data-id="{{ rowUniversite.id }}"> <span class="glyphicon glyphicon-plus"></span>Favoris</a>
+  </td>
+</tr>
+{% endfor %}
 {% endif %}

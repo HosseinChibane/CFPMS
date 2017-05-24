@@ -6,6 +6,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\FormInterface;
+use DUDEEGO\PlatformBundle\Entity\T_Formation_Universite;
+use DUDEEGO\PlatformBundle\Entity\T_Langue_Universite;
+use DUDEEGO\PlatformBundle\Entity\T_Universite;
+
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
@@ -23,31 +28,6 @@ class InscriptionUniversiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('nometablissement', EntityType::class, array(
-            'class' => 'DUDEEGOPlatformBundle:T_Universite',
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('u')
-                ->orderBy('u.nometablissement', 'ASC')
-                ;
-            },
-            'choice_label' => 'nometablissement',
-            'required'    => true,
-            'placeholder' => 'Choisir un établissement',
-            'empty_data'  => '',
-            ))
-
-        ->add('formation', EntityType::class, array(
-            'class' => 'DUDEEGOPlatformBundle:T_Formation_Universite',
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('u')
-                ->orderBy('u.formation', 'ASC');
-            },
-            'choice_label' => 'formation',
-            'required'    => true,
-            'placeholder' => 'Choisir une formation',
-            'empty_data'  => null,
-            ))
-
         ->add('langue', EntityType::class, array(
             'class' => 'DUDEEGOPlatformBundle:T_Langue_Universite',
             'query_builder' => function (EntityRepository $er) {
@@ -56,8 +36,16 @@ class InscriptionUniversiteType extends AbstractType
             },
             'choice_label' => 'langue',
             'required'    => true,
-            'placeholder' => 'Choisir une langue',
+            'placeholder' => 'Sélectionner un élément dans la liste',
             'empty_data'  => '',
+            ))
+
+        ->add('formation', ChoiceType::class, array(
+            'placeholder' => 'En attente d\'un élément sélectionner',
+            ))
+
+        ->add('nometablissement', ChoiceType::class, array(
+            'placeholder' => 'En attente d\'un élément sélectionner',
             ))
 
         ->add('rechercher', SubmitType::class, array(
@@ -66,12 +54,62 @@ class InscriptionUniversiteType extends AbstractType
 
         ->add('reinitialiser', ResetType::class, array(
             'attr' => array('class' => 'btn btn-danger'),
-            ))
-        ;
+            ));
 
+        $formModifier = function (FormInterface $form, T_Langue_Universite $langue = null) {
+            $formation = null === $langue ? array() : $langue->getFormation();
+            $form->add('formation', EntityType::class, array(
+                'class'       => 'DUDEEGOPlatformBundle:T_Formation_Universite',
+                'placeholder' => 'Sélectionner un élément dans la liste',
+                'choices'     => $formation,
+                ));        
+        };
 
+        $formModifierFormation = function (FormInterface $form, T_Formation_Universite $formation = null) {
+            $nometablissement = null === $formation ? array() : $formation->getUniversite();
+            $form->add('nometablissement', EntityType::class, array(
+                'class'       => 'DUDEEGOPlatformBundle:T_Universite',
+                'placeholder' => 'Sélectionner un élément dans la liste',
+                'choices'     => $nometablissement,
+                ));
+        };
+
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) use ($formModifier) {
+                $data = $event->getData();
+                if($data === null || !method_exists($data, 'getLangue')) {
+                    $formModifier($event->getForm(), null);
+                } else {
+                    $formModifier($event->getForm(), $data->getLangue());
+                }
+            });
+
+        $builder->get('langue')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) use ($formModifier) {
+                $langue = $event->getForm()->getData();
+                $formModifier($event->getForm()->getParent(), $langue);
+            });
+
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) use ($formModifierFormation) {
+                $data = $event->getData();
+                if($data === null || !method_exists($data, 'getFormation')) {
+                    $formModifierFormation($event->getForm(), null);
+                } else {
+                    $formModifierFormation($event->getForm(), $data->getFormation());
+                }
+            });
+
+        $builder->get('formation')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) use ($formModifierFormation) {
+                $formation = $event->getForm()->getData();
+                $formModifierFormation($event->getForm()->getParent(), $formation);
+            });    
     }
-
 
     /**
      * {@inheritdoc}
@@ -79,7 +117,8 @@ class InscriptionUniversiteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => null
+            'data_class' => null,
+            'csrf_protection'   => false,
             ));
     }
 
@@ -90,54 +129,4 @@ class InscriptionUniversiteType extends AbstractType
     {
         return 'dudeego_platformbundle_t_universite';
     }
-
-
 }
- /*PRE SUBMIT
-
-        ->addEventListener(
-            FormEvents::PRE_SUBMIT,
-            function(FormEvent $event) {
-                $data = $event->getData();
-                $form = $event->getForm();
-
-                if (!$data['nometablissement']) {
-                    return;
-                }
-                else{
-                    $id = $data['nometablissement'];
-
-                    $form->add('formation', EntityType::class, array(
-                        'class' => 'DUDEEGOPlatformBundle:T_Formation_Universite',
-                        'query_builder' => function (EntityRepository $er) {
-                            return $er->getFormation(1);
-                        },
-                        'choice_label' => 'formation',
-                        'required'    => true,
-                        'placeholder' => 'Choisir une formation',
-                        'empty_data'  => null,
-                        ));
-                }})
-
-        ->addEventListener(
-            FormEvents::PRE_SUBMIT,
-            function(FormEvent $event) {
-                $data = $event->getData();
-                $form = $event->getForm();
-
-                if (!isset($data['formation'])) {
-                    return;
-                }
-                else{
-                    $id = $data['formation'];
-                    $form->add('langue', EntityType::class, array(
-                        'class' => 'DUDEEGOPlatformBundle:T_Langue_Universite',
-                        'query_builder' => function (EntityRepository $er) {
-                            return $er->getLangue(1);
-                        },
-                        'choice_label' => 'langue',
-                        'required'    => true,
-                        'placeholder' => 'Choisir une langue',
-                        'empty_data'  => '',
-                        ));
-                }})*/

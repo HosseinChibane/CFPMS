@@ -430,18 +430,22 @@ class backController extends Controller
 
 				if ($form->isSubmitted() && $form->isValid()) {
 					#recherche le PDF
-					$formation = $form->get('formation')->getData()->getFormation();
-					$langue = $form->get('langue')->getData()->getLangue();
-					$nometablissement = $form->get('nometablissement')->getData()->getNomEtablissement();
-					$universiteId = $form->get('nometablissement')->getData()->getId();
+					if ($form->get('nometablissement')->getData() !== null) {
+						# code...						
+						$formation = $form->get('formation')->getData()->getFormation();
+						$langue = $form->get('langue')->getData()->getLangue();
+						$nometablissement = $form->get('nometablissement')->getData()->getNomEtablissement();
 
-					$document = $em->getRepository('DUDEEGOPlatformBundle:T_Document_Universite')
-					->getDocumentIncription($universiteId);
+						$universiteId = $form->get('nometablissement')->getData()->getId();
 
-					return $this->render('DUDEEGOPlatformBundle:back:universiteTwo.html.twig', array(
-						'form' => $form->createView(),
-						'document' => $document,
-						));	
+						$document = $em->getRepository('DUDEEGOPlatformBundle:T_Document_Universite')
+						->getDocumentIncription($universiteId);
+
+						return $this->render('DUDEEGOPlatformBundle:back:universiteTwo.html.twig', array(
+							'form' => $form->createView(),
+							'document' => $document,
+							));	
+					}
 				}
 
 				return $this->render('DUDEEGOPlatformBundle:back:universiteOne.html.twig', array(

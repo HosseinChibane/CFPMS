@@ -24,7 +24,7 @@ class T_UniversiteRepository extends \Doctrine\ORM\EntityRepository
 		return $qb->getQuery()->getResult();
 	}
 
-	public function getUniversiteWithSearchAND( $formations,  $langues,  $villes,  $pays,  $nomuniversite)
+	public function getUniversiteWithSearchAND($formations,  $langues,  $villes,  $pays,  $nomuniversite)
 	{
 		$qb = $this
 		->createQueryBuilder('u')
@@ -65,4 +65,21 @@ class T_UniversiteRepository extends \Doctrine\ORM\EntityRepository
 		->setParameter('langues', '%'.$langue.'%')
 */
 	}
+	public function  getUniversiteCriteria($formations,  $langues) {
+		
+		$qb = $this
+		->createQueryBuilder('u')
+		->leftJoin('u.formations', 'for')
+		->leftJoin('for.langues', 'lan')
+		->where('for.id = :formations')
+		->setParameter('formations', $formations)
+		->andwhere('lan.id = :langues')
+		->setParameter('langues', $langues)
+		;
+
+		return $qb->getQuery()->getResult();
+
+	}
+
+
 }

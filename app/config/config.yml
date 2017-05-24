@@ -289,6 +289,20 @@ easy_admin:
                     - { property: 'adresse' }
         Documents:
             class: DUDEEGO\PlatformBundle\Entity\T_Document_Universite
+            list:
+                fields:
+                    - { property: 'id' }
+                    - { property: 'pdfName', template: 'contract.html.twig', type: 'file', base_path: '%app.path.universites_pdf%' }
+                    - { property: 'universite' }
+            show:
+                fields:
+                    - { property: 'id' }
+                    - { property: 'pdfName', type: 'file', base_path: '%app.path.universites_pdf%' }
+                    - { property: 'universite' }
+            form:
+                fields:
+                    - { property: 'pdfFile', type: 'vich_file' }
+                    - { property: 'universite' }
         Adresse:
             class: DUDEEGO\PlatformBundle\Entity\T_Adresse_Universite
         Ville:

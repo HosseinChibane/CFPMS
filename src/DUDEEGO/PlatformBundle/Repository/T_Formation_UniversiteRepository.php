@@ -21,4 +21,19 @@ class T_Formation_UniversiteRepository extends \Doctrine\ORM\EntityRepository
 
 		return $qb;
 	}
+
+		public function  getUniversiteCriteria($formations,  $langues) {
+		
+		$qb = $this
+		->createQueryBuilder('u')
+		->leftJoin('u.langues', 'lan')
+		->where('u.id = :formations')
+		->setParameter('formations', $formations)
+		->andwhere('lan.id = :langues')
+		->setParameter('langues', $langues)
+		;
+
+		return $qb;
+
+	}
 }
