@@ -1,0 +1,78 @@
+<?php
+
+/* @Framework/Form/widget_attributes.html.php */
+class __TwigTemplate_fddf3dd4951c77c5ee5e60808b643185c49e1f509ce3c124b151ebe62a7fb03b extends Twig_Template
+{
+    public function __construct(Twig_Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->parent = false;
+
+        $this->blocks = array(
+        );
+    }
+
+    protected function doDisplay(array $context, array $blocks = array())
+    {
+        $__internal_9d31a849815978b82cce6b08adba8fae63621481f0be9b69860667c0fc30e37c = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_9d31a849815978b82cce6b08adba8fae63621481f0be9b69860667c0fc30e37c->enter($__internal_9d31a849815978b82cce6b08adba8fae63621481f0be9b69860667c0fc30e37c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Framework/Form/widget_attributes.html.php"));
+
+        $__internal_db3bfea05c723f3b6974bc3e1b4218c7018e1b62aa40e39f451e4ce55b0f112e = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_db3bfea05c723f3b6974bc3e1b4218c7018e1b62aa40e39f451e4ce55b0f112e->enter($__internal_db3bfea05c723f3b6974bc3e1b4218c7018e1b62aa40e39f451e4ce55b0f112e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@Framework/Form/widget_attributes.html.php"));
+
+        // line 1
+        echo "id=\"<?php echo \$view->escape(\$id) ?>\" name=\"<?php echo \$view->escape(\$full_name) ?>\"<?php if (\$disabled): ?> disabled=\"disabled\"<?php endif ?>
+<?php if (\$required): ?> required=\"required\"<?php endif ?>
+<?php foreach (\$attr as \$k => \$v): ?>
+<?php if (in_array(\$k, array('placeholder', 'title'), true)): ?>
+<?php printf(' %s=\"%s\"', \$view->escape(\$k), \$view->escape(false !== \$translation_domain ? \$view['translator']->trans(\$v, array(), \$translation_domain) : \$v)) ?>
+<?php elseif (\$v === true): ?>
+<?php printf(' %s=\"%s\"', \$view->escape(\$k), \$view->escape(\$k)) ?>
+<?php elseif (\$v !== false): ?>
+<?php printf(' %s=\"%s\"', \$view->escape(\$k), \$view->escape(\$v)) ?>
+<?php endif ?>
+<?php endforeach ?>
+";
+        
+        $__internal_9d31a849815978b82cce6b08adba8fae63621481f0be9b69860667c0fc30e37c->leave($__internal_9d31a849815978b82cce6b08adba8fae63621481f0be9b69860667c0fc30e37c_prof);
+
+        
+        $__internal_db3bfea05c723f3b6974bc3e1b4218c7018e1b62aa40e39f451e4ce55b0f112e->leave($__internal_db3bfea05c723f3b6974bc3e1b4218c7018e1b62aa40e39f451e4ce55b0f112e_prof);
+
+    }
+
+    public function getTemplateName()
+    {
+        return "@Framework/Form/widget_attributes.html.php";
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  25 => 1,);
+    }
+
+    /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
+    public function getSource()
+    {
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 1.27 and will be removed in 2.0. Use getSourceContext() instead.', E_USER_DEPRECATED);
+
+        return $this->getSourceContext()->getCode();
+    }
+
+    public function getSourceContext()
+    {
+        return new Twig_Source("id=\"<?php echo \$view->escape(\$id) ?>\" name=\"<?php echo \$view->escape(\$full_name) ?>\"<?php if (\$disabled): ?> disabled=\"disabled\"<?php endif ?>
+<?php if (\$required): ?> required=\"required\"<?php endif ?>
+<?php foreach (\$attr as \$k => \$v): ?>
+<?php if (in_array(\$k, array('placeholder', 'title'), true)): ?>
+<?php printf(' %s=\"%s\"', \$view->escape(\$k), \$view->escape(false !== \$translation_domain ? \$view['translator']->trans(\$v, array(), \$translation_domain) : \$v)) ?>
+<?php elseif (\$v === true): ?>
+<?php printf(' %s=\"%s\"', \$view->escape(\$k), \$view->escape(\$k)) ?>
+<?php elseif (\$v !== false): ?>
+<?php printf(' %s=\"%s\"', \$view->escape(\$k), \$view->escape(\$v)) ?>
+<?php endif ?>
+<?php endforeach ?>
+", "@Framework/Form/widget_attributes.html.php", "C:\\wamp64\\www\\Projet\\CFPMS\\siteweb\\dudeego\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\FrameworkBundle\\Resources\\views\\Form\\widget_attributes.html.php");
+    }
+}
