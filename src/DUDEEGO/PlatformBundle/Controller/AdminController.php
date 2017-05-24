@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
-class adminController extends Controller
+class AdminController extends Controller
 {
 	public function adminPanelAction(Request $request)
 	{ 

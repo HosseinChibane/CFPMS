@@ -27,7 +27,7 @@
 
       {#Formulaire de recherche#}
       {#{{form_start(form)}}#}
-      {{ form_start(form, {'action': path('dudeego_platform_filterComparateur'), 'method': 'POST'}) }}
+      {{ form_start(form, {'action': path('dudeego_platform_filterAjaxComparateur'), 'method': 'POST'}) }}
       {# Les erreurs générales du formulaire. #}
       {% if form_errors(form) %}
         <div class="alert alert-danger" role="alert">

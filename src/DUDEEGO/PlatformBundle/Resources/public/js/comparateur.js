@@ -5,12 +5,15 @@
     $( document ).ready(function() {
 
         var loadResult = function(formations, langues, villes, pays, nomuniversite) {
-
+            if(formations =="Choisir une formation") formation="";
+            if(langues =="Choisir une langue") langues="";
+            if(villes =="Choisir une ville") villes="";
+            if(pays =="Choisir un pays") pays="";
             $.ajax({
                 beforeSend: function(){
                  $("#content_result").html('<tr><td> Chargement en cours...</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
              },
-             url : "filtercomparateur",
+             url : "front/comparateurajax",
              method: "POST",
              data : {
                 'formations': formations,
@@ -20,6 +23,8 @@
                 'nomuniversite': nomuniversite
             }
         }).done(function(response) {
+            console.log("==============OK ==========");
+            console.log(response);
             $table = $('#tableUniversite').DataTable();
             $table.destroy();
             $("#content_result").html(response);
@@ -42,10 +47,10 @@
     $("#dudeego_platform_filterComparateur_comparez").on('click',function(e) {
         e.preventDefault();
         loadResult(
-            $('#dudeego_platform_filterComparateur_formations').val(),
-            $('#dudeego_platform_filterComparateur_langues').val(),
-            $('#dudeego_platform_filterComparateur_villes').val(),
-            $('#dudeego_platform_filterComparateur_pays').val(),
+            $('#dudeego_platform_filterComparateur_formations option:selected').text(),
+            $('#dudeego_platform_filterComparateur_langues option:selected').text(),
+            $('#dudeego_platform_filterComparateur_villes option:selected').text(),
+            $('#dudeego_platform_filterComparateur_pays option:selected').text(),
             $('#dudeego_platform_filterComparateur_nomuniversite').val()
             );
     });
