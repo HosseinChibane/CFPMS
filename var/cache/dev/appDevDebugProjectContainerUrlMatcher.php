@@ -162,17 +162,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             }
             not_dudeego_platform_filterComparateur:
 
-            // dudeego_platform_filterAjaxComparateur
-            if ($pathinfo === '/front/comparateurajax') {
-                if ($this->context->getMethod() != 'POST') {
-                    $allow[] = 'POST';
-                    goto not_dudeego_platform_filterAjaxComparateur;
-                }
-
-                return array (  '_controller' => 'DUDEEGO\\PlatformBundle\\Controller\\frontController::filterAjaxComparateurAction',  '_route' => 'dudeego_platform_filterAjaxComparateur',);
-            }
-            not_dudeego_platform_filterAjaxComparateur:
-
             // dudeego_platform_itemsComparateur
             if ($pathinfo === '/front/itemsComparateur') {
                 if (!in_array($this->context->getMethod(), array('POST', 'GET', 'HEAD'))) {

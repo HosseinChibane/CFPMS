@@ -90,7 +90,8 @@
 
         <div class="col-md-4">
             <div class="form-group">
-            <img src="{{ vich_uploader_asset(imageUser, 'imageFile' )  | imagine_filter('my_thumb') }}" alt="{{ imageUser.imageName }}" />
+                {# | imagine_filter('my_thumb') #}
+            <img src="{{ vich_uploader_asset(imageUser, 'imageFile' ) }}" alt="{{ imageUser.imageName }}" />
            </div>
        </div>
 

@@ -8,7 +8,7 @@
             beforeSend: function(){
                $("#content_result").html('<tr><td> Chargement en cours...</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
            },
-           url : "front/comparateurajax",
+           url : "comparateurajax",
            method: "POST",
            data : {
             'nomuniversite': nomuniversite,

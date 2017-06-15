@@ -67,6 +67,7 @@ class InscriptionUniversiteType extends AbstractType
         };
 
         $formModifierFormation = function (FormInterface $form, T_Formation_Universite $formation = null) {
+
             $nometablissement = null === $formation ? array() : $formation->getUniversite();
 
             $form->add('nometablissement', EntityType::class, array(
@@ -113,6 +114,8 @@ class InscriptionUniversiteType extends AbstractType
                 dump($formation);exit();
                 $formModifierFormation($event->getForm()->getParent(), $formation);
             });    
+
+        
     }
 
     /**

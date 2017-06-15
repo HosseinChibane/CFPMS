@@ -24,7 +24,7 @@ class Search_UniversiteType extends AbstractType
         ->add('nomuniversite', SearchType::class, array(
             'attr' => array('class' => 'form-control'),
             'required'    => false,
-            'empty_data'  => ''))
+            'empty_data'  => null))
 
         ->add('formations', EntityType::class, array(
             'class' => 'DUDEEGOPlatformBundle:T_Formation_Universite',
@@ -34,8 +34,8 @@ class Search_UniversiteType extends AbstractType
             },
             'choice_label' => 'formation',
             'required'    => false,
-            'placeholder' => 'Choisir une formation',
-            'empty_data'  => '',
+            'placeholder' => 'Selectionnez une formation',
+            'empty_data'  => null,
             ))
 
         ->add('langues', EntityType::class, array(
@@ -46,8 +46,8 @@ class Search_UniversiteType extends AbstractType
             },
             'choice_label' => 'langue',
             'required'    => false,
-            'placeholder' => 'Choisir une langue',
-            'empty_data'  => '',
+            'placeholder' => 'Selectionnez une langue',
+            'empty_data'  => null,
             ))
 
         ->add('villes', EntityType::class, array(
@@ -58,8 +58,8 @@ class Search_UniversiteType extends AbstractType
             },
             'choice_label' => 'commune',
             'required'    => false,
-            'placeholder' => 'Choisir une ville',
-            'empty_data'  => '',
+            'placeholder' => 'Selectionnez une ville',
+            'empty_data'  => null,
             ))
 
         ->add('pays', EntityType::class, array(
@@ -70,8 +70,8 @@ class Search_UniversiteType extends AbstractType
             },
             'choice_label' => 'pays',
             'required'    => false,
-            'placeholder' => 'Choisir un pays',
-            'empty_data'  => '',
+            'placeholder' => 'Selectionnez un pays',
+            'empty_data'  => null,
             ))
 
         ->add('comparez', SubmitType::class, array(

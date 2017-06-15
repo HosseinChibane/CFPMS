@@ -229,61 +229,91 @@ class frontController extends Controller
 
 	public function filterComparateurAction(Request $request)
 	{
-		$form = $this->get('form.factory')->create(Search_UniversiteType::class);
+
+		$form = $this->createform(Search_UniversiteType::class);
+
+		$listUniversite = $this
+		->getDoctrine()
+		->getManager()
+		->getRepository('DUDEEGOPlatformBundle:T_Universite')
+		->getAllUniversite();
 		
+		$form->handleRequest($request);
+
 		if ($form->isSubmitted() && $form->isValid()) {
-
-			$form->submit($request->query->get($form->getName()));
-			$data = $form->getData();
-
-			$formations = $data->getFormations();
-			$langues = $data->getLangues();
-			$villes = $data->getVilles();
-			$pays =  $data->getPays();
-			$nomuniversite =  $data->getNomuniversite();
-
+			if ($form->get('formations')->getData() != null) {
+				$formations = $form->get('formations')->getData()->getFormation();
+			}
+			else {
+				$formations =$form->get('formations')->getData();
+			}
+			if ($form->get('langues')->getData() != null) {
+				$langues = $form->get('langues')->getData()->getLangue();
+			}
+			else {
+				$langues =$form->get('langues')->getData();
+			}
+			if ($form->get('villes')->getData() != null) {
+				$villes = $form->get('villes')->getData()->getCommune();
+			}
+			else {
+				$villes = $form->get('villes')->getData();
+			}
+			if ($form->get('pays')->getData() != null) {
+				$pays =  $form->get('pays')->getData()->getPays();
+			}
+			else {
+				$pays = $form->get('pays')->getData();
+			}
+			$nomuniversite = $form->get('nomuniversite')->getData();
+			
 			$listUniversite = $this
 			->getDoctrine()->getManager()->getRepository('DUDEEGOPlatformBundle:T_Universite')
 			->getUniversiteWithSearchAND($formations, $langues, $villes, $pays, $nomuniversite);
-
+			
 			return $this->render('DUDEEGOPlatformBundle:front:comparateur.html.twig', array(
 				'form' => $form->createView(),
 				'listUniversite' => $listUniversite,
 				));
 		}
-		else {
-			$this->redirect($this->generateUrl('dudeego_platform_showComparateur'));
-		}
 
 		return $this->render('DUDEEGOPlatformBundle:front:comparateur.html.twig', array(
 			'form' => $form->createView(),
+			'listUniversite' => $listUniversite,
 			));
 	}
 
 	public function filterAjaxComparateurAction(Request $request)
 	{
 		$form = $this->get('form.factory')->create(Search_UniversiteType::class);
+		dump($form);exit();
+		if ($request->isXmlHttpRequest()) {
+		 	# filtrer...
+			$formations = $request->get('formations');
+			$langues = $request->get('langues');
+			$villes = $request->get('villes');
+			$pays =  $request->get('pays');
+			$nomuniversite =  $request->get('nomuniversite');
 
-		$formations = $request->get('formations');
-		$langues = $request->get('langues');
-		$villes = $request->get('villes');
-		$pays =  $request->get('pays');
-		$nomuniversite =  $request->get('nomuniversite');
+			$listUniversite = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('DUDEEGOPlatformBundle:T_Universite')
+			->getUniversiteWithSearchAND($formations, $langues, $villes, $pays, $nomuniversite);
 
-		$listUniversite = $this
-		->getDoctrine()
-		->getManager()
-		->getRepository('DUDEEGOPlatformBundle:T_Universite')
-		->getUniversiteWithSearchAND($formations, $langues, $villes, $pays, $nomuniversite);
+			$data = array(
+				'listUniversite' => $listUniversite,
+				);
 
-		$data = array(
-			'listUniversite' => $listUniversite,
-			);
+			return $this->render('DUDEEGOPlatformBundle:Front:comparateurAjax.html.twig', array(
+				'form' => $form->createView(),
+				'data' => $data,
+				'listUniversite' => $listUniversite,
+				));
+		}
 
 		return $this->render('DUDEEGOPlatformBundle:Front:comparateurAjax.html.twig', array(
-			'form' => $form->createView(),
-			'data' => $data,
-			'listUniversite' => $listUniversite,
+			'form' => $form->createView(),	
 			));
 	}
 

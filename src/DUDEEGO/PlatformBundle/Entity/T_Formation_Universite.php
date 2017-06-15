@@ -136,12 +136,14 @@ class T_Formation_Universite
     {
         return $this->formation;
     }
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->langues = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->universite = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -178,19 +180,7 @@ class T_Formation_Universite
         return $this->langues;
     }
 
-    /**
-     * Set universite
-     *
-     * @param \DUDEEGO\PlatformBundle\Entity\T_Universite $universite
-     *
-     * @return T_Formation_Universite
-     */
-    public function setUniversite(\DUDEEGO\PlatformBundle\Entity\T_Universite $universite)
-    {
-        $this->universite = $universite;
 
-        return $this;
-    }
 
     /**
      * Set duree
@@ -361,6 +351,30 @@ class T_Formation_Universite
     }
 
     /**
+     * Set universite
+     *
+     * @param \DUDEEGO\PlatformBundle\Entity\T_Universite $universite
+     *
+     * @return T_Formation_Universite
+     */
+    public function setUniversite(\DUDEEGO\PlatformBundle\Entity\T_Universite $universite)
+    {
+        $this->universite = $universite;
+
+        return $this;
+    }
+
+    /**
+     * Get universite
+     *
+     *  @return \DUDEEGO\PlatformBundle\Entity\T_Universite
+     */
+    public function getUniversite()
+    {
+        return $this->universite;
+    }
+
+    /**
      * Add universite
      *
      * @param \DUDEEGO\PlatformBundle\Entity\T_Universite $universite
@@ -384,15 +398,6 @@ class T_Formation_Universite
         $this->universite->removeElement($universite);
     }
 
-    /**
-     * Get universite
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUniversite()
-    {
-        return $this->universite;
-    }
 
     /**
      * Set niveau
